@@ -41,7 +41,7 @@ simulación de escenarios.
 ### Conclusiones
 
 - El negocio operativo es excelente: el problema es financiero.
-- Los gastos financieros del préstamo ICO (262.583 €) destruyen el resultado.
+- Los gastos financieros de la deuda (262.583 €, probablemente el préstamo ICO) destruyen el resultado.
 - El 44,7% de las ventas se concentra en Q4, con tensión de tesorería en Q1-Q3.
 - Solo refinanciando la deuda un 30% la empresa pasa a beneficios.
 
@@ -132,16 +132,16 @@ Este análisis es una pieza de un portfolio de casos de analítica. Las piezas h
 > growing since, so read these figures as a snapshot of that date. What carries over is the
 > method, not the particular numbers.
 
-> On the accounting terms: the books are Spanish, so a few words stay in Spanish. An *asiento*
-> is a journal entry, and *debe* and *haber* are the debit and credit sides of it. The lender
-> behind the loan below, the ICO, is Spain's state-owned credit institute.
+> A note on the terminology: these are Spanish books. An *asiento* is what an English speaker
+> would call a journal entry, and *debe* and *haber* are its debit and credit sides. The lender
+> behind the loan below, the ICO, is Spain's state-owned promotional bank.
 
 ---
 
 ### The business problem
 
 TechAcces SL is a simulated online shop selling tech accessories. Gross margin runs at 91.7%,
-and even so this 2024 snapshot closes the year -57,742 € in the red.
+and even so the company closes 2024 with a 57,742 € loss.
 
 The analysis works out why, puts a number on each cause, and tests concrete fixes against
 simulated scenarios.
@@ -164,9 +164,9 @@ simulated scenarios.
 ### Conclusions
 
 - The trading side of the business is excellent. What breaks it sits below the operating line.
-- The ICO loan's financing costs (262,583 €) destroy the result.
-- Q4 takes 44.7% of sales, which leaves cash tight from Q1 through Q3.
-- Refinancing the debt by 30% is enough on its own to put the company back in profit.
+- The financing costs on the debt (262,583 €, most likely the ICO loan) destroy the result.
+- Q4 accounts for 44.7% of sales, which leaves cash tight from Q1 through Q3.
+- Refinancing the debt by 30% is enough on its own to put the company into profit.
 
 ---
 
@@ -224,11 +224,11 @@ jupyter notebook analisis_contable.ipynb
 
 ### What the analysis covers
 
-1. **First look**: 4,006 ledger lines across 1,525 journal entries, debit and credit tie out to the cent.
+1. **First look**: 4,006 ledger lines across 1,525 journal entries (*asientos*), with *debe* and *haber* tying out to the cent.
 2. **Monthly sales**: how they move month to month, and B2C against B2B.
 3. **Expense breakdown**: by category, each as a share of the total.
 4. **Income statement**: from sales down to the net result, with a waterfall chart.
-5. **Quarterly analysis**: seasonality, and how sales and expenses fall across the year.
+5. **Quarterly analysis**: seasonality, and how sales and expenses are spread across the year.
 6. **Cash projection**: monthly net flow and the running balance.
 7. **Scenario simulator**: 4 scenarios and what each one does to the net result.
 8. **Excel export**: the report, 5 formatted sheets.
