@@ -1,4 +1,4 @@
-# Análisis financiero con Python — TechAcces SL 2024
+# Análisis financiero con Python · TechAcces SL 2024
 
 **Juan Luis León Rodríguez · Proyecto TechAcces · Mayo 2026**
 
