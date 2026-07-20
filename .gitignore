@@ -1,0 +1,17 @@
+# Credenciales — nunca se suben. El README pide crear un .env en esta carpeta;
+# sin esta línea, quien clone el repo y siga las instrucciones se queda sin red.
+# (La versión anterior escribía el .gitignore en `../`, es decir, FUERA del repo:
+#  la protección no llegaba a quien clonaba.)
+.env
+.env.*
+!.env.example
+
+# Artefactos de ejecución
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+_ejecutar_prueba.py
+
+# Entornos
+.venv/
+venv/
