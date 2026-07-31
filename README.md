@@ -11,7 +11,9 @@
 Una empresa vende bien, sus productos dejan margen holgado y el año cierra en pérdidas. ¿Dónde se ha
 ido el dinero? La respuesta está escrita en el libro diario, que es el registro donde queda anotado
 cada movimiento de dinero de la empresa, línea a línea y por orden de fecha. Contestar recorriendo
-4.710 líneas a mano no es trabajo de una tarde, y ahí es donde entra un programa.
+4.710 líneas a mano no es trabajo de una tarde, y ahí es donde entra un programa. Esa cifra es la
+del ejercicio 2024 en la base del proyecto, que es un disco privado, así que **no es reproducible**
+desde aquí: da el tamaño del problema y no es un resultado que puedas comprobar.
 
 Este repositorio contiene uno. Se conecta a la base de datos donde vive el libro diario de
 TechAcces SL, una empresa ficticia simulada para el proyecto, toma el ejercicio 2024 y clasifica
