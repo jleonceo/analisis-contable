@@ -1,7 +1,2 @@
-pandas
-sqlalchemy
-pymysql
-matplotlib
-seaborn
-openpyxl
-python-dotenv
+pandas>=2.0
+jupyter>=1.0
