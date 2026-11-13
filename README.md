@@ -39,6 +39,7 @@ flowchart TD
     P --> V1{¿Coincide con el asiento<br/>de cierre?}
     B --> V2{¿Coincide con el saldo<br/>del banco?}
     V1 -->|0,00 € de diferencia| OK[Cifras publicadas]
+    V1 -->|No| AV[Aviso: averiguar por qué<br/>antes de publicar]
     V2 -->|Sí| OK
     V2 -->|No| STOP[El cuaderno se detiene]
     style OK fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20

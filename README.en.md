@@ -39,6 +39,7 @@ flowchart TD
     P --> V1{Matches the<br/>closing entry?}
     B --> V2{Matches the<br/>bank balance?}
     V1 -->|0.00 € difference| OK[Figures published]
+    V1 -->|No| AV[Warning: find out why<br/>before publishing]
     V2 -->|Yes| OK
     V2 -->|No| STOP[The notebook stops]
     style OK fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
