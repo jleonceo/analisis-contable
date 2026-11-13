@@ -31,6 +31,21 @@ El **EBITDA** es el beneficio de la actividad antes de amortizaciones, intereses
 
 ## Cómo funciona
 
+```mermaid
+flowchart TD
+    D[Libro diario de 2024] --> C[Clasifica cada línea<br/>por su cuenta del PGC]
+    C --> P[Cuenta de resultados]
+    C --> B[Movimiento del banco por mes]
+    P --> V1{¿Coincide con el asiento<br/>de cierre?}
+    B --> V2{¿Coincide con el saldo<br/>del banco?}
+    V1 -->|0,00 € de diferencia| OK[Cifras publicadas]
+    V2 -->|Sí| OK
+    V2 -->|No| STOP[El cuaderno se detiene]
+    style OK fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    style STOP fill:#ffebee,stroke:#c62828,color:#b71c1c
+```
+
+
 1. Lee las líneas del libro diario de 2024: fecha, asiento, cuenta, debe y haber.
 2. Clasifica cada línea por la familia de su cuenta en el Plan General Contable: 700 ventas, 600 compras, 640
    sueldos, 572 bancos, y así con las demás.
