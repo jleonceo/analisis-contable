@@ -32,16 +32,16 @@ El **EBITDA** es el beneficio de la actividad antes de amortizaciones, intereses
 ## Cómo funciona
 
 ```mermaid
-flowchart TD
-    D[Libro diario de 2024] --> C[Clasifica cada línea<br/>por su cuenta del PGC]
-    C --> P[Cuenta de resultados]
-    C --> B[Movimiento del banco por mes]
-    P --> V1{¿Coincide con el asiento<br/>de cierre?}
-    B --> V2{¿Coincide con el saldo<br/>del banco?}
-    V1 -->|0,00 € de diferencia| OK[Cifras publicadas]
+flowchart LR
+    D[Libro diario<br/>de 2024] --> C[Clasifica cada línea<br/>por su cuenta del PGC]
+    C --> P[Cuenta de<br/>resultados]
+    C --> B[Movimiento del<br/>banco por mes]
+    P --> V1{¿Coincide con<br/>el asiento<br/>de cierre?}
+    B --> V2{¿Coincide con<br/>el saldo<br/>del banco?}
+    V1 -->|0,00 € de<br/>diferencia| OK[Cifras<br/>publicadas]
     V1 -->|No| AV[Aviso: averiguar por qué<br/>antes de publicar]
     V2 -->|Sí| OK
-    V2 -->|No| STOP[El cuaderno se detiene]
+    V2 -->|No| STOP[El cuaderno<br/>se detiene]
     style OK fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
     style STOP fill:#ffebee,stroke:#c62828,color:#b71c1c
 ```
