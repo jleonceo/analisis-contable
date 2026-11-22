@@ -1,0 +1,90 @@
+/* Cuadro de mando de contabilidad de gestión. Estilo de la casa: fondo blanco, Segoe UI, sin sombras, sin
+   degradados, sin píldoras ni animaciones. Valores de las reglas de salida (E1 a E8) y del patrón del cuadro de mando. */
+
+html, body { margin: 0; background: #ffffff; color: #0b0b0b; }
+body { font-family: "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.5; }
+
+/* Barra de arriba: nombre en negrita y pestañas en una fila; la elegida, en negrita y subrayada. */
+.barra { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px; padding: 14px 24px 0; border-bottom: 1px solid #e1e0d9; }
+.nombre { font-size: 17px; font-weight: 700; margin: 0 8px 0 0; }
+.pestanas { display: flex; gap: 28px; flex-wrap: wrap; }
+.pestanas button { font: 16px "Segoe UI", system-ui, sans-serif; color: #0b0b0b; background: none; border: 0; padding: 0 0 10px; cursor: pointer; border-bottom: 2px solid transparent; }
+.pestanas button[aria-selected="true"] { font-weight: 700; border-bottom-color: #0b0b0b; }
+.pestanas button:focus-visible, .filtros select:focus-visible, .filtros button:focus-visible { outline: 2px solid #0b0b0b; outline-offset: 2px; }
+
+/* Filtros que valen para todas las pestañas y la línea «Viendo». */
+.filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 10px 24px; border-bottom: 1px solid #e1e0d9; font-size: 14px; }
+.filtros label { display: flex; align-items: center; gap: 8px; }
+.filtros select { font: 14px "Segoe UI", system-ui, sans-serif; padding: 2px 4px; }
+.filtros button { font: 13px "Segoe UI", system-ui, sans-serif; background: #ffffff; border: 1px solid #c3c2b7; border-radius: 2px; padding: 2px 10px; cursor: pointer; color: #0b0b0b; }
+.filtros button:disabled { color: #898781; cursor: default; }
+.viendo { color: #52514e; }
+.ficticia { margin-left: auto; color: #52514e; font-size: 13px; }
+
+main { padding: 16px 24px 32px; max-width: 1100px; }
+.pestana[hidden] { display: none; }
+
+/* La pregunta de la pestaña, en una línea. */
+.pregunta { font-size: 14px; color: #52514e; margin: 0 0 8px; }
+
+/* Cifras de arriba: cuatro casillas iguales; número a 28 px en negrita, etiqueta y contexto a 13 px. */
+.cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0 0 18px; }
+.cifra { border: 1px solid #e1e0d9; border-radius: 2px; padding: 8px 12px; }
+.cifra p { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cifra .numero { font-size: 28px; font-weight: 700; line-height: 1.2; }
+.cifra .etiqueta { font-size: 13px; }
+.cifra .contexto { font-size: 13px; color: #52514e; }
+.cifra:focus-visible, .cifra:focus { outline: 2px solid #0b0b0b; outline-offset: 1px; }
+
+.texto { max-width: 75ch; margin: 0 0 18px; }
+
+/* Dos gráficos lado a lado, título que concluye a 18 px, subtítulo con medida, unidad y periodo, fuente al pie. */
+.graficos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.grafico h2 { font-size: 18px; font-weight: 700; line-height: 1.3; margin: 0 0 2px; }
+.grafico .subtitulo { font-size: 13px; color: #52514e; margin: 0 0 8px; }
+.grafico svg { display: block; width: 100%; height: auto; overflow: visible; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: #0b0b0b; margin: 0 0 6px; padding: 0; list-style: none; }
+.leyenda span.marca { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
+.leyenda span.raya { display: inline-block; width: 14px; height: 2px; margin-right: 6px; vertical-align: 3px; }
+
+svg text { font-family: "Segoe UI", system-ui, sans-serif; fill: #52514e; font-size: 11px; }
+svg text.valor { fill: #0b0b0b; font-size: 11px; }
+svg .dato { cursor: default; }
+svg .dato:focus { outline: none; }
+svg .dato:focus rect, svg .dato:focus circle { stroke: #0b0b0b; stroke-width: 2px; }
+
+/* El detalle, plegado: el lector lo abre si lo necesita. */
+details { margin: 22px 0 0; border-top: 1px solid #e1e0d9; padding-top: 10px; }
+summary { cursor: pointer; font-weight: 700; font-size: 15px; }
+details .nota { font-size: 13px; color: #52514e; margin: 6px 0 0; max-width: 90ch; }
+
+/* Tablas como las del Gobierno británico: línea bajo la cabecera y sobre el total, sin rayas entre filas. */
+.tabla-caja { overflow-x: auto; }
+table { border-collapse: collapse; font-size: 13px; margin: 12px 0 0; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-weight: 700; font-size: 14px; padding: 0 0 6px; }
+th { text-align: left; font-weight: 700; padding: 5px 16px 5px 0; border-bottom: 1px solid #0b0b0b; vertical-align: bottom; }
+td { text-align: left; padding: 4px 16px 4px 0; vertical-align: top; }
+th.num, td.num { text-align: right; }
+tr.total td { font-weight: 700; border-top: 1px solid #0b0b0b; }
+td.aviso { font-weight: 700; }
+
+.descarga { margin: 10px 0 0; }
+.descarga button { font: 13px "Segoe UI", system-ui, sans-serif; background: #ffffff; border: 1px solid #c3c2b7; border-radius: 2px; padding: 3px 10px; cursor: pointer; }
+
+.fuente { font-size: 13px; color: #52514e; margin: 22px 0 0; }
+.fuente a { color: #0b0b0b; }
+.error { font-weight: 700; }
+
+/* Etiqueta al pasar el ratón o con el tabulador: fondo blanco, borde fino, sin sombra. */
+.etiqueta-dato { position: fixed; z-index: 10; max-width: 320px; padding: 4px 8px; font-size: 13px; line-height: 1.4; color: #0b0b0b; background: #ffffff; border: 1px solid #0b0b0b; pointer-events: none; }
+.etiqueta-dato[hidden] { display: none; }
+
+@media (max-width: 1000px) {
+  .graficos { grid-template-columns: 1fr; }
+  .cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .barra, .filtros, main { padding-left: 16px; padding-right: 16px; }
+  .cifras { grid-template-columns: 1fr; }
+  .ficticia { margin-left: 0; }
+}

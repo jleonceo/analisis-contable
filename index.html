@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contabilidad de gestión con datos</title>
+<meta name="description" content="Cuadro de mando de contabilidad de gestión de una empresa ficticia: dirección, controller y contabilidad, con cada cifra comprobada por otra vía.">
+<link rel="stylesheet" href="estilo.css?v=3">
+</head>
+<body>
+<header>
+  <div class="barra">
+    <p class="nombre">Contabilidad de gestión con datos</p>
+    <nav class="pestanas" role="tablist" aria-label="Cuadros">
+      <button role="tab" id="tab-direccion" aria-controls="direccion" data-pestana="direccion">Dirección</button>
+      <button role="tab" id="tab-controller" aria-controls="controller" data-pestana="controller">Controller</button>
+      <button role="tab" id="tab-contabilidad" aria-controls="contabilidad" data-pestana="contabilidad">Contabilidad</button>
+    </nav>
+  </div>
+  <div class="filtros">
+    <label>Año <select id="filtro-ano"></select></label>
+    <span class="viendo" id="viendo"></span>
+    <button type="button" id="quitar">Quitar filtros</button>
+    <span class="ficticia">TechAcces es una empresa ficticia</span>
+  </div>
+</header>
+
+<main>
+  <section class="pestana" id="direccion" role="tabpanel" aria-labelledby="tab-direccion">
+    <p class="pregunta">¿Va bien la empresa?</p>
+    <div class="cifras" id="dir-cifras"></div>
+    <p class="texto" id="dir-texto"></p>
+    <div class="graficos">
+      <figure class="grafico" id="dir-g1"></figure>
+      <figure class="grafico" id="dir-g2"></figure>
+    </div>
+    <details id="dir-detalle"><summary>Detalle por año</summary></details>
+    <p class="fuente">Fuente: libro diario, cierres y estados financieros de la empresa. Datos a 31/07/2026. Cómo se calcula y se comprueba cada cifra: <a href="https://github.com/jleonceo/analisis-contable/blob/main/informes/01_estados_financieros.md">estados financieros</a> y <a href="https://github.com/jleonceo/analisis-contable/blob/main/informes/02_rentabilidad_y_margenes.md">rentabilidad y márgenes</a>.</p>
+  </section>
+
+  <section class="pestana" id="controller" role="tabpanel" aria-labelledby="tab-controller" hidden>
+    <p class="pregunta">¿Dónde se aparta 2026 del presupuesto y de los objetivos?</p>
+    <div class="cifras" id="con-cifras"></div>
+    <p class="texto" id="con-texto"></p>
+    <div class="graficos">
+      <figure class="grafico" id="con-g1"></figure>
+      <figure class="grafico" id="con-g2"></figure>
+    </div>
+    <details id="con-detalle"><summary>Detalle: partidas, líneas, centros, personal y clientes</summary></details>
+    <p class="fuente">Fuente: libro diario, presupuesto y objetivos de la empresa. Datos a 31/07/2026. Cómo se calcula y se comprueba cada cifra: <a href="https://github.com/jleonceo/analisis-contable/blob/main/informes/03_presupuesto_objetivos_y_centros.md">presupuesto y coste por centro</a> y <a href="https://github.com/jleonceo/analisis-contable/blob/main/informes/04_clientes_y_proveedores.md">clientes y proveedores</a>.</p>
+  </section>
+
+  <section class="pestana" id="contabilidad" role="tabpanel" aria-labelledby="tab-contabilidad" hidden>
+    <p class="pregunta">¿Qué hay que revisar en el libro diario?</p>
+    <div class="cifras" id="ope-cifras"></div>
+    <p class="texto" id="ope-texto"></p>
+    <div id="ope-tabla"></div>
+    <p class="fuente">Fuente: libro diario y cierres de la empresa. Comprobaciones a 31/07/2026. Cómo se hace cada comprobación: <a href="https://github.com/jleonceo/analisis-contable/blob/main/informes/05_calidad_del_libro_diario.md">calidad del libro diario</a> y <a href="https://github.com/jleonceo/analisis-contable/blob/main/informes/06_fiscal_y_cierre.md">fiscal y cierre</a>.</p>
+  </section>
+</main>
+
+<div class="etiqueta-dato" id="etiqueta" role="tooltip" hidden></div>
+<script src="cuadro.js?v=9"></script>
+</body>
+</html>

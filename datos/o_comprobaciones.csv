@@ -1,0 +1,21 @@
+analisis,bloque,estado,cifra,que_mira
+A01,el diario cuadra,OK,"asientos: 6.399; asientos descuadrados: 0; total del debe: 22.029.536,94; total del haber: 22.029.536,94; cierres descuadrados: 0",¿Cuadra todo?
+A02,el cierre se traspasa,OK,ejercicios cerrados: 3; ejercicios con fallo: 0,¿El cierre traspasa el saldo y la apertura lo repite?
+A10,las vistas dicen lo mismo,OK,cuentas con saldo distinto en el informe de saldos: 0; asientos distintos en el informe de cuadre: 0,¿Las vistas dicen lo mismo que la tabla?
+A04,cuentas y periodos,OK,campos con valores que no existen: 0,"¿Aparece un centro, canal o tipo que no existe?"
+A05,cuentas y periodos,OK,cuentas fuera del plan: 0,¿Cada cuenta está en el plan?
+A06,cuentas y periodos,OK,cuentas de agrupación con apuntes: 0,¿Se carga una cuenta de agrupación?
+A07,cuentas y periodos,OK,borradores: 19; borradores en un periodo cerrado: 0; periodos cerrados: 36,¿Se escribe en un mes o ejercicio cerrado?
+A09,cuentas y periodos,OK,vencimientos anteriores al asiento: 0; cobros anteriores a la factura: 0; fechas futuras: 0,"¿Cobro o vencimiento antes del asiento, o fecha futura?"
+A03,campos analíticos rellenos,AVISO,caídas del relleno de un campo en un mes: 27,"¿Qué parte del diario trae centro, línea, canal, categoría, vencimiento y referencia?"
+A08,numeración de asientos,AVISO,primer número: 1; último número: 8.672; números sin usar: 2.273; números con varias fechas: 0,¿Faltan o se repiten números de asiento?
+B05,cuentas que no se comportan como siempre,AVISO,cuentas sin movimiento: 11,¿Qué cuentas dejaron de moverse?
+B06,cuentas que no se comportan como siempre,AVISO,cuentas casi nunca usadas: 10,¿Se usó una cuenta casi nunca usada?
+B07,cuentas que no se comportan como siempre,AVISO,cuentas con el signo cambiado algún mes: 9; cuentas con el signo cambiado al corte: 6,¿Hay un saldo con el signo que no toca?
+B08,cuentas que no se comportan como siempre,AVISO,apuntes atípicos: 70; cuentas con apuntes atípicos: 20,¿Un apunte fuera de lo habitual para esa cuenta?
+C03,combinaciones de cuentas,OK,pares de cuentas: 185; pares nuevos en el último mes: 0; pares vistos una sola vez: 14,¿Hay una combinación nueva?
+C10,combinaciones de cuentas,AVISO,"tipos de asiento: 40; tipos de asiento raros: 11; % de asientos en los diez tipos más usados: 91,89",¿Qué tipos de asiento hay y cuáles no encajan?
+C12,IVA y nómina,OK,asientos: 752; asientos que no cuadran: 0; asientos sin tipo o sin base: 15,¿472 = base × tipo y 400 = base + IVA?
+C13,IVA y nómina,OK,meses: 43; meses fuera de rango: 0; meses con retención distinta: 0; meses sin pagar: 0,"¿4751 y 476 cuadran con 640 y 642, y 465 se paga?"
+H19,proveedores,AVISO,facturas fuera de lo normal: 17,¿Un proveedor factura distinto de lo normal?
+D08,reserva legal,AVISO,"sin dotar: 11.680,00 €",¿Está dotada la reserva legal?

@@ -1,0 +1,57 @@
+mes,centro,cuenta,nombre_cuenta,presupuesto,real,desviacion,sentido
+2026-01,,70000002,Ventas de mercaderías,96691.94,91218.81,-5473.13,DESFAVORABLE
+2026-01,Administración,62100002,Arrendamientos y cánones,4025.00,0.00,-4025.00,FAVORABLE
+2026-01,Administración,62800002,Suministros,934.98,984.19,49.21,DESFAVORABLE
+2026-01,Almacén y logística,60000002,Compras de mercaderías,47742.06,49731.31,1989.25,DESFAVORABLE
+2026-01,Almacén y logística,62400002,Transportes,1453.85,1384.62,-69.23,FAVORABLE
+2026-01,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-01,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.66,0.02,DESFAVORABLE
+2026-01,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",579.60,603.75,24.15,DESFAVORABLE
+2026-02,,70000002,Ventas de mercaderías,114292.50,104855.50,-9437.00,DESFAVORABLE
+2026-02,Administración,62100002,Arrendamientos y cánones,4025.00,0.00,-4025.00,FAVORABLE
+2026-02,Administración,62800002,Suministros,820.12,745.56,-74.56,FAVORABLE
+2026-02,Almacén y logística,60000002,Compras de mercaderías,54899.92,56020.33,1120.41,DESFAVORABLE
+2026-02,Almacén y logística,62400002,Transportes,1582.42,1582.42,0.00,NEUTRO
+2026-02,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-02,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.66,0.02,DESFAVORABLE
+2026-02,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",676.20,690.00,13.80,DESFAVORABLE
+2026-03,,70000002,Ventas de mercaderías,123114.30,119528.45,-3585.85,DESFAVORABLE
+2026-03,Administración,62100002,Arrendamientos y cánones,4025.00,0.00,-4025.00,FAVORABLE
+2026-03,Administración,62800002,Suministros,902.61,902.61,0.00,NEUTRO
+2026-03,Almacén y logística,60000002,Compras de mercaderías,76147.82,72521.73,-3626.09,FAVORABLE
+2026-03,Almacén y logística,62400002,Transportes,1691.21,1780.22,89.01,DESFAVORABLE
+2026-03,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-03,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.66,0.02,DESFAVORABLE
+2026-03,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",815.06,776.25,-38.81,FAVORABLE
+2026-04,,70000002,Ventas de mercaderías,133729.50,133729.50,0.00,NEUTRO
+2026-04,Administración,62100002,Arrendamientos y cánones,4025.00,0.00,-4025.00,FAVORABLE
+2026-04,Administración,62800002,Suministros,736.16,800.17,64.01,DESFAVORABLE
+2026-04,Almacén y logística,60000002,Compras de mercaderías,82812.08,82812.08,0.00,NEUTRO
+2026-04,Almacén y logística,62400002,Transportes,2136.26,1978.02,-158.24,FAVORABLE
+2026-04,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-04,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.66,0.02,DESFAVORABLE
+2026-04,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",862.50,862.50,0.00,NEUTRO
+2026-05,,70000002,Ventas de mercaderías,119918.98,128945.14,9026.16,FAVORABLE
+2026-05,Administración,62100002,Arrendamientos y cánones,4025.00,0.00,-4025.00,FAVORABLE
+2026-05,Administración,62800002,Suministros,798.91,739.73,-59.18,FAVORABLE
+2026-05,Almacén y logística,60000002,Compras de mercaderías,84335.90,78088.80,-6247.10,FAVORABLE
+2026-05,Almacén y logística,62400002,Transportes,1819.78,1978.02,158.24,DESFAVORABLE
+2026-05,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-05,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.66,0.02,DESFAVORABLE
+2026-05,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",931.50,862.50,-69.00,FAVORABLE
+2026-06,,70000002,Ventas de mercaderías,664440.16,612580.14,-51860.02,DESFAVORABLE
+2026-06,Administración,62100002,Arrendamientos y cánones,2450.00,0.00,-2450.00,FAVORABLE
+2026-06,Administración,62800002,Suministros,11534.73,11891.47,356.74,DESFAVORABLE
+2026-06,Almacén y logística,60000002,Compras de mercaderías,339615.61,327941.46,-11674.15,FAVORABLE
+2026-06,Almacén y logística,62400002,Transportes,17260.33,0.00,-17260.33,FAVORABLE
+2026-06,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-06,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.64,0.00,NEUTRO
+2026-06,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",17345.26,0.00,-17345.26,FAVORABLE
+2026-07,,70000002,Ventas de mercaderías,579379.77,643755.30,64375.53,FAVORABLE
+2026-07,Administración,62100002,Arrendamientos y cánones,2450.00,0.00,-2450.00,FAVORABLE
+2026-07,Administración,62800002,Suministros,15138.05,14417.19,-720.86,FAVORABLE
+2026-07,Almacén y logística,60000002,Compras de mercaderías,376706.94,396533.62,19826.68,DESFAVORABLE
+2026-07,Almacén y logística,62400002,Transportes,23734.46,0.00,-23734.46,FAVORABLE
+2026-07,Recursos humanos,64000002,Sueldos y salarios,16350.00,16350.00,0.00,NEUTRO
+2026-07,Recursos humanos,64200002,Seguridad Social a cargo de la empresa,4888.64,4888.64,0.00,NEUTRO
+2026-07,Comercial,62700002,"Publicidad, propaganda y relaciones públicas",17064.47,0.00,-17064.47,FAVORABLE

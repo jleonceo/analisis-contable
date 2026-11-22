@@ -1,0 +1,161 @@
+mes,centro,coste
+2023-01,Administración,1974.46
+2023-01,Almacén y logística,16070.45
+2023-01,Recursos humanos,6734.02
+2023-01,Comercial,367.50
+2023-02,Administración,1974.80
+2023-02,Almacén y logística,18589.76
+2023-02,Recursos humanos,8177.03
+2023-02,Comercial,420.00
+2023-03,Administración,2023.48
+2023-03,Almacén y logística,21419.99
+2023-03,Recursos humanos,8177.03
+2023-03,Comercial,472.50
+2023-04,Administración,2229.06
+2023-04,Almacén y logística,22467.77
+2023-04,Recursos humanos,9439.66
+2023-04,Comercial,525.00
+2023-05,Administración,2182.33
+2023-05,Almacén y logística,23680.95
+2023-05,Recursos humanos,9439.66
+2023-05,Comercial,525.00
+2023-06,Administración,2179.72
+2023-06,Almacén y logística,20465.37
+2023-06,Recursos humanos,9439.66
+2023-06,Comercial,472.50
+2023-07,Administración,2121.87
+2023-07,Almacén y logística,18993.11
+2023-07,Recursos humanos,18879.31
+2023-07,Comercial,393.75
+2023-08,Administración,20405.59
+2023-08,Almacén y logística,13633.01
+2023-08,Recursos humanos,9439.66
+2023-08,Comercial,315.00
+2023-09,Administración,2253.94
+2023-09,Almacén y logística,27238.54
+2023-09,Recursos humanos,10582.03
+2023-09,Comercial,577.50
+2023-10,Administración,17090.38
+2023-10,Almacén y logística,29313.86
+2023-10,Recursos humanos,10582.03
+2023-10,Comercial,630.00
+2023-11,Administración,7906.67
+2023-11,Almacén y logística,42430.86
+2023-11,Recursos humanos,11664.28
+2023-11,Comercial,1155.00
+2023-12,Administración,44872.91
+2023-12,Almacén y logística,49691.96
+2023-12,Recursos humanos,23328.55
+2023-12,Sin centro,5600.04
+2023-12,Comercial,1312.50
+2024-01,Administración,5488.50
+2024-01,Almacén y logística,16654.90
+2024-01,Recursos humanos,13608.33
+2024-02,Administración,5680.34
+2024-02,Almacén y logística,18515.60
+2024-02,Recursos humanos,13608.33
+2024-03,Administración,5811.97
+2024-03,Almacén y logística,26786.56
+2024-03,Recursos humanos,15011.25
+2024-04,Administración,5814.17
+2024-04,Almacén y logística,28688.35
+2024-04,Recursos humanos,15011.25
+2024-05,Administración,5777.35
+2024-05,Almacén y logística,29679.63
+2024-05,Recursos humanos,15011.25
+2024-06,Administración,5742.08
+2024-06,Almacén y logística,27555.82
+2024-06,Recursos humanos,15011.25
+2024-07,Administración,5505.66
+2024-07,Almacén y logística,18940.55
+2024-07,Recursos humanos,30022.49
+2024-08,Administración,19320.78
+2024-08,Almacén y logística,16260.06
+2024-08,Recursos humanos,15011.25
+2024-09,Administración,5932.20
+2024-09,Almacén y logística,30652.54
+2024-09,Recursos humanos,15011.25
+2024-10,Administración,53095.16
+2024-10,Almacén y logística,36332.89
+2024-10,Recursos humanos,15291.83
+2024-11,Administración,50356.97
+2024-11,Almacén y logística,54079.70
+2024-11,Recursos humanos,15291.83
+2024-12,Administración,78631.86
+2024-12,Almacén y logística,68246.29
+2024-12,Recursos humanos,30583.66
+2025-01,Administración,2507.02
+2025-01,Almacén y logística,29405.92
+2025-01,Recursos humanos,18204.56
+2025-01,Comercial,404.25
+2025-02,Administración,2513.04
+2025-02,Almacén y logística,34755.53
+2025-02,Recursos humanos,18204.56
+2025-02,Comercial,462.00
+2025-03,Administración,7074.04
+2025-03,Almacén y logística,31982.04
+2025-03,Recursos humanos,18204.56
+2025-03,Comercial,519.75
+2025-04,Administración,2391.90
+2025-04,Almacén y logística,39382.97
+2025-04,Recursos humanos,18204.56
+2025-04,Comercial,577.50
+2025-05,Administración,2451.59
+2025-05,Almacén y logística,41838.82
+2025-05,Recursos humanos,18204.56
+2025-05,Comercial,577.50
+2025-06,Administración,2407.22
+2025-06,Almacén y logística,35997.93
+2025-06,Recursos humanos,18204.56
+2025-06,Comercial,519.75
+2025-07,Administración,2359.73
+2025-07,Almacén y logística,28042.45
+2025-07,Recursos humanos,36409.13
+2025-07,Comercial,433.13
+2025-08,Administración,2345.09
+2025-08,Almacén y logística,27324.55
+2025-08,Recursos humanos,18204.56
+2025-08,Comercial,346.50
+2025-09,Administración,2417.36
+2025-09,Almacén y logística,45734.85
+2025-09,Recursos humanos,18204.56
+2025-09,Comercial,635.25
+2025-10,Administración,2523.86
+2025-10,Almacén y logística,55813.76
+2025-10,Recursos humanos,18204.56
+2025-10,Comercial,693.00
+2025-11,Administración,2450.95
+2025-11,Almacén y logística,80728.86
+2025-11,Recursos humanos,18204.56
+2025-11,Comercial,1270.50
+2025-12,Administración,-18012.40
+2025-12,Almacén y logística,99159.74
+2025-12,Recursos humanos,36409.13
+2025-12,Comercial,1443.75
+2026-01,Administración,3297.21
+2026-01,Almacén y logística,55140.93
+2026-01,Recursos humanos,21238.66
+2026-01,Comercial,603.75
+2026-02,Administración,3054.58
+2026-02,Almacén y logística,61627.75
+2026-02,Recursos humanos,21238.66
+2026-02,Comercial,690.00
+2026-03,Administración,3207.63
+2026-03,Almacén y logística,78326.95
+2026-03,Recursos humanos,21238.66
+2026-03,Comercial,776.25
+2026-04,Administración,3101.19
+2026-04,Almacén y logística,88815.10
+2026-04,Recursos humanos,21238.66
+2026-04,Comercial,862.50
+2026-05,Administración,3036.75
+2026-05,Almacén y logística,84091.82
+2026-05,Recursos humanos,21238.66
+2026-05,Comercial,862.50
+2026-06,Administración,72902.52
+2026-06,Almacén y logística,331641.46
+2026-06,Recursos humanos,21238.64
+2026-06,Sin centro,322.14
+2026-07,Administración,87890.33
+2026-07,Almacén y logística,398983.62
+2026-07,Recursos humanos,21238.64

@@ -1,0 +1,227 @@
+{
+ "empresa": "S0",
+ "corte": "2026-07-31",
+ "generado_el": "2026-11-22T18:55:54",
+ "fuentes": {
+  "plantilla_b": "familia_b_154855.json (2026-11-20 15:48)",
+  "plantilla_c": "familia_c_154858.json (2026-11-20 15:48)",
+  "plantilla_e": "familia_e_154859.json (2026-11-20 15:48)",
+  "plantilla_h": "familia_h_154900.json (2026-11-20 15:49)",
+  "plantilla_m": "familia_m_154901.json (2026-11-20 15:49)",
+  "estados_y_analitica": "relanzadas en esta pasada",
+  "publicacion": "2026-11-21 08:27:24"
+ },
+ "periodo_de_cada_fichero": {
+  "d_concentracion_clientes.csv": "facturado a clientes en los doce meses hasta el corte",
+  "c_clientes.csv": "días de cobro de todo el histórico; saldo y límite al corte; apagado al corte",
+  "c_flujo_entre_grupos.csv": "todo el histórico del diario hasta el corte",
+  "c_facturas_disparadas.csv": "todo el histórico del diario hasta el corte, por mes",
+  "c_variaciones.csv": "del 1 de enero al corte frente al mismo periodo del año anterior, y el mes del corte",
+  "o_comprobaciones.csv": "la publicación de los análisis al corte; D08, el ejercicio del corte",
+  "d_puente_presupuesto.csv": "los meses terminados del ejercicio del corte",
+  "c_presupuesto_real.csv": "los meses terminados del ejercicio del corte"
+ },
+ "notas": {
+  "d_rentabilidad.csv": "ROE sobre el patrimonio medio del año; rotación y apalancamiento en veces; 2026 sin anualizar",
+  "c_variaciones.csv": "importes en el sentido de la naturaleza de la cuenta",
+  "c_clientes.csv": "uso del límite vacío cuando el saldo no es a cobrar"
+ },
+ "controles": [
+  {
+   "cifra": "ventas 2023",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "1054769.16",
+   "en_sql": "1054769.16",
+   "coincide": true
+  },
+  {
+   "cifra": "resultado 2023",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "494909.11",
+   "en_sql": "494909.11",
+   "coincide": true
+  },
+  {
+   "cifra": "margen bruto 2023",
+   "fichero": "d_margenes.csv",
+   "en_el_fichero": "67.13",
+   "en_sql": "67.13",
+   "coincide": true
+  },
+  {
+   "cifra": "variación de tesorería 2023",
+   "fichero": "d_flujos.csv",
+   "en_el_fichero": "558825.74",
+   "en_sql": "558825.74",
+   "coincide": true
+  },
+  {
+   "cifra": "ingresos por línea 2023",
+   "fichero": "c_ingresos_linea.csv",
+   "en_el_fichero": "1054769.16",
+   "en_sql": "1054769.16",
+   "coincide": true
+  },
+  {
+   "cifra": "margen neto 2023",
+   "fichero": "d_rentabilidad.csv",
+   "en_el_fichero": "46.92",
+   "en_sql": "46.92",
+   "coincide": true
+  },
+  {
+   "cifra": "ventas 2024",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "1420269.26",
+   "en_sql": "1420269.26",
+   "coincide": true
+  },
+  {
+   "cifra": "resultado 2024",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "592245.36",
+   "en_sql": "592245.36",
+   "coincide": true
+  },
+  {
+   "cifra": "margen bruto 2024",
+   "fichero": "d_margenes.csv",
+   "en_el_fichero": "62.31",
+   "en_sql": "62.31",
+   "coincide": true
+  },
+  {
+   "cifra": "variación de tesorería 2024",
+   "fichero": "d_flujos.csv",
+   "en_el_fichero": "739034.45",
+   "en_sql": "739034.45",
+   "coincide": true
+  },
+  {
+   "cifra": "ingresos por línea 2024",
+   "fichero": "c_ingresos_linea.csv",
+   "en_el_fichero": "1420269.26",
+   "en_sql": "1420269.26",
+   "coincide": true
+  },
+  {
+   "cifra": "margen neto 2024",
+   "fichero": "d_rentabilidad.csv",
+   "en_el_fichero": "41.70",
+   "en_sql": "41.70",
+   "coincide": true
+  },
+  {
+   "cifra": "ventas 2025",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "1947317.98",
+   "en_sql": "1947317.98",
+   "coincide": true
+  },
+  {
+   "cifra": "resultado 2025",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "1120974.42",
+   "en_sql": "1120974.42",
+   "coincide": true
+  },
+  {
+   "cifra": "margen bruto 2025",
+   "fichero": "d_margenes.csv",
+   "en_el_fichero": "75.50",
+   "en_sql": "75.50",
+   "coincide": true
+  },
+  {
+   "cifra": "variación de tesorería 2025",
+   "fichero": "d_flujos.csv",
+   "en_el_fichero": "1126948.40",
+   "en_sql": "1126948.40",
+   "coincide": true
+  },
+  {
+   "cifra": "ingresos por línea 2025",
+   "fichero": "c_ingresos_linea.csv",
+   "en_el_fichero": "1947317.98",
+   "en_sql": "1947317.98",
+   "coincide": true
+  },
+  {
+   "cifra": "margen neto 2025",
+   "fichero": "d_rentabilidad.csv",
+   "en_el_fichero": "57.57",
+   "en_sql": "57.57",
+   "coincide": true
+  },
+  {
+   "cifra": "ventas 2026",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "1834612.84",
+   "en_sql": "1834612.84",
+   "coincide": true
+  },
+  {
+   "cifra": "resultado 2026",
+   "fichero": "d_ventas_resultado.csv",
+   "en_el_fichero": "406707.28",
+   "en_sql": "406707.28",
+   "coincide": true
+  },
+  {
+   "cifra": "margen bruto 2026",
+   "fichero": "d_margenes.csv",
+   "en_el_fichero": "42.02",
+   "en_sql": "42.02",
+   "coincide": true
+  },
+  {
+   "cifra": "variación de tesorería 2026",
+   "fichero": "d_flujos.csv",
+   "en_el_fichero": "418700.24",
+   "en_sql": "418700.24",
+   "coincide": true
+  },
+  {
+   "cifra": "ingresos por línea 2026",
+   "fichero": "c_ingresos_linea.csv",
+   "en_el_fichero": "1834612.84",
+   "en_sql": "1834612.84",
+   "coincide": true
+  },
+  {
+   "cifra": "margen neto 2026",
+   "fichero": "d_rentabilidad.csv",
+   "en_el_fichero": "22.17",
+   "en_sql": "22.17",
+   "coincide": true
+  },
+  {
+   "cifra": "objetivo de ingresos 2026",
+   "fichero": "c_objetivos.csv",
+   "en_el_fichero": "1831567.15",
+   "en_sql": "1831567.15",
+   "coincide": true
+  },
+  {
+   "cifra": "ingresos reales 2026",
+   "fichero": "c_objetivos.csv",
+   "en_el_fichero": "1834612.84",
+   "en_sql": "1834612.84",
+   "coincide": true
+  },
+  {
+   "cifra": "resultado real del puente 2026",
+   "fichero": "d_puente_presupuesto.csv",
+   "en_el_fichero": "406707.28",
+   "en_sql": "406707.28",
+   "coincide": true
+  },
+  {
+   "cifra": "reserva legal sin dotar",
+   "fichero": "o_comprobaciones.csv",
+   "en_el_fichero": "11680.00",
+   "en_sql": "11680.00",
+   "coincide": true
+  }
+ ]
+}
