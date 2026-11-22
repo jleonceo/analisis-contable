@@ -49,8 +49,14 @@ La **caja libre** es explotación más inversión: lo que queda después de mant
 
 **Segunda vía.** La variación de tesorería de cada año es el movimiento neto de las cuentas de bancos y caja (57). Una
 consulta sobre esas cuentas da las cuatro cifras al céntimo, una vez quitado el asiento de apertura de 2023, que es
-saldo inicial y no flujo del año. Los tres flujos suman la variación en los cuatro años. El reparto entre explotación,
-inversión y financiación no se ha rehecho por otra vía.
+saldo inicial y no flujo del año. El reparto se rehace también con consultas sobre el diario:
+
+- **financiación** es el principal de deuda devuelto cada año: 19.200,00 € de 2023 a 2025 y 8.000,00 € en 2026;
+- **inversión** es el inmovilizado comprado sin IVA menos la parte financiada sin pagar: 2.000,00 € en 2024 y
+  3.600,00 € en 2025;
+- **explotación** es el resto de la variación, con los intereses y el IVA de las compras de inmovilizado dentro.
+
+Las doce cifras coinciden. La caja libre es la variación más el principal devuelto.
 
 **Cuándo engaña.** Una compra financiada por el vendedor no pasa entera por la caja. El 1 de mayo de 2025 se compra un
 elemento de transporte por 18.000 €: se pagan 3.600 € más el IVA y el resto queda como deuda por arrendamiento
