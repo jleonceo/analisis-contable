@@ -34,6 +34,10 @@ table c_objetivos
 		lineageTag: c0bf52de-94ac-458d-ba57-8f1a7734efd4
 		sourceColumn: semaforo
 
+	column nombre_indicador = SWITCH ( c_objetivos[indicador], "Gasto_Total_Mes", "Gasto total", "Ingresos_B2B_Mes", "Ingresos de empresas", "Ingresos_B2C_Mes", "Ingresos de particulares", "Ingresos_Totales_Mes", "Ingresos totales", "Margen_Bruto_Pct", "Margen bruto", c_objetivos[indicador] )
+		dataType: string
+		lineageTag: a5649c59-c1cd-4562-84e2-924810a8ad3a
+
 	partition c_objetivos = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("c_objetivos.csv"), {{"indicador", type text}, {"periodo", type text}, {"objetivo", Currency.Type}, {"real", Currency.Type}, {"cumplimiento_pct", type number}, {"semaforo", type text}}, "en-US")

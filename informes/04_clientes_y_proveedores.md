@@ -98,7 +98,7 @@ comprar al corte.
 
 **Cuándo engaña.** Aquí no avisa de un cliente perdido. Avisa de un cambio en la forma de contabilizar.
 
-## Cuatro acreedores facturaron más de un 30 % por encima de lo habitual en 41 meses
+## Cuatro acreedores se apartaron más de un 30 % de su importe habitual en 41 meses
 
 **Pregunta.** ¿Hay facturas de gasto recurrente que se apartan de su importe habitual?
 
@@ -106,8 +106,8 @@ comprar al corte.
 y seguros) tienen un importe mensual habitual en su ficha. Se suma la base de lo que factura cada mes. Ese mes se aparta si la base pasa en más de un 30 % de lo
 habitual, por arriba o por abajo.
 
-Se aparta en 41 de los 133 meses con factura de un acreedor con importe habitual. Los 41 son de 2023 y 2024, repartidos
-entre cuatro acreedores.
+Se aparta en 41 de los 133 meses con factura de un acreedor con importe habitual: 19 al alza y 22 a la baja. Los 41 son
+de 2023 y 2024, repartidos entre cuatro acreedores.
 
 **Segunda vía.** Una consulta que suma el gasto de los asientos de cada acreedor por mes y lo compara con el habitual
 de su ficha da los 133 meses y los 41 que se apartan.

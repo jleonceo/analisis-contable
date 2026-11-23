@@ -63,7 +63,7 @@ table _Medidas
 		displayFolder: Controller
 		lineageTag: 776fdd3c-d156-46dc-88e0-e39b2ff1c626
 
-	measure 'Efecto en el resultado' = CALCULATE ( SUM ( d_puente_presupuesto[efecto] ), d_puente_presupuesto[orden] > 0, d_puente_presupuesto[partida] <> "Resultado real" )
+	measure 'Efecto en el resultado' = CALCULATE ( SUM ( d_puente_presupuesto[efecto] ), KEEPFILTERS ( d_puente_presupuesto[orden] > 0 ), KEEPFILTERS ( d_puente_presupuesto[partida] <> "Resultado real" ) )
 		formatString: #,0.00 €
 		displayFolder: Controller
 		lineageTag: 67b3322a-5e8e-4745-8f11-1d3211ee07df
@@ -83,17 +83,17 @@ table _Medidas
 		displayFolder: Controller
 		lineageTag: 2011bf68-fccb-4213-9933-60e5978ed31e
 
-	measure 'Comprobaciones en orden' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "OK" )
+	measure 'Controles superados' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "OK" )
 		formatString: 0
 		displayFolder: Contabilidad
 		lineageTag: 91c4aa14-19c2-45d8-8a4d-b9e5f7a48249
 
-	measure 'Comprobaciones con aviso' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "AVISO" )
+	measure 'Controles con incidencia' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "AVISO" )
 		formatString: 0
 		displayFolder: Contabilidad
 		lineageTag: 9497e30a-29da-467b-b93e-4fb249f3760d
 
-	measure 'Meses con gasto fuera de lo habitual' = COUNTROWS ( c_facturas_disparadas )
+	measure 'Meses con gasto recurrente desviado' = COUNTROWS ( c_facturas_disparadas )
 		formatString: 0
 		displayFolder: Contabilidad
 		lineageTag: 9e45034b-236e-4257-8c6f-efccd081c211
@@ -102,6 +102,27 @@ table _Medidas
 		formatString: #,0.00 €
 		displayFolder: Contabilidad
 		lineageTag: f99588c6-4d51-4b92-afce-9c9ece0b945b
+
+	measure 'Título ventas' = "Ventas " & [Año cerrado]
+		displayFolder: Títulos
+		lineageTag: 5927e0ec-2099-4536-8e2c-88eb77fa3f0c
+
+	measure 'Título resultado' = "Resultado del ejercicio " & [Año cerrado]
+		displayFolder: Títulos
+		lineageTag: bb559fda-debd-41e6-99e3-bbf5cef0a6c4
+
+	measure 'Título flujo de caja libre' = "Flujo de caja libre " & [Año cerrado]
+		displayFolder: Títulos
+		lineageTag: 2be77571-9c22-4b4a-9848-a8a437631fd0
+
+	measure 'Título margen bruto' = "Margen bruto " & [Año cerrado] & " (%)"
+		displayFolder: Títulos
+		lineageTag: eef961ec-fe35-41dd-b9a9-fa3fd0d36116
+
+	measure 'Margen bruto mensual %' = AVERAGE ( d_margen_bruto_mensual[margen_bruto_pct] )
+		formatString: 0.00
+		displayFolder: Dirección
+		lineageTag: 1bfa2787-56b1-44f3-9ef6-64d07be5f780
 
 	column _
 		lineageTag: 3265b514-0172-40e5-9d4e-d290f60a21af

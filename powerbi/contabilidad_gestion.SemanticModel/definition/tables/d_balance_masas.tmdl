@@ -24,6 +24,17 @@ table d_balance_masas
 		lineageTag: b1a960ae-22e9-4a50-9291-74a85a3572d4
 		sourceColumn: importe
 
+	column orden_masa = SWITCH ( d_balance_masas[masa], "activo_no_corriente", 1, "activo_corriente", 2, "patrimonio_neto", 3, "pasivo_no_corriente", 4, "pasivo_corriente", 5, 9 )
+		dataType: int64
+		isHidden
+		lineageTag: 2e4dff27-ba53-4c94-b35c-b88619bddbb9
+		summarizeBy: none
+
+	column nombre_masa = SWITCH ( d_balance_masas[masa], "activo_no_corriente", "Activo no corriente", "activo_corriente", "Activo corriente", "patrimonio_neto", "Patrimonio neto", "pasivo_no_corriente", "Pasivo no corriente", "pasivo_corriente", "Pasivo corriente", d_balance_masas[masa] )
+		dataType: string
+		lineageTag: f518e5b0-b279-41b9-bd29-c5de0e62d99d
+		sortByColumn: orden_masa
+
 	partition d_balance_masas = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("d_balance_masas.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"masa", type text}, {"importe", Currency.Type}}, "en-US")
