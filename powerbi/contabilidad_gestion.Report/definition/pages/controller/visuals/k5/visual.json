@@ -82,7 +82,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Coste por centro (2023 a julio de 2026)'"
+                  "Value": "'Coste por centro, enero a julio de 2026'"
                 }
               }
             },

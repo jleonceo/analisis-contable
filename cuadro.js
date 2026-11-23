@@ -1,13 +1,12 @@
 /* Cuadro de mando de contabilidad de gestión.
    Lee los CSV de datos/ (los mismos que lee el informe de Power BI), dibuja tres pestañas y guarda la pestaña y el
-   filtro en la dirección de la página. Sin librerías: SVG dibujado aquí. Todo texto que viene de los datos entra con
+   en la dirección de la página. Sin librerías: SVG dibujado aquí. Todo texto que viene de los datos entra con
    textContent. */
 "use strict";
 
 // ===== Paleta y textos fijos =====
 const AZUL = "#2a78d6", NARANJA = "#eb6834", VERDE = "#1baf7a", GRIS = "#898781";
 const REJILLA = "#e1e0d9", EJE = "#c3c2b7";
-const ANOS = ["2023", "2024", "2025", "2026"];
 const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 const FICHEROS = ["d_ventas_resultado", "d_margenes", "d_margen_bruto_mensual", "d_punto_muerto", "d_flujos",
   "d_rentabilidad", "d_concentracion_clientes", "d_puente_presupuesto", "c_objetivos", "c_presupuesto_real",
@@ -15,7 +14,7 @@ const FICHEROS = ["d_ventas_resultado", "d_margenes", "d_margen_bruto_mensual", 
 const ESTADO = { OK: "En orden", AVISO: "Aviso", SIN_DATO: "Sin dato" };
 
 let D = {};                       // los CSV leídos, por nombre
-const estado = { pestana: "direccion", ano: "Todos" };
+const estado = { pestana: "direccion" };
 
 // ===== Números y textos a la española =====
 function miles(entero) { return String(entero).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
@@ -207,21 +206,14 @@ function tabla(destino, titulo, columnasTabla, filas, total) {
 }
 
 // ===== Selección =====
-function anosSel() { return estado.ano === "Todos" ? ANOS : [estado.ano]; }
-function textoViendo() {
-  if (estado.ano === "Todos") return "Viendo: todos los años, de enero de 2023 a julio de 2026";
-  if (estado.ano === "2026") return "Viendo: 2026, de enero a julio";
-  return "Viendo: " + estado.ano + ", año completo";
-}
+// Solo el ejercicio del corte (Juan, 23/11/2026): los años de 2023 a 2025 salen de un dato generado en el que las
+// compras no siguen a las ventas. No se publican, así que la página no lleva filtro de año.
+const ANO = "2026";
 function porAno(nombre) { return Object.fromEntries(D[nombre].map(f => [f.ano, f])); }
-function etiquetaAno(a) { return a === "2026" ? "2026 (ene-jul)" : a; }
 
 // ===== Pestaña Dirección =====
-// Solo el ejercicio del corte (Juan, 23/11/2026): la rentabilidad de 2023 a 2025 sale de un dato generado irreal y
-// no se publica. Por eso esta pestaña no usa el filtro de año.
-const ANO_DIRECCION = "2026";
 function dibujarDireccion() {
-  const a = ANO_DIRECCION;
+  const a = ANO;
   const v = porAno("d_ventas_resultado")[a], mg = porAno("d_margenes")[a], fl = porAno("d_flujos")[a];
   const pm = porAno("d_punto_muerto")[a], rt = porAno("d_rentabilidad")[a];
   cifras("dir-cifras", [
@@ -325,7 +317,6 @@ function dibujarController() {
 
   const det = document.getElementById("con-detalle");
   det.replaceChildren(el("summary", {}, "Detalle: partidas, líneas, centros, personal y clientes"));
-  if (estado.ano !== "Todos" && estado.ano !== "2026") det.append(el("p", { class: "nota" }, "El presupuesto y los objetivos solo existen para 2026: el filtro de año cambia las tablas de líneas, centros y personal."));
 
   // Desviación por partida, sumada de enero a julio
   const partidas = {};
@@ -342,28 +333,26 @@ function dibujarController() {
   ], lista);
   det.append(el("p", { class: "nota" }, "El real de cada partida es el de esa cuenta en ese centro. Lo apuntado en otro centro, o en una cuenta sin presupuesto, cae en las partidas sin presupuesto."));
 
-  const lineasNeg = D.c_ingresos_linea.filter(f => anosSel().includes(f.ano));
-  tabla(det, "Ingresos por línea de negocio", [
-    { nombre: "Año", valor: f => etiquetaAno(f.ano) }, { nombre: "Línea", valor: f => f.linea }, { nombre: "Ingresos (€)", num: true, valor: f => num(f.ingresos) },
-  ], lineasNeg);
+  tabla(det, "Ingresos por línea de negocio, de enero a julio de 2026", [
+    { nombre: "Línea", valor: f => f.linea }, { nombre: "Ingresos (€)", num: true, valor: f => num(f.ingresos) },
+  ], D.c_ingresos_linea);
   det.append(el("p", { class: "nota" }, "El gasto no se reparte entre líneas porque todo se apunta como común. Repartirlo por ventas daría a las dos el mismo margen."));
 
   const centros = {};
-  for (const f of D.c_coste_centro.filter(f => anosSel().includes(f.mes.slice(0, 4)))) {
-    const k = f.mes.slice(0, 4) + "|" + f.centro;
-    centros[k] ??= { ano: f.mes.slice(0, 4), centro: f.centro, coste: 0 };
-    centros[k].coste += Number(f.coste);
+  for (const f of D.c_coste_centro) {
+    centros[f.centro] ??= { centro: f.centro, coste: 0 };
+    centros[f.centro].coste += Number(f.coste);
   }
-  tabla(det, "Coste por centro", [
-    { nombre: "Año", valor: f => etiquetaAno(f.ano) }, { nombre: "Centro", valor: f => f.centro }, { nombre: "Coste (€)", num: true, valor: f => num(f.coste) },
-  ], Object.values(centros).sort((p, q) => p.ano.localeCompare(q.ano) || q.coste - p.coste));
-  det.append(el("p", { class: "nota" }, "El reparto de una misma cuenta entre centros cambia de un año a otro, así que el coste de un centro se lee dentro de cada año y no se compara entre años."));
+  tabla(det, "Coste por centro, de enero a julio de 2026", [
+    { nombre: "Centro", valor: f => f.centro }, { nombre: "Coste (€)", num: true, valor: f => num(f.coste) },
+  ], Object.values(centros).sort((p, q) => q.coste - p.coste));
+  det.append(el("p", { class: "nota" }, "Cada apunte va al centro que lleva. Una misma cuenta puede repartirse entre varios centros, como el transporte y la publicidad de la tabla de partidas."));
 
-  tabla(det, "Coste de personal", [
-    { nombre: "Año", valor: f => etiquetaAno(f.ano) }, { nombre: "Personas", num: true, valor: f => f.personas },
+  tabla(det, "Coste de personal, de enero a julio de 2026", [
+    { nombre: "Personas", num: true, valor: f => f.personas },
     { nombre: "Sueldos (€)", num: true, valor: f => num(f.sueldos) }, { nombre: "Seguridad Social (€)", num: true, valor: f => num(f.seguridad_social) },
     { nombre: "Coste total (€)", num: true, valor: f => num(f.coste_total) },
-  ], D.c_coste_laboral.filter(f => anosSel().includes(f.ano)));
+  ], D.c_coste_laboral);
   det.append(el("p", { class: "nota" }, "Solo el total: por departamento quedarían grupos de menos de cinco personas, en los que se vería el sueldo de alguien."));
 
   tabla(det, "Clientes: días de cobro y límite de crédito al corte", [
@@ -414,30 +403,22 @@ function descargarComprobaciones(filas) {
   document.body.append(a); a.click(); a.remove();
 }
 
-// ===== Dirección de la página, pestañas y filtros =====
+// ===== Dirección de la página y pestañas =====
 function leerDireccion() {
   const p = new URLSearchParams(location.hash.slice(1));
   if (["direccion", "controller", "contabilidad"].includes(p.get("pestana"))) estado.pestana = p.get("pestana");
-  if (["Todos", ...ANOS].includes(p.get("ano"))) estado.ano = p.get("ano");
 }
-function escribirDireccion() { history.replaceState(null, "", "#pestana=" + estado.pestana + "&ano=" + estado.ano); }
+function escribirDireccion() { history.replaceState(null, "", "#pestana=" + estado.pestana); }
 function pintar() {
   for (const b of document.querySelectorAll(".pestanas button")) {
     const sel = b.dataset.pestana === estado.pestana;
     b.setAttribute("aria-selected", String(sel)); b.tabIndex = sel ? 0 : -1;
     document.getElementById(b.dataset.pestana).hidden = !sel;
   }
-  document.getElementById("filtro-ano").value = estado.ano;
-  document.getElementById("viendo").textContent = textoViendo();
-  document.getElementById("quitar").disabled = estado.ano === "Todos";
   ({ direccion: dibujarDireccion, controller: dibujarController, contabilidad: dibujarContabilidad })[estado.pestana]();
   escribirDireccion();
 }
 function preparar() {
-  const sel = document.getElementById("filtro-ano");
-  for (const a of ["Todos", ...ANOS]) sel.append(el("option", { value: a }, a === "2026" ? "2026 (ene-jul)" : a));
-  sel.addEventListener("change", () => { estado.ano = sel.value; pintar(); });
-  document.getElementById("quitar").addEventListener("click", () => { estado.ano = "Todos"; pintar(); });
   const botones = [...document.querySelectorAll(".pestanas button")];
   botones.forEach((b, i) => {
     b.addEventListener("click", () => { estado.pestana = b.dataset.pestana; pintar(); });

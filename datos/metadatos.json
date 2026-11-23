@@ -1,7 +1,7 @@
 {
  "empresa": "S0",
  "corte": "2026-07-31",
- "generado_el": "2026-11-23T21:36:04",
+ "generado_el": "2026-11-23T21:58:00",
  "fuentes": {
   "plantilla_b": "familia_b_154855.json (2026-11-20 15:48)",
   "plantilla_c": "familia_c_154858.json (2026-11-20 15:48)",
@@ -16,7 +16,8 @@
   "c_clientes.csv": "días de cobro de todo el histórico; saldo y límite al corte; apagado al corte",
   "c_flujo_entre_grupos.csv": "todo el histórico del diario hasta el corte",
   "c_facturas_disparadas.csv": "todo el histórico del diario hasta el corte, por mes",
-  "c_variaciones.csv": "del 1 de enero al corte frente al mismo periodo del año anterior, y el mes del corte",
+  "c_variaciones.csv": "el mes del corte frente al mes anterior",
+  "c_coste_centro.csv": "los meses del ejercicio del corte",
   "o_comprobaciones.csv": "la publicación de los análisis al corte; D08, el ejercicio del corte",
   "d_puente_presupuesto.csv": "los meses terminados del ejercicio del corte",
   "c_presupuesto_real.csv": "los meses terminados del ejercicio del corte",

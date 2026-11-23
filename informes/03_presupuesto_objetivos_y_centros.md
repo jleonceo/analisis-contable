@@ -75,57 +75,52 @@ cumplimiento de objetivos, que incluye todo el grupo 6.
 
 **Pregunta.** ¿Cuánto factura cada línea de negocio?
 
-**Cómo se calcula.** Las ventas de mercaderías de cada año, separadas por la línea de negocio que lleva cada apunte.
+**Cómo se calcula.** Las ventas de mercaderías de enero a julio, separadas por la línea de negocio que lleva cada
+apunte.
 
-| Año | B2B (€) | B2C (€) |
+| Periodo | B2B (€) | B2C (€) |
 |---|---:|---:|
-| 2023 | 361.280,43 | 693.488,73 |
-| 2024 | 508.518,25 | 911.751,01 |
-| 2025 | 723.404,28 | 1.223.913,70 |
 | 2026, enero a julio | 1.441.253,19 | 393.359,65 |
 
-**Segunda vía.** Las dos líneas de cada año suman las ventas del año, comprobadas al céntimo con una consulta sobre las
+**Segunda vía.** Las dos líneas suman las ventas del periodo, comprobadas al céntimo con una consulta sobre las
 cuentas 70.
 
 **Lo que no se publica.** El margen de cada línea. Todo el gasto del diario está en la línea común, sin asignar a B2B
-ni a B2C, salvo dos apuntes de amortización de 2023 que no llevan línea. La única base de reparto con dato son las ventas. Repartir el gasto común en proporción a las ventas da a
+ni a B2C. La única base de reparto con dato son las ventas. Repartir el gasto común en proporción a las ventas da a
 las dos líneas el mismo margen que la empresa entera. Esa cifra no informa de nada, así que no se enseña.
 
-## El coste de cada centro se lee dentro de su año
+## Almacén y logística reúne tres de cada cuatro euros de gasto
 
 **Pregunta.** ¿Cuánto cuesta cada centro de coste?
 
-**Cómo se calcula.** La suma del grupo 6 de cada año, por el centro que lleva cada apunte.
+**Cómo se calcula.** La suma del grupo 6 de enero a julio, por el centro que lleva cada apunte.
 
-| Centro (€) | 2023 | 2024 | 2025 | 2026, enero a julio |
-|---|---:|---:|---:|---:|
-| Almacén y logística | 303.995,63 | 372.392,89 | 550.167,42 | 1.098.627,63 |
-| Administración | 107.215,21 | 247.157,04 | 13.429,40 | 176.490,21 |
-| Recursos humanos | 135.882,92 | 208.473,97 | 254.863,86 | 148.670,58 |
-| Comercial | 7.166,25 | 0,00 | 7.882,88 | 3.795,00 |
-| Sin centro | 5.600,04 | 0,00 | 0,00 | 322,14 |
+| Centro | 2026, enero a julio (€) |
+|---|---:|
+| Almacén y logística | 1.098.627,63 |
+| Administración | 176.490,21 |
+| Recursos humanos | 148.670,58 |
+| Comercial | 3.795,00 |
+| Sin centro | 322,14 |
 
-**Segunda vía.** Una consulta agrupada por año y centro da las veinte cifras al céntimo.
+**Segunda vía.** Una consulta agrupada por centro da las cinco cifras al céntimo.
 
-**Cuándo engaña.** El reparto de una misma cuenta entre centros cambia de un año a otro. Administración pasa de
-247.157,04 € en 2024 a 13.429,40 € en 2025. Comparar un centro entre años mide la forma de imputar, no lo que cuesta.
+**Cuándo engaña.** El centro es el que lleva cada apunte. Una misma cuenta se reparte entre varios centros: el
+transporte y la publicidad caen sobre todo en administración, aunque su presupuesto esté en almacén y en comercial.
 
 ## El coste de personal se publica solo en total
 
-**Pregunta.** ¿Cuánto cuesta la plantilla cada año?
+**Pregunta.** ¿Cuánto cuesta la plantilla?
 
 **Cómo se calcula.** Sueldos y salarios (640) más Seguridad Social a cargo de la empresa (642). Las personas son las
-que estuvieron en plantilla algún día del año.
+que estuvieron en plantilla algún día del periodo.
 
-| Año | Personas | Sueldos (€) | Seguridad Social (€) | Coste total (€) |
+| Periodo | Personas | Sueldos (€) | Seguridad Social (€) | Coste total (€) |
 |---|---:|---:|---:|---:|
-| 2023 | 8 | 104.605,82 | 31.277,10 | 135.882,92 |
-| 2024 | 10 | 160.488,00 | 47.985,97 | 208.473,97 |
-| 2025 | 9 | 196.200,04 | 58.663,82 | 254.863,86 |
 | 2026, enero a julio | 9 | 114.450,00 | 34.220,58 | 148.670,58 |
 
-**Segunda vía.** Las cuentas 640 y 642 de cada año y el número de fichas de empleado con alta antes de fin de año y sin
-baja antes de su inicio dan las dieciséis cifras.
+**Segunda vía.** Las cuentas 640 y 642 y el número de fichas de empleado con alta antes del corte y sin baja antes del
+1 de enero dan las cuatro cifras.
 
 **Lo que no se publica.** El coste por departamento. Con menos de cinco personas en un grupo, el coste del grupo deja
 ver el sueldo de alguien.
