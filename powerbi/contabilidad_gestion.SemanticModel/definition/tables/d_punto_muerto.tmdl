@@ -1,0 +1,42 @@
+table d_punto_muerto
+	lineageTag: f03d2fb0-bee1-4316-bc4f-c4fca3ec21fc
+
+	column ano
+		dataType: int64
+		lineageTag: 7034f9bb-dded-4f14-9de4-5479bdac9a11
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: 9bcd00ea-2c44-4931-8598-5faefe6d7a79
+		sourceColumn: completo
+
+	column ventas
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 38abd8d4-1482-4e95-82da-fbaa11e60cf8
+		sourceColumn: ventas
+
+	column costes_fijos
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 74fca3a8-ae3c-4dfb-841a-2a3aa6d246e3
+		sourceColumn: costes_fijos
+
+	column costes_variables
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 5a1a40b8-986d-43ae-9262-4a07f94b31e3
+		sourceColumn: costes_variables
+
+	column punto_muerto
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: d44911de-43a8-417d-b689-fd027d5891f7
+		sourceColumn: punto_muerto
+
+	partition d_punto_muerto = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_punto_muerto.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"ventas", Currency.Type}, {"costes_fijos", Currency.Type}, {"costes_variables", Currency.Type}, {"punto_muerto", Currency.Type}}, "en-US")
+

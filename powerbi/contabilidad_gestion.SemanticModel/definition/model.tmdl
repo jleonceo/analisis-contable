@@ -1,0 +1,33 @@
+model management_accounting_analytics
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_ProTooling = ["MCP-PBIModeling"]
+
+ref table d_ventas_resultado
+ref table d_flujos
+ref table d_balance_masas
+ref table d_margenes
+ref table d_margen_bruto_mensual
+ref table d_rentabilidad
+ref table d_punto_muerto
+ref table d_puente_presupuesto
+ref table d_concentracion_clientes
+ref table c_objetivos
+ref table c_coste_centro
+ref table c_presupuesto_real
+ref table c_ingresos_linea
+ref table c_coste_laboral
+ref table c_clientes
+ref table c_facturas_disparadas
+ref table c_flujo_entre_grupos
+ref table c_variaciones
+ref table o_comprobaciones
+ref table _Medidas
+
+ref cultureInfo en-US
+

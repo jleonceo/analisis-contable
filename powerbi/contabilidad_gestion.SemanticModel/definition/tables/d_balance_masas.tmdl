@@ -1,0 +1,30 @@
+/// Balance en cinco masas al cierre de cada año; 2026 al 31/07.
+table d_balance_masas
+	lineageTag: 2224d1bb-bb20-46a4-ba51-c7129e3bbbb3
+
+	column ano
+		dataType: int64
+		lineageTag: 26a460c6-d7a6-4671-a319-8dc04e983fad
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: e5557e7e-2f68-49eb-a180-b9d04bc17ed7
+		sourceColumn: completo
+
+	column masa
+		dataType: string
+		lineageTag: c8dcd821-0f3d-4176-a0e4-924978db0e78
+		sourceColumn: masa
+
+	column importe
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: b1a960ae-22e9-4a50-9291-74a85a3572d4
+		sourceColumn: importe
+
+	partition d_balance_masas = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_balance_masas.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"masa", type text}, {"importe", Currency.Type}}, "en-US")
+

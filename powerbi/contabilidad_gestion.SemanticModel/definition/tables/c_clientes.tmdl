@@ -1,0 +1,47 @@
+table c_clientes
+	lineageTag: 59b8fdcd-c665-4275-b6ff-ffd4ca9817af
+
+	column cuenta
+		dataType: string
+		lineageTag: 61c5e198-8b63-4ad3-a9f6-488062044b91
+		sourceColumn: cuenta
+
+	column dias_pactados
+		dataType: double
+		formatString: 0
+		lineageTag: 961dd599-e901-4138-9ce3-e2f5f5c487bf
+		sourceColumn: dias_pactados
+
+	column dias_reales_mediana
+		dataType: double
+		formatString: 0
+		lineageTag: 7db967b6-1f8d-477e-8b9a-f1c418ecbe7f
+		sourceColumn: dias_reales_mediana
+
+	column apagado
+		dataType: boolean
+		lineageTag: 438130f0-525a-4ebf-80df-4b3127805591
+		sourceColumn: apagado
+
+	column saldo
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 37739946-9189-4b97-a7d5-1abd1ebf62bc
+		sourceColumn: saldo
+
+	column limite
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: c401a34e-8ada-436e-b8a6-997ea7a6e703
+		sourceColumn: limite
+
+	column uso_limite_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: bf5a307f-35a4-4485-a7f1-ed03a49684b1
+		sourceColumn: uso_limite_pct
+
+	partition c_clientes = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_clientes.csv"), {{"cuenta", type text}, {"dias_pactados", type number}, {"dias_reales_mediana", type number}, {"apagado", type logical}, {"saldo", Currency.Type}, {"limite", Currency.Type}, {"uso_limite_pct", type number}}, "en-US")
+

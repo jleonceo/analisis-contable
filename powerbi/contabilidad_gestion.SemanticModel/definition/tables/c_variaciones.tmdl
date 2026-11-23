@@ -1,0 +1,45 @@
+table c_variaciones
+	lineageTag: 3daff73b-daba-455f-8a55-ba57bf4a37ae
+
+	column comparacion
+		dataType: string
+		lineageTag: 0091a8e7-b387-4c66-9533-4d945610380e
+		sourceColumn: comparacion
+
+	column cuenta
+		dataType: string
+		lineageTag: f418eb87-fb83-4681-8911-eaee32dc0391
+		sourceColumn: cuenta
+
+	column nombre_cuenta
+		dataType: string
+		lineageTag: c598e8e2-b19d-421d-9245-17c122ba0c84
+		sourceColumn: nombre_cuenta
+
+	column naturaleza
+		dataType: string
+		lineageTag: 41be7294-e4ca-4d57-b7fd-b79c3de3eaf7
+		sourceColumn: naturaleza
+
+	column actual
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 2df56074-02f2-41bc-903e-72b1e8c74dfa
+		sourceColumn: actual
+
+	column anterior
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: f20694de-fb96-4f31-bb55-7d08c61122ae
+		sourceColumn: anterior
+
+	column variacion
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: cacbb70a-de19-4324-8700-50c8b28a9dce
+		sourceColumn: variacion
+
+	partition c_variaciones = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_variaciones.csv"), {{"comparacion", type text}, {"cuenta", type text}, {"nombre_cuenta", type text}, {"naturaleza", type text}, {"actual", Currency.Type}, {"anterior", Currency.Type}, {"variacion", Currency.Type}}, "en-US")
+

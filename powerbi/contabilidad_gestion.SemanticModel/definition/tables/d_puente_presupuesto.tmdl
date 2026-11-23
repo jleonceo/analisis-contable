@@ -1,0 +1,32 @@
+/// Del resultado presupuestado al real, partida a partida; meses terminados de 2026.
+table d_puente_presupuesto
+	lineageTag: 83a612ae-24d4-4101-8659-3858695f90d8
+
+	column orden
+		dataType: int64
+		lineageTag: a284073b-5a8c-4d39-864a-0563518a4fba
+		summarizeBy: none
+		sourceColumn: orden
+
+	column partida
+		dataType: string
+		lineageTag: 29bbdb62-ac57-42ad-8123-be0265caf7e7
+		sourceColumn: partida
+		sortByColumn: orden
+
+	column efecto
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 5ff84d81-be25-4d48-93c1-604be0d58c0b
+		sourceColumn: efecto
+
+	column acumulado
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: eecdc959-37d7-4a12-93da-c4ebe8f45b62
+		sourceColumn: acumulado
+
+	partition d_puente_presupuesto = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_puente_presupuesto.csv"), {{"orden", Int64.Type}, {"partida", type text}, {"efecto", Currency.Type}, {"acumulado", Currency.Type}}, "en-US")
+

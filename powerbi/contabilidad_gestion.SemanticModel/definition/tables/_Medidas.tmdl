@@ -1,0 +1,114 @@
+/// Tabla técnica que solo guarda las medidas.
+table _Medidas
+	lineageTag: 4d17a7e2-b869-4118-b39b-5154c816b8b3
+
+	/// Último año completo de la serie.
+	measure 'Año cerrado' = CALCULATE ( MAX ( d_ventas_resultado[ano] ), d_ventas_resultado[completo] = TRUE (), REMOVEFILTERS ( d_ventas_resultado ) )
+		formatString: 0
+		displayFolder: Dirección
+		lineageTag: 7824112f-af78-4db0-967e-cdae572f1add
+
+	measure Ventas = SUM ( d_ventas_resultado[ventas] )
+		formatString: #,0.00 €
+		displayFolder: Dirección
+		lineageTag: 5cde0876-71ec-4541-8cbd-abc65b4f3a91
+
+	measure Resultado = SUM ( d_ventas_resultado[resultado] )
+		formatString: #,0.00 €
+		displayFolder: Dirección
+		lineageTag: 56a902c9-1e4b-4cea-b4b9-8cd54e500552
+
+	measure 'Caja libre' = SUM ( d_flujos[caja_libre] )
+		formatString: #,0.00 €
+		displayFolder: Dirección
+		lineageTag: 69cd00bd-50cc-47ed-a4af-34971e09795e
+
+	measure 'Ventas del año cerrado' = VAR a = [Año cerrado] RETURN CALCULATE ( [Ventas], d_ventas_resultado[ano] = a )
+		formatString: #,0 €
+		displayFolder: Dirección
+		lineageTag: e2aa94a0-1c6e-4420-aa9b-7ec23656a80f
+
+	measure 'Resultado del año cerrado' = VAR a = [Año cerrado] RETURN CALCULATE ( [Resultado], d_ventas_resultado[ano] = a )
+		formatString: #,0 €
+		displayFolder: Dirección
+		lineageTag: ec8c06bb-4d47-4228-abd2-382c8e09b55c
+
+	measure 'Caja libre del año cerrado' = VAR a = [Año cerrado] RETURN CALCULATE ( [Caja libre], d_flujos[ano] = a )
+		formatString: #,0 €
+		displayFolder: Dirección
+		lineageTag: 037f43da-93c8-47cc-adfa-b1ef2819d07b
+
+	measure 'Margen bruto del año cerrado %' = VAR a = [Año cerrado] RETURN CALCULATE ( MAX ( d_margenes[margen_bruto_pct] ), d_margenes[ano] = a )
+		formatString: 0.00
+		displayFolder: Dirección
+		lineageTag: 4cd0b7b5-9771-4043-9475-554d0dd66607
+
+	measure 'Importe de la masa' = SUM ( d_balance_masas[importe] )
+		formatString: #,0.00 €
+		displayFolder: Dirección
+		lineageTag: 415a45b2-c4c3-4f59-86d9-c13be951d0b6
+
+	measure 'Resultado presupuestado' = CALCULATE ( SUM ( d_puente_presupuesto[efecto] ), d_puente_presupuesto[orden] = 0 )
+		formatString: #,0.00 €
+		displayFolder: Controller
+		lineageTag: b31dd78c-66dc-492b-857f-2ffb239dd169
+
+	measure 'Resultado real del periodo' = CALCULATE ( SUM ( d_puente_presupuesto[efecto] ), d_puente_presupuesto[partida] = "Resultado real" )
+		formatString: #,0.00 €
+		displayFolder: Controller
+		lineageTag: f302ae8f-d19f-4b73-8d18-c9fe0cc0044e
+
+	measure 'Desviación del resultado' = [Resultado real del periodo] - [Resultado presupuestado]
+		formatString: #,0.00 €
+		displayFolder: Controller
+		lineageTag: 776fdd3c-d156-46dc-88e0-e39b2ff1c626
+
+	measure 'Efecto en el resultado' = CALCULATE ( SUM ( d_puente_presupuesto[efecto] ), d_puente_presupuesto[orden] > 0, d_puente_presupuesto[partida] <> "Resultado real" )
+		formatString: #,0.00 €
+		displayFolder: Controller
+		lineageTag: 67b3322a-5e8e-4745-8f11-1d3211ee07df
+
+	measure 'Coste del centro' = SUM ( c_coste_centro[coste] )
+		formatString: #,0.00 €
+		displayFolder: Controller
+		lineageTag: dd680226-b144-42a6-a942-844d14548e70
+
+	measure 'Ingresos de la línea' = SUM ( c_ingresos_linea[ingresos] )
+		formatString: #,0.00 €
+		displayFolder: Controller
+		lineageTag: 39507996-c2f4-487d-a18e-f3c5ac170015
+
+	measure 'Cumplimiento %' = AVERAGE ( c_objetivos[cumplimiento_pct] )
+		formatString: 0.00
+		displayFolder: Controller
+		lineageTag: 2011bf68-fccb-4213-9933-60e5978ed31e
+
+	measure 'Comprobaciones en orden' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "OK" )
+		formatString: 0
+		displayFolder: Contabilidad
+		lineageTag: 91c4aa14-19c2-45d8-8a4d-b9e5f7a48249
+
+	measure 'Comprobaciones con aviso' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "AVISO" )
+		formatString: 0
+		displayFolder: Contabilidad
+		lineageTag: 9497e30a-29da-467b-b93e-4fb249f3760d
+
+	measure 'Meses con gasto fuera de lo habitual' = COUNTROWS ( c_facturas_disparadas )
+		formatString: 0
+		displayFolder: Contabilidad
+		lineageTag: 9e45034b-236e-4257-8c6f-efccd081c211
+
+	measure 'Saldo de clientes' = SUM ( c_clientes[saldo] )
+		formatString: #,0.00 €
+		displayFolder: Contabilidad
+		lineageTag: f99588c6-4d51-4b92-afce-9c9ece0b945b
+
+	column _
+		lineageTag: 3265b514-0172-40e5-9d4e-d290f60a21af
+		isNameInferred
+		sourceColumn: [_]
+
+	partition _Medidas = calculated
+		mode: import
+		source = ROW("_", BLANK())
+

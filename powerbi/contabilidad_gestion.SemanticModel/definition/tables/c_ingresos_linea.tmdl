@@ -1,0 +1,29 @@
+table c_ingresos_linea
+	lineageTag: 8907939b-4934-43ae-b889-1fde1d212a8b
+
+	column ano
+		dataType: int64
+		lineageTag: 1ff44980-4bd4-4ef6-b780-c45d357679c3
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: 9c0a0dcd-1170-4555-a951-4d3a1f9b1aac
+		sourceColumn: completo
+
+	column linea
+		dataType: string
+		lineageTag: 7d7a4f61-f55a-41e8-9bb7-c3548137f89b
+		sourceColumn: linea
+
+	column ingresos
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 71f1777c-fe05-49a3-b850-31ab4444f788
+		sourceColumn: ingresos
+
+	partition c_ingresos_linea = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_ingresos_linea.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"linea", type text}, {"ingresos", Currency.Type}}, "en-US")
+

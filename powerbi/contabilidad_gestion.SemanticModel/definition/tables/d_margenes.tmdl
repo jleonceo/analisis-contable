@@ -1,0 +1,30 @@
+table d_margenes
+	lineageTag: 83833296-c397-40d7-be64-e6923173bcfc
+
+	column ano
+		dataType: int64
+		lineageTag: 9572c173-bbf5-464a-a7ea-28cf8f471eb7
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: 0ee39b9a-4451-4821-a120-075a2290bf85
+		sourceColumn: completo
+
+	column margen_bruto_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 5465d535-7270-4a0a-9d2c-802d4f307575
+		sourceColumn: margen_bruto_pct
+
+	column margen_explotacion_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 43dfc4e4-1bd2-4f7a-b85c-03f5dc6b5596
+		sourceColumn: margen_explotacion_pct
+
+	partition d_margenes = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_margenes.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"margen_bruto_pct", type number}, {"margen_explotacion_pct", type number}}, "en-US")
+

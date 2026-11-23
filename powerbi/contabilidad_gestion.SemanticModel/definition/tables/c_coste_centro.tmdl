@@ -1,0 +1,23 @@
+table c_coste_centro
+	lineageTag: 6d52ef6e-4d41-4eb5-9694-37c1fdb161e1
+
+	column mes
+		dataType: string
+		lineageTag: 41e5f4d1-cd9b-49cd-ae85-db55f19cdeab
+		sourceColumn: mes
+
+	column centro
+		dataType: string
+		lineageTag: 753a1f19-baf3-4cab-979e-79d8ff7a6271
+		sourceColumn: centro
+
+	column coste
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 1dac8b51-f96c-4494-835c-c7247964bf4f
+		sourceColumn: coste
+
+	partition c_coste_centro = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_coste_centro.csv"), {{"mes", type text}, {"centro", type text}, {"coste", Currency.Type}}, "en-US")
+

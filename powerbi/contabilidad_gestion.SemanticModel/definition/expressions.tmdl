@@ -1,0 +1,17 @@
+/// Carpeta local o dirección web de los CSV de datos/, terminada en barra.
+expression CarpetaDatos = "C:\PROYECTOS_GITHUB\analisis-contable\datos\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 353d3e05-5ba6-40b9-9abd-63c1b637b8c6
+
+/// Lee un CSV de CarpetaDatos (disco o web) y deja vacíos como nulos.
+expression LeerCsv =
+		(fichero as text) as table =>
+		let
+		    Ruta = CarpetaDatos & fichero,
+		    Binario = if Text.StartsWith(Ruta, "http") then Web.Contents(Ruta) else File.Contents(Ruta),
+		    Origen = Csv.Document(Binario, [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+		    Cabecera = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+		    SinVacios = Table.TransformColumns(Cabecera, {}, each if _ = "" then null else _)
+		in
+		    SinVacios
+	lineageTag: ae2caa00-90ec-4e75-8ce7-fb6b9efc3718
+

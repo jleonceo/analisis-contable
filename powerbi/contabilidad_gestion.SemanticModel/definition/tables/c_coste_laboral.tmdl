@@ -1,0 +1,42 @@
+table c_coste_laboral
+	lineageTag: b106108c-4c09-4ad7-bf9c-b67477eb9bac
+
+	column ano
+		dataType: int64
+		lineageTag: 3abcec7e-297b-4d6a-bfa5-4b6017be99a2
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: d133f5f9-a247-4b38-b973-6115c4821400
+		sourceColumn: completo
+
+	column personas
+		dataType: int64
+		lineageTag: e4a941de-55c9-4950-ba19-99bedfdd37d8
+		summarizeBy: none
+		sourceColumn: personas
+
+	column sueldos
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 7542850e-e40c-40f9-8a79-78a3e82f6255
+		sourceColumn: sueldos
+
+	column seguridad_social
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 2864a1d0-d1fe-4ac6-8fc8-7e449623aa80
+		sourceColumn: seguridad_social
+
+	column coste_total
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: e1bd8160-7195-4ed0-9c5b-16cd95474dc1
+		sourceColumn: coste_total
+
+	partition c_coste_laboral = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_coste_laboral.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"personas", Int64.Type}, {"sueldos", Currency.Type}, {"seguridad_social", Currency.Type}, {"coste_total", Currency.Type}}, "en-US")
+

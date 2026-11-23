@@ -1,0 +1,40 @@
+table c_objetivos
+	lineageTag: e42b5c6f-21ac-42e7-a767-0dfe93259fd3
+
+	column indicador
+		dataType: string
+		lineageTag: 865f8b80-c849-401c-8078-8d6ea8c3197e
+		sourceColumn: indicador
+
+	column periodo
+		dataType: string
+		lineageTag: dda2ae3f-274b-4969-8678-228bc5297071
+		sourceColumn: periodo
+
+	column objetivo
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: 4f296eab-2c0e-4e2f-8c92-65ffa8f4a4a2
+		sourceColumn: objetivo
+
+	column real
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: 7c549300-e7c5-4e04-9f2f-f0e7bb8b7259
+		sourceColumn: real
+
+	column cumplimiento_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 64f958d9-62e8-4697-bd47-02589345fa0a
+		sourceColumn: cumplimiento_pct
+
+	column semaforo
+		dataType: string
+		lineageTag: c0bf52de-94ac-458d-ba57-8f1a7734efd4
+		sourceColumn: semaforo
+
+	partition c_objetivos = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_objetivos.csv"), {{"indicador", type text}, {"periodo", type text}, {"objetivo", Currency.Type}, {"real", Currency.Type}, {"cumplimiento_pct", type number}, {"semaforo", type text}}, "en-US")
+

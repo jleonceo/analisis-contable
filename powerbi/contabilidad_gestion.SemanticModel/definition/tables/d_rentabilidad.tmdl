@@ -1,0 +1,42 @@
+table d_rentabilidad
+	lineageTag: d90436b7-561e-4053-a316-8dc52d7e0ceb
+
+	column ano
+		dataType: int64
+		lineageTag: 77eb23d1-325a-4093-8997-f4f87c24d141
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: dca36da5-bfec-4b24-8644-dc861c089596
+		sourceColumn: completo
+
+	column margen_neto_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 1c2e6e41-acb1-4da9-bbce-b7e969898f65
+		sourceColumn: margen_neto_pct
+
+	column rotacion
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 04cef9c4-203a-47ab-abf6-3c8a5dacbe15
+		sourceColumn: rotacion
+
+	column apalancamiento
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 29e166ea-463f-4b46-9e4f-13f386f3756c
+		sourceColumn: apalancamiento
+
+	column roe_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 82d46fd3-0b8f-4b1a-96a3-42f0a844feaf
+		sourceColumn: roe_pct
+
+	partition d_rentabilidad = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_rentabilidad.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"margen_neto_pct", type number}, {"rotacion", type number}, {"apalancamiento", type number}, {"roe_pct", type number}}, "en-US")
+

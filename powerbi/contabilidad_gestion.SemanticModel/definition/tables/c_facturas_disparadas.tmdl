@@ -1,0 +1,35 @@
+table c_facturas_disparadas
+	lineageTag: cf9f2682-a616-48bc-8be3-a739cb2c9ce7
+
+	column cuenta
+		dataType: string
+		lineageTag: ded605cd-af52-4923-822f-d3e355e200c4
+		sourceColumn: cuenta
+
+	column mes
+		dataType: string
+		lineageTag: cc50d564-59bb-4296-a37c-6a276d1a338e
+		sourceColumn: mes
+
+	column base
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: f749d2d4-2dd0-49ac-b156-1414f1a4fb3b
+		sourceColumn: base
+
+	column habitual
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: c0be3e7d-144d-4af7-8c31-a0ee91ca4bfe
+		sourceColumn: habitual
+
+	column desviacion_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 908fe1b5-d837-48ba-963a-c47ef2c1e3ba
+		sourceColumn: desviacion_pct
+
+	partition c_facturas_disparadas = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_facturas_disparadas.csv"), {{"cuenta", type text}, {"mes", type text}, {"base", Currency.Type}, {"habitual", Currency.Type}, {"desviacion_pct", type number}}, "en-US")
+

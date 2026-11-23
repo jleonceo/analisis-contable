@@ -1,0 +1,23 @@
+table c_flujo_entre_grupos
+	lineageTag: c9d2d39f-4b9a-4f2f-b404-5a3f531c983f
+
+	column grupo_debe
+		dataType: string
+		lineageTag: 495915b4-117e-4d86-bb5e-9b2a137af3cc
+		sourceColumn: grupo_debe
+
+	column grupo_haber
+		dataType: string
+		lineageTag: 92ea9e09-881b-4130-97e6-fd8675857987
+		sourceColumn: grupo_haber
+
+	column importe
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 4de742a1-c514-4eb8-8fff-7e0d4cdc1d72
+		sourceColumn: importe
+
+	partition c_flujo_entre_grupos = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_flujo_entre_grupos.csv"), {{"grupo_debe", type text}, {"grupo_haber", type text}, {"importe", Currency.Type}}, "en-US")
+

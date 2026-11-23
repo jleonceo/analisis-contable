@@ -1,0 +1,49 @@
+/// Estado de flujos de efectivo por el método indirecto, por año.
+table d_flujos
+	lineageTag: 9a7f2b6d-0dc8-4bd3-8046-df1b5c2d13ff
+
+	column ano
+		dataType: int64
+		lineageTag: 46411f36-51f3-448d-99c0-f8a76cd9ea69
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: 18a82139-c2e9-4a7b-8fc3-1fff52ea4d4c
+		sourceColumn: completo
+
+	column explotacion
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 2e37a3f6-fabd-401c-8081-83f49f4daf08
+		sourceColumn: explotacion
+
+	column inversion
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: b645a5c5-f265-4333-b228-34e721818f4b
+		sourceColumn: inversion
+
+	column financiacion
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 5ebd7928-8ad3-42ca-8b8b-59bed5ea07df
+		sourceColumn: financiacion
+
+	column variacion
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 70001e29-f7fa-4a4d-8389-0af20a1500ed
+		sourceColumn: variacion
+
+	column caja_libre
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: a63c73d2-05c0-4182-aafc-8bf786a17d12
+		sourceColumn: caja_libre
+
+	partition d_flujos = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_flujos.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"explotacion", Currency.Type}, {"inversion", Currency.Type}, {"financiacion", Currency.Type}, {"variacion", Currency.Type}, {"caja_libre", Currency.Type}}, "en-US")
+

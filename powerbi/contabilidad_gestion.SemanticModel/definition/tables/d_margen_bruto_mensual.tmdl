@@ -1,0 +1,30 @@
+table d_margen_bruto_mensual
+	lineageTag: 989bc3ec-022d-4eee-b872-33e596a56f53
+
+	column mes
+		dataType: string
+		lineageTag: 8145c908-9f58-4ae7-ae2e-243bb8273614
+		sourceColumn: mes
+
+	column ventas
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 9ee2eeb3-b802-4e64-9a40-fe7288d50fd9
+		sourceColumn: ventas
+
+	column aprovisionamientos
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: e9c64752-ee1d-4cc6-8d4a-43e69fa28f9b
+		sourceColumn: aprovisionamientos
+
+	column margen_bruto_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 90f1d32b-89d9-4575-b634-26c0c2e56c4f
+		sourceColumn: margen_bruto_pct
+
+	partition d_margen_bruto_mensual = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_margen_bruto_mensual.csv"), {{"mes", type text}, {"ventas", Currency.Type}, {"aprovisionamientos", Currency.Type}, {"margen_bruto_pct", type number}}, "en-US")
+

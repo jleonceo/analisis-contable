@@ -1,0 +1,33 @@
+/// Las 20 comprobaciones del libro diario con su estado (OK o AVISO).
+table o_comprobaciones
+	lineageTag: 7b5ec0d4-92f7-457e-a5e3-67cd1705bc20
+
+	column analisis
+		dataType: string
+		lineageTag: c08f3ed3-c4d4-40eb-8d44-c48768334b06
+		sourceColumn: analisis
+
+	column bloque
+		dataType: string
+		lineageTag: cf153286-3548-4bea-8733-d4e7a7a78361
+		sourceColumn: bloque
+
+	column estado
+		dataType: string
+		lineageTag: a242c7cd-f653-494f-878a-35429fb93306
+		sourceColumn: estado
+
+	column cifra
+		dataType: string
+		lineageTag: 5fc180e5-8e0d-4baf-8b2c-92218a56bbf6
+		sourceColumn: cifra
+
+	column que_mira
+		dataType: string
+		lineageTag: 0e920c42-f087-423e-9d22-e454fe2fcb14
+		sourceColumn: que_mira
+
+	partition o_comprobaciones = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("o_comprobaciones.csv"), {{"analisis", type text}, {"bloque", type text}, {"estado", type text}, {"cifra", type text}, {"que_mira", type text}})
+

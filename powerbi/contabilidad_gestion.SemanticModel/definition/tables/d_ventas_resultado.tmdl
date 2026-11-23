@@ -1,0 +1,31 @@
+/// Ventas (70) y resultado (grupo 7 menos grupo 6) por año. 2026, enero a julio.
+table d_ventas_resultado
+	lineageTag: aaa06ea6-42ac-4c21-822e-6f2e26fee56b
+
+	column ano
+		dataType: int64
+		lineageTag: 4e0cebe0-996d-4544-be19-a5e2ccf88b4f
+		summarizeBy: none
+		sourceColumn: ano
+
+	column completo
+		dataType: boolean
+		lineageTag: dc9feb6e-b941-48cc-bae8-a61eac82a439
+		sourceColumn: completo
+
+	column ventas
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 182ed18f-229a-423b-8d47-0f44c96ab26a
+		sourceColumn: ventas
+
+	column resultado
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 32270c5c-6928-4bac-a797-95ef51650b7c
+		sourceColumn: resultado
+
+	partition d_ventas_resultado = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_ventas_resultado.csv"), {{"ano", Int64.Type}, {"completo", type logical}, {"ventas", Currency.Type}, {"resultado", Currency.Type}}, "en-US")
+

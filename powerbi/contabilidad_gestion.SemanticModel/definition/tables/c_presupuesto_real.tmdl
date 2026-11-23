@@ -1,0 +1,50 @@
+table c_presupuesto_real
+	lineageTag: f9e05d11-3a52-4b47-a535-9942aa0007c2
+
+	column mes
+		dataType: string
+		lineageTag: 0b1fb2e3-2908-4167-82cd-db2edff33dd2
+		sourceColumn: mes
+
+	column centro
+		dataType: string
+		lineageTag: ec12cdc6-d931-475c-aded-83291ae3a92a
+		sourceColumn: centro
+
+	column cuenta
+		dataType: string
+		lineageTag: 42a4f05a-1bea-44f0-a003-33641e1cc25e
+		sourceColumn: cuenta
+
+	column nombre_cuenta
+		dataType: string
+		lineageTag: 3093a337-cc7f-4c8a-aa84-e1ecdb190fec
+		sourceColumn: nombre_cuenta
+
+	column presupuesto
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 9e25eeae-c6fc-4491-9960-9b753223e93d
+		sourceColumn: presupuesto
+
+	column real
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 0133cd00-fbd0-4dc6-a6a0-bb5a5b4ac076
+		sourceColumn: real
+
+	column desviacion
+		dataType: decimal
+		formatString: #,0.00 €
+		lineageTag: 6488525a-84e7-428f-9e3d-566c44e76732
+		sourceColumn: desviacion
+
+	column sentido
+		dataType: string
+		lineageTag: 4e02b575-f036-45fd-8989-ed9289651a6f
+		sourceColumn: sentido
+
+	partition c_presupuesto_real = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("c_presupuesto_real.csv"), {{"mes", type text}, {"centro", type text}, {"cuenta", type text}, {"nombre_cuenta", type text}, {"presupuesto", Currency.Type}, {"real", Currency.Type}, {"desviacion", Currency.Type}, {"sentido", type text}}, "en-US")
+
