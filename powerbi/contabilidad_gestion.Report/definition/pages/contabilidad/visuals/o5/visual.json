@@ -1,1 +1,122 @@
-{"$schema":"https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json","name":"o5","position":{"x":856,"y":135,"z":1000,"height":520,"width":404,"tabOrder":1000},"visual":{"visualType":"clusteredBarChart","query":{"queryState":{"Category":{"projections":[{"field":{"Column":{"Expression":{"SourceRef":{"Entity":"c_facturas_disparadas"}},"Property":"cuenta"}},"queryRef":"c_facturas_disparadas.cuenta","nativeQueryRef":"Acreedor","displayName":"Acreedor"}]},"Y":{"projections":[{"field":{"Measure":{"Expression":{"SourceRef":{"Entity":"_Medidas"}},"Property":"Meses con gasto recurrente desviado"}},"queryRef":"_Medidas.Meses con gasto recurrente desviado","nativeQueryRef":"Meses","displayName":"Meses"}]}}},"visualContainerObjects":{"title":[{"properties":{"show":{"expr":{"Literal":{"Value":"true"}}},"text":{"expr":{"Literal":{"Value":"'Gasto recurrente desviado por acreedor'"}}},"fontSize":{"expr":{"Literal":{"Value":"12D"}}},"bold":{"expr":{"Literal":{"Value":"true"}}}}}]},"drillFilterOtherVisuals":true}}
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "o5",
+  "position": {
+    "x": 796,
+    "y": 152,
+    "z": 1000,
+    "height": 488,
+    "width": 464,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "c_facturas_disparadas"
+                    }
+                  },
+                  "Property": "acreedor"
+                }
+              },
+              "queryRef": "c_facturas_disparadas.acreedor",
+              "nativeQueryRef": "Acreedor",
+              "displayName": "Acreedor"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Meses con gasto recurrente desviado"
+                }
+              },
+              "queryRef": "_Medidas.Meses con gasto recurrente desviado",
+              "nativeQueryRef": "Meses",
+              "displayName": "Meses"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "maxMarginFactor": {
+              "expr": {
+                "Literal": {
+                  "Value": "50L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Gasto recurrente desviado por acreedor'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

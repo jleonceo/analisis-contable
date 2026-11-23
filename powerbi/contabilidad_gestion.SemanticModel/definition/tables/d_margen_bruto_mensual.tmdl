@@ -24,6 +24,11 @@ table d_margen_bruto_mensual
 		lineageTag: 90f1d32b-89d9-4575-b634-26c0c2e56c4f
 		sourceColumn: margen_bruto_pct
 
+	column fecha_mes = DATE ( VALUE ( LEFT ( d_margen_bruto_mensual[mes], 4 ) ), VALUE ( RIGHT ( d_margen_bruto_mensual[mes], 2 ) ), 1 )
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: 67db1e5b-0ed0-4fb5-a7c8-6621e4edd4f4
+
 	partition d_margen_bruto_mensual = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("d_margen_bruto_mensual.csv"), {{"mes", type text}, {"ventas", Currency.Type}, {"aprovisionamientos", Currency.Type}, {"margen_bruto_pct", type number}}, "en-US")

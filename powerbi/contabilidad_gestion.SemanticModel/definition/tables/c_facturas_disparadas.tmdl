@@ -29,6 +29,11 @@ table c_facturas_disparadas
 		lineageTag: 908fe1b5-d837-48ba-963a-c47ef2c1e3ba
 		sourceColumn: desviacion_pct
 
+	/// Tipo de gasto de la cuenta de gasto habitual de la ficha del acreedor (tabla acreedores), con su código. Pendiente: que lo traiga el exportador.
+	column acreedor = VAR t = SWITCH ( c_facturas_disparadas[cuenta], "41000002", "Arrendamiento", "41000003", "Servicios profesionales", "41000004", "Transporte", "41000005", "Publicidad", "41000006", "Suministros", "41000007", "Seguros", "41000008", "Servicios profesionales", "41000009", "Renting", "Acreedor" ) RETURN t & " · " & c_facturas_disparadas[cuenta]
+		dataType: string
+		lineageTag: 11678c3a-ad81-4742-88bc-d3a655398bae
+
 	partition c_facturas_disparadas = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("c_facturas_disparadas.csv"), {{"cuenta", type text}, {"mes", type text}, {"base", Currency.Type}, {"habitual", Currency.Type}, {"desviacion_pct", type number}}, "en-US")

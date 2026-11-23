@@ -1,1 +1,140 @@
-{"$schema":"https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json","name":"d6","position":{"x":648,"y":135,"z":1000,"height":255,"width":612,"tabOrder":1000},"visual":{"visualType":"clusteredColumnChart","query":{"queryState":{"Category":{"projections":[{"field":{"Column":{"Expression":{"SourceRef":{"Entity":"d_flujos"}},"Property":"ano"}},"queryRef":"d_flujos.ano","nativeQueryRef":"Ejercicio","displayName":"Ejercicio"}]},"Y":{"projections":[{"field":{"Measure":{"Expression":{"SourceRef":{"Entity":"_Medidas"}},"Property":"Caja libre"}},"queryRef":"_Medidas.Caja libre","nativeQueryRef":"Flujo de caja libre","displayName":"Flujo de caja libre"}]}}},"visualContainerObjects":{"title":[{"properties":{"show":{"expr":{"Literal":{"Value":"true"}}},"text":{"expr":{"Literal":{"Value":"'Flujo de caja libre por ejercicio'"}}},"fontSize":{"expr":{"Literal":{"Value":"12D"}}},"bold":{"expr":{"Literal":{"Value":"true"}}}}}]},"drillFilterOtherVisuals":true}}
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "d6",
+  "position": {
+    "x": 648,
+    "y": 152,
+    "z": 1000,
+    "height": 240,
+    "width": 612,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "d_flujos"
+                    }
+                  },
+                  "Property": "ano"
+                }
+              },
+              "queryRef": "d_flujos.ano",
+              "nativeQueryRef": "Ejercicio",
+              "displayName": "Ejercicio"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Caja libre"
+                }
+              },
+              "queryRef": "_Medidas.Caja libre",
+              "nativeQueryRef": "Flujo de caja libre",
+              "displayName": "Flujo de caja libre"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Color ejercicio"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Flujo de caja libre por ejercicio (2026: enero a julio)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -3,9 +3,9 @@
   "name": "k3",
   "position": {
     "x": 856,
-    "y": 20,
+    "y": 50,
     "z": 1000,
-    "height": 100,
+    "height": 90,
     "width": 404,
     "tabOrder": 1000
   },
@@ -55,6 +55,22 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Color desviación"
+                    }
+                  }
                 }
               }
             }

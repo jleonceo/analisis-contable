@@ -3,9 +3,9 @@
   "name": "k6",
   "position": {
     "x": 20,
-    "y": 405,
+    "y": 454,
     "z": 1000,
-    "height": 235,
+    "height": 186,
     "width": 1240,
     "tabOrder": 1000
   },
@@ -42,10 +42,10 @@
                       "Entity": "c_objetivos"
                     }
                   },
-                  "Property": "periodo"
+                  "Property": "periodo_etiqueta"
                 }
               },
-              "queryRef": "c_objetivos.periodo",
+              "queryRef": "c_objetivos.periodo_etiqueta",
               "nativeQueryRef": "Mes",
               "displayName": "Mes"
             }
@@ -65,8 +65,8 @@
                 }
               },
               "queryRef": "_Medidas.Cumplimiento %",
-              "nativeQueryRef": "Cumplimiento (%)",
-              "displayName": "Cumplimiento (%)"
+              "nativeQueryRef": "Cumplimiento",
+              "displayName": "Cumplimiento"
             }
           ]
         }
@@ -90,6 +90,36 @@
                 }
               }
             }
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Color cumplimiento"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "_Medidas.Cumplimiento %"
           }
         }
       ],

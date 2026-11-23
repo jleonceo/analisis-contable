@@ -1,1 +1,180 @@
-{"$schema":"https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json","name":"k4","position":{"x":20,"y":135,"z":1000,"height":255,"width":612,"tabOrder":1000},"visual":{"visualType":"clusteredBarChart","query":{"queryState":{"Category":{"projections":[{"field":{"Column":{"Expression":{"SourceRef":{"Entity":"d_puente_presupuesto"}},"Property":"partida"}},"queryRef":"d_puente_presupuesto.partida","nativeQueryRef":"Partida","displayName":"Partida"}]},"Y":{"projections":[{"field":{"Measure":{"Expression":{"SourceRef":{"Entity":"_Medidas"}},"Property":"Efecto en el resultado"}},"queryRef":"_Medidas.Efecto en el resultado","nativeQueryRef":"Efecto en el resultado","displayName":"Efecto en el resultado"}]}}},"visualContainerObjects":{"title":[{"properties":{"show":{"expr":{"Literal":{"Value":"true"}}},"text":{"expr":{"Literal":{"Value":"'Puente de desviaciones por partida'"}}},"fontSize":{"expr":{"Literal":{"Value":"12D"}}},"bold":{"expr":{"Literal":{"Value":"true"}}}}}]},"drillFilterOtherVisuals":true}}
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "k4",
+  "position": {
+    "x": 20,
+    "y": 152,
+    "z": 1000,
+    "height": 290,
+    "width": 612,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "d_puente_presupuesto"
+                    }
+                  },
+                  "Property": "partida"
+                }
+              },
+              "queryRef": "d_puente_presupuesto.partida",
+              "nativeQueryRef": "Partida",
+              "displayName": "Partida"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Efecto en el resultado"
+                }
+              },
+              "queryRef": "_Medidas.Efecto en el resultado",
+              "nativeQueryRef": "Efecto en el resultado",
+              "displayName": "Efecto en el resultado"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "maxMarginFactor": {
+              "expr": {
+                "Literal": {
+                  "Value": "50L"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Color efecto"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Puente de desviaciones por partida'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

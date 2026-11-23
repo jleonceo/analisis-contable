@@ -38,6 +38,17 @@ table c_objetivos
 		dataType: string
 		lineageTag: a5649c59-c1cd-4562-84e2-924810a8ad3a
 
+	column orden_periodo = IF ( CONTAINSSTRING ( c_objetivos[periodo], " a " ), 99, VALUE ( RIGHT ( c_objetivos[periodo], 2 ) ) )
+		dataType: int64
+		isHidden
+		lineageTag: 41622b11-a570-49be-9e4d-1c2572311667
+		summarizeBy: none
+
+	column periodo_etiqueta = IF ( CONTAINSSTRING ( c_objetivos[periodo], " a " ), "Acumulado", c_objetivos[periodo] )
+		dataType: string
+		lineageTag: a403f3cb-ee74-4a9a-97a9-93a6fa87b15a
+		sortByColumn: orden_periodo
+
 	partition c_objetivos = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("c_objetivos.csv"), {{"indicador", type text}, {"periodo", type text}, {"objetivo", Currency.Type}, {"real", Currency.Type}, {"cumplimiento_pct", type number}, {"semaforo", type text}}, "en-US")

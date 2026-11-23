@@ -27,6 +27,10 @@ table o_comprobaciones
 		lineageTag: 0e920c42-f087-423e-9d22-e454fe2fcb14
 		sourceColumn: que_mira
 
+	column control = UPPER ( LEFT ( o_comprobaciones[bloque], 1 ) ) & MID ( o_comprobaciones[bloque], 2, 200 )
+		dataType: string
+		lineageTag: 963d50ac-ba72-4e1a-b1de-c0a721c5de24
+
 	partition o_comprobaciones = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("o_comprobaciones.csv"), {{"analisis", type text}, {"bloque", type text}, {"estado", type text}, {"cifra", type text}, {"que_mira", type text}})

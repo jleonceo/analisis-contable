@@ -1,1 +1,37 @@
-{"$schema":"https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json","name":"nota","position":{"x":20,"y":648,"z":1000,"height":66,"width":1240,"tabOrder":9000},"visual":{"visualType":"textbox","objects":{"general":[{"properties":{"paragraphs":[{"textRuns":[{"value":"Controles sobre el libro diario hasta el 31/07/2026. Incidencia: el control pide revisión a mano. Gasto recurrente desviado: mes en que lo facturado por un acreedor se aparta más de un 30 % de su importe habitual, al alza o a la baja; cada mes de cada acreedor cuenta una vez.","textStyle":{"fontSize":"10pt","color":"#605E5C"}}]}]}}]},"drillFilterOtherVisuals":true}}
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "nota",
+  "position": {
+    "x": 20,
+    "y": 648,
+    "z": 1000,
+    "height": 66,
+    "width": 1240,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Controles sobre el libro diario hasta el 31/07/2026. Incidencia: el control pide revisión a mano. Gasto recurrente desviado: mes en que lo facturado por un acreedor se aparta más de un 30 % de su importe habitual, al alza o a la baja; cada mes de cada acreedor cuenta una vez. Cada acreedor va con el tipo de gasto de su ficha y su código de cuenta.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#605E5C"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

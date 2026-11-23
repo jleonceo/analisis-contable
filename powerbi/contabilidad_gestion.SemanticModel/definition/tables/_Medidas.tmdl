@@ -39,12 +39,12 @@ table _Medidas
 		lineageTag: 037f43da-93c8-47cc-adfa-b1ef2819d07b
 
 	measure 'Margen bruto del año cerrado %' = VAR a = [Año cerrado] RETURN CALCULATE ( MAX ( d_margenes[margen_bruto_pct] ), d_margenes[ano] = a )
-		formatString: 0.00
+		formatString: 0.0 \%
 		displayFolder: Dirección
 		lineageTag: 4cd0b7b5-9771-4043-9475-554d0dd66607
 
 	measure 'Importe de la masa' = SUM ( d_balance_masas[importe] )
-		formatString: #,0.00 €
+		formatString: #,0 €
 		displayFolder: Dirección
 		lineageTag: 415a45b2-c4c3-4f59-86d9-c13be951d0b6
 
@@ -79,7 +79,7 @@ table _Medidas
 		lineageTag: 39507996-c2f4-487d-a18e-f3c5ac170015
 
 	measure 'Cumplimiento %' = AVERAGE ( c_objetivos[cumplimiento_pct] )
-		formatString: 0.00
+		formatString: 0.0 \%
 		displayFolder: Controller
 		lineageTag: 2011bf68-fccb-4213-9933-60e5978ed31e
 
@@ -115,14 +115,39 @@ table _Medidas
 		displayFolder: Títulos
 		lineageTag: 2be77571-9c22-4b4a-9848-a8a437631fd0
 
-	measure 'Título margen bruto' = "Margen bruto " & [Año cerrado] & " (%)"
+	measure 'Título margen bruto' = "Margen bruto " & [Año cerrado]
 		displayFolder: Títulos
 		lineageTag: eef961ec-fe35-41dd-b9a9-fa3fd0d36116
 
 	measure 'Margen bruto mensual %' = AVERAGE ( d_margen_bruto_mensual[margen_bruto_pct] )
-		formatString: 0.00
+		formatString: 0.0 \%
 		displayFolder: Dirección
 		lineageTag: 1bfa2787-56b1-44f3-9ef6-64d07be5f780
+
+	measure 'Margen bruto medio %' = AVERAGEX ( ALL ( d_margen_bruto_mensual ), d_margen_bruto_mensual[margen_bruto_pct] )
+		formatString: 0.0 \%
+		displayFolder: Dirección
+		lineageTag: 9d38dcaa-a200-427f-97db-af1af0b3e096
+
+	measure 'Color ejercicio' = IF ( SELECTEDVALUE ( d_flujos[completo], TRUE () ), "#1F4E79", "#9DC3E6" )
+		displayFolder: Colores
+		lineageTag: 3a388bf7-bffe-49fd-9a0f-da93fcba3e7a
+
+	measure 'Color desviación' = IF ( [Desviación del resultado] < 0, "#C62828", "#1F4E79" )
+		displayFolder: Colores
+		lineageTag: 8514b6e7-fcbe-4267-bd96-c2cb9956f2f4
+
+	measure 'Color efecto' = IF ( [Efecto en el resultado] < 0, "#C62828", "#1F4E79" )
+		displayFolder: Colores
+		lineageTag: 431a07d8-4fcc-4d00-b696-5154f99dc8a5
+
+	measure 'Color cumplimiento' = SWITCH ( MAX ( c_objetivos[semaforo] ), "verde", "#2E7D32", "ambar", "#B26A00", "rojo", "#C62828", "#252423" )
+		displayFolder: Colores
+		lineageTag: 0127f0bf-2724-44f0-9f42-3ee035d5a5cf
+
+	measure 'Color estado' = IF ( MAX ( o_comprobaciones[estado] ) = "AVISO", "#B26A00", "#2E7D32" )
+		displayFolder: Colores
+		lineageTag: 82a904a1-f7f3-4b60-913f-c1c499872667
 
 	column _
 		lineageTag: 3265b514-0172-40e5-9d4e-d290f60a21af
