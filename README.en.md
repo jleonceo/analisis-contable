@@ -1,98 +1,82 @@
 Versión en español: [README.md](README.md)
 
-# Financial analysis with Python · TechAcces SL 2024
+# Management accounting with data
 
-Builds a company's income statement and bank movement from its general ledger, and checks both figures by an
-independent route.
+Three dashboards built on a small business's general ledger: one for management, one for the controller and one for
+accounting. Almost every figure is checked against an independent second calculation before it is published. The
+company, TechAcces SL, is fictional: its books were generated for the project.
 
-**Result:** the 2024 financial year closes with a profit of €592,245.36 on €1,420,269.26 of sales. The figure
-matches to the cent the closing entry, which comes from another table.
+**Result:** from January to July 2026 the company sold €1,834,612.84 and earned €406,707.28, which is €70,085.60 less
+than budgeted. Three budget lines that seemed to save €100,479.60 had their spending booked to another cost centre.
+
+**Tools:** SQL (MySQL), Python, Power BI (DAX and Power Query), HTML and JavaScript.
 
 ```bash
-pip install -r requirements.txt
-jupyter notebook analisis_contable.ipynb
+git clone https://github.com/jleonceo/management-accounting-analytics.git
+cd management-accounting-analytics
+python -m http.server
 ```
 
-TechAcces SL is a fictional company whose books were generated for the project. The data is in `datos/`.
+Then open `http://localhost:8000` in a browser. The Power BI version is in [`powerbi/`](powerbi/).
 
-## What it calculates
+The dashboards and the reports are written in Spanish.
 
-| Item | 2024 |
+## The three views
+
+| View | Question it answers | What it shows |
+|---|---|---|
+| Management | How is the company doing? | sales, result, gross margin and free cash flow from January to July, their month-by-month trend and the balance sheet at 31 July |
+| Controller | Where does it deviate from the budget? | variance bridge by budget line, cost by cost centre and degree of target achievement |
+| Accounting | Is the general ledger well kept? | twenty checks on the ledger, with what each one detects |
+
+At 31/07/2026, nine of the twenty checks flag issues that need manual review, among them the unfunded legal reserve
+and 2,273 unused journal entry numbers.
+
+## How each figure is checked
+
+The figures come from an analysis program that reads the general ledger in MySQL. Almost all of them have been
+recalculated with a separately written SQL query, with the same result to the cent. The few without a second
+calculation say so in their report. The [reports](informes/README.md) explain, analysis by analysis, the question, the
+formula, the figure, how it was checked and when the figure can mislead.
+
+An independent review, with its own SQL queries, found the three budget lines mentioned at the top. The budget bridge
+showed spending below budget on them: that spending was booked to another cost centre. The detail is in
+[Presupuesto y coste por centro](informes/03_presupuesto_objetivos_y_centros.md) (budget and cost by centre).
+
+## Power BI
+
+[`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) is a Power BI project with the same three
+views. Its 19 tables read the same files in `datos/` as the web page, so both show the same figures. It opens in Power
+BI Desktop and updates with «Actualizar» (Refresh).
+
+## What is in the repository
+
+| File | What it is |
 |---|---|
-| Ledger lines | 4,710, across 1,743 journal entries |
-| Debit and credit | €5,536,643.47 each, fully balanced |
-| Sales | €1,420,269.26 |
-| Gross margin | €884,998.05, 62.3 % |
-| EBITDA | €609,005.36, 42.9 % |
-| Result for the year | €592,245.36 |
-| Net bank flow | €739,034.45, with 2 of 12 months negative |
-
-**EBITDA** is the profit from the business activity before depreciation, interest and tax.
-
-## How it works
-
-```mermaid
-flowchart LR
-    D[2024 general<br/>ledger] --> C[Classifies each line<br/>by its chart-of-accounts code]
-    C --> P[Income<br/>statement]
-    C --> B[Bank movements<br/>by month]
-    P --> V1{Matches the<br/>closing entry?}
-    B --> V2{Matches the<br/>bank balance?}
-    V1 -->|0.00 €<br/>difference| OK[Figures<br/>published]
-    V1 -->|No| AV[Warning: find out why<br/>before publishing]
-    V2 -->|Yes| OK
-    V2 -->|No| STOP[The notebook<br/>stops]
-    style OK fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
-    style STOP fill:#ffebee,stroke:#c62828,color:#b71c1c
-```
-
-
-1. It reads the 2024 ledger lines: date, entry, account, debit and credit.
-2. It classifies each line by its account family in the Spanish chart of accounts: 700 sales, 600 purchases, 640
-   wages, 572 banks, and so on.
-3. It builds the income statement from sales down to the result.
-4. It groups the bank movements by month.
-
-Three classification decisions change the result and are in the code:
-- the cost of sales includes the change in inventory, not just purchases;
-- of a loan instalment, only the interest is an expense; repaying the principal cancels debt and does not reduce
-  the result;
-- the bank account is an asset: money coming in goes to the debit side and money going out to the credit side.
-
-## The two checks
-
-Checking a figure against the same calculation that produced it proves nothing, so the notebook reaches each
-result by a second route:
-- the result for the year, added up from the ledger, matches the closing entry, which lives in another table:
-  a €0.00 difference;
-- the bank's cumulative flow over the year matches the account balance. If it did not, the notebook would stop with
-  an error instead of carrying on.
+| `index.html`, `cuadro.js`, `estilo.css` | the web page with the three dashboards |
+| [`datos/`](datos/) | the 19 CSV files read by the web page and Power BI, with `metadatos.json` (the period each one covers) |
+| [`informes/`](informes/) | six reports by block, with the method and the check behind each figure |
+| [`powerbi/`](powerbi/) | the Power BI project |
 
 ## Limits
 
-- The data belongs to an invented company. It teaches the method; its business conclusions apply to no real
-  company.
-- It looks at one financial year and two accounting identities. It is not an audit.
-- The data in `datos/` is an extract of the project database with only the columns the notebook uses.
-
-## Files
-
-| File | What it holds |
-|---|---|
-| `analisis_contable.ipynb` | the analysis, already run |
-| `construir_notebook.py` | the program that generates the notebook |
-| `datos/diario_2024.csv` | the 2024 ledger |
-| `datos/cierre_resultado_2024.csv` | the closing entry that allocates the result |
-| `requirements.txt` | the libraries it needs |
+- Only the 2026 financial year, January to July, is published. The years 2023 to 2025 come from generated data in
+  which purchases do not follow sales: their margins are not those of a real small business. The second calculation
+  still checks them, but they are not published.
+- 2026 is an incomplete year: its figures cover seven months and are not compared with a full year.
+- The second calculation ran on the project's MySQL database, which is not published. The repository includes the
+  results already calculated. Since the full general ledger stays in that database, the check cannot be repeated from
+  here.
+- EBITDA is not published: two calculations in the project define it differently and give different figures.
 
 ## Related repositories
 
-- [tesoreria-forecast-ia](https://github.com/jleonceo/tesoreria-forecast-ia): monthly cash forecasting, with its
-  error measured against the past.
-- [control-interno-fraude-ia](https://github.com/jleonceo/control-interno-fraude-ia): accounting fraud detection in
-  a ledger.
-- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): AI agents doing the bookkeeping for
-  this same company.
+- [tesoreria-forecast-ia](https://github.com/jleonceo/tesoreria-forecast-ia): month-by-month cash forecasting, with
+  its error measured on historical data.
+- [control-interno-fraude-ia](https://github.com/jleonceo/control-interno-fraude-ia): accounting fraud detection in a
+  ledger.
+- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): AI agents that post the journal
+  entries of this same company.
 
 ---
 
