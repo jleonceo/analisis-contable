@@ -32,25 +32,6 @@
             }
           ]
         },
-        "Columns": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "d_balance_masas"
-                    }
-                  },
-                  "Property": "ano"
-                }
-              },
-              "queryRef": "d_balance_masas.ano",
-              "nativeQueryRef": "Ejercicio",
-              "displayName": "Ejercicio"
-            }
-          ]
-        },
         "Values": {
           "projections": [
             {
@@ -148,7 +129,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Masas patrimoniales por ejercicio'"
+                  "Value": "'Balance a 31/07/2026'"
                 }
               }
             },

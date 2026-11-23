@@ -16,7 +16,7 @@ falta es el menor de dos importes: el 10 % del beneficio o lo que queda hasta el
 que el reparto lleva a la reserva.
 
 El capital es de 58.400,00 €, así que el tope de la reserva es de 11.680,00 €. No se ha dotado nada.
-El diario no tiene ningún apunte en la cuenta de reserva legal (112). El 10 % del beneficio de 2023, 49.490,91 €, ya bastaba para dotarla entera.
+El diario no tiene ningún apunte en la cuenta de reserva legal (112). El 10 % del beneficio de 2023 ya bastaba para dotarla entera.
 
 **Segunda vía.** Una consulta sobre las cuentas de capital (100) y de reserva legal (112), en el diario y en los
 asientos de cierre, da el 20 % del capital menos la reserva: 11.680,00 €. Esta cifra se comprueba cada vez que se
@@ -33,16 +33,13 @@ resultado del ejercicio (129) y la apertura siguiente lo saca entero?
 **Cómo se calcula.** Para cada ejercicio cerrado se compara lo que el asiento de cierre abona a la cuenta 129 con el
 resultado del año calculado con el diario. Después, lo que la apertura del año siguiente carga a esa cuenta.
 
-| Ejercicio | Resultado del diario (€) | Llevado a la 129 en el cierre (€) | Sacado de la 129 en la apertura siguiente (€) |
-|---|---:|---:|---:|
-| 2023 | 494.909,11 | 494.909,11 | 494.909,11 |
-| 2024 | 592.245,36 | 592.245,36 | 592.245,36 |
-| 2025 | 1.120.974,42 | 1.120.974,42 | 1.120.974,42 |
+En los tres ejercicios cerrados, de 2023 a 2025, lo que el cierre lleva a la 129 coincide al céntimo con el resultado
+del diario y con lo que saca la apertura siguiente. Cada asiento de cierre y de apertura cuadra. La apertura lleva el
+resultado al remanente. Los importes no se publican: los ejercicios anteriores a 2026 salen de un dato generado cuyos
+márgenes no son los de una pyme real.
 
-Cada asiento de cierre y de apertura cuadra. La apertura lleva el resultado al remanente.
-
-**Segunda vía.** Una consulta sobre la tabla de cierres, agrupada por ejercicio y por tipo, da las seis cifras de la
-129 y el cuadre de cada asiento.
+**Segunda vía.** Una consulta sobre la tabla de cierres, agrupada por ejercicio y por tipo, da las cifras de la 129 y
+el cuadre de cada asiento.
 
 **Cuándo engaña.** La prueba mira que el cierre sea coherente con el diario: un gasto que durante el año se llevó a
 una cuenta equivocada, con su contrapartida bien puesta, llega al cierre cuadrado y el cierre lo traspasa sin que esta

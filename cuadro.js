@@ -8,7 +8,6 @@
 const AZUL = "#2a78d6", NARANJA = "#eb6834", VERDE = "#1baf7a", GRIS = "#898781";
 const REJILLA = "#e1e0d9", EJE = "#c3c2b7";
 const ANOS = ["2023", "2024", "2025", "2026"];
-const ANO_CERRADO = "2025";       // último año completo: el de las cifras de arriba de Dirección
 const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 const FICHEROS = ["d_ventas_resultado", "d_margenes", "d_margen_bruto_mensual", "d_punto_muerto", "d_flujos",
   "d_rentabilidad", "d_concentracion_clientes", "d_puente_presupuesto", "c_objetivos", "c_presupuesto_real",
@@ -218,64 +217,61 @@ function porAno(nombre) { return Object.fromEntries(D[nombre].map(f => [f.ano, f
 function etiquetaAno(a) { return a === "2026" ? "2026 (ene-jul)" : a; }
 
 // ===== Pestaña Dirección =====
+// Solo el ejercicio del corte (Juan, 23/11/2026): la rentabilidad de 2023 a 2025 sale de un dato generado irreal y
+// no se publica. Por eso esta pestaña no usa el filtro de año.
+const ANO_DIRECCION = "2026";
 function dibujarDireccion() {
-  const v = porAno("d_ventas_resultado"), mg = porAno("d_margenes"), fl = porAno("d_flujos");
-  const a = ANO_CERRADO, b = String(Number(ANO_CERRADO) - 1);
-  const cambio = (x, y) => (Number(x) / Number(y) - 1) * 100;
+  const a = ANO_DIRECCION;
+  const v = porAno("d_ventas_resultado")[a], mg = porAno("d_margenes")[a], fl = porAno("d_flujos")[a];
+  const pm = porAno("d_punto_muerto")[a], rt = porAno("d_rentabilidad")[a];
   cifras("dir-cifras", [
-    { numero: eur(v[a].ventas), etiqueta: "Ventas de " + a, contexto: conSigno(pct(cambio(v[a].ventas, v[b].ventas)), 1) + " frente a " + b,
-      valor: v[a].ventas, tip: "Ventas de mercaderías de " + a + ": " + eur(v[a].ventas) + ". Haber menos debe de las cuentas de ventas en el año." },
-    { numero: eur(v[a].resultado), etiqueta: "Resultado de " + a, contexto: conSigno(pct(cambio(v[a].resultado, v[b].resultado)), 1) + " frente a " + b,
-      valor: v[a].resultado, tip: "Resultado del ejercicio " + a + ": " + eur(v[a].resultado) + ". Ingresos menos gastos del año, sin impuestos." },
-    { numero: pct(mg[a].margen_bruto_pct), etiqueta: "Margen bruto de " + a,
-      contexto: conSigno(num(Number(mg[a].margen_bruto_pct) - Number(mg[b].margen_bruto_pct), 1), 1) + " puntos frente a " + b,
-      valor: mg[a].margen_bruto_pct, tip: "Margen bruto de " + a + ": " + pct(mg[a].margen_bruto_pct, 2) + ". Ventas menos compras y variación de existencias, sobre las ventas." },
-    { numero: eur(fl[a].caja_libre), etiqueta: "Caja libre de " + a, contexto: conSigno(pct(cambio(fl[a].caja_libre, fl[b].caja_libre)), 1) + " frente a " + b,
-      valor: fl[a].caja_libre, tip: "Caja libre de " + a + ": " + eur(fl[a].caja_libre) + ". Caja que deja la operación después de pagar las inversiones." },
+    { numero: eur(v.ventas), etiqueta: "Ventas", contexto: "de enero a julio de " + a,
+      valor: v.ventas, tip: "Ventas de mercaderías de enero a julio de " + a + ": " + eur(v.ventas) + ". Haber menos debe de las cuentas de ventas." },
+    { numero: eur(v.resultado), etiqueta: "Resultado", contexto: "de enero a julio de " + a + ", antes de impuestos",
+      valor: v.resultado, tip: "Resultado de enero a julio de " + a + ": " + eur(v.resultado) + ". Ingresos menos gastos; el diario no registra el impuesto sobre beneficios." },
+    { numero: pct(mg.margen_bruto_pct), etiqueta: "Margen bruto", contexto: "de enero a julio de " + a,
+      valor: mg.margen_bruto_pct, tip: "Margen bruto de enero a julio de " + a + ": " + pct(mg.margen_bruto_pct, 2) + ". Ventas menos compras y variación de existencias, sobre las ventas." },
+    { numero: eur(fl.caja_libre), etiqueta: "Flujo de caja libre", contexto: "de enero a julio de " + a,
+      valor: fl.caja_libre, tip: "Flujo de caja libre de enero a julio de " + a + ": " + eur(fl.caja_libre) + ". Caja que deja la operación después de pagar las inversiones." },
   ]);
-  const mb26 = Number(mg["2026"].margen_bruto_pct);
   document.getElementById("dir-texto").textContent =
-    a + " cerró con las ventas y el resultado más altos de la serie. En los siete primeros meses de 2026 las ventas casi igualan las de todo " + a +
-    ", pero el margen bruto bajó al " + pct(mb26) + ". Las compras de esos siete meses pasan del doble de las de todo " + a + ".";
+    "De enero a julio de " + a + " la empresa vendió " + eur(v.ventas) + " con un margen bruto del " + pct(mg.margen_bruto_pct) +
+    ". El resultado antes de impuestos fue de " + eur(v.resultado) + ", el " + pct(rt.margen_neto_pct) + " de las ventas.";
 
+  const meses = D.d_margen_bruto_mensual.filter(f => f.mes.startsWith(a + "-"));
   const fig1 = document.getElementById("dir-g1");
-  cabeceraGrafico(fig1, a + " fue el año con más ventas y más resultado",
-    "Ventas y resultado de cada año, en millones de €; 2026, de enero a julio",
-    [{ nombre: "Ventas", color: AZUL }, { nombre: "Resultado", color: VERDE }]);
-  columnas(fig1, ANOS.map(x => ({ nombre: etiquetaAno(x), tip: etiquetaAno(x) })),
-    [{ nombre: "Ventas", color: AZUL, valores: ANOS.map(x => v[x].ventas) },
-     { nombre: "Resultado", color: VERDE, valores: ANOS.map(x => v[x].resultado) }], millones, eur);
+  cabeceraGrafico(fig1, "Ventas y aprovisionamientos de cada mes",
+    "En miles de €; de enero a julio de " + a,
+    [{ nombre: "Ventas", color: AZUL }, { nombre: "Aprovisionamientos", color: NARANJA }]);
+  columnas(fig1, meses.map(f => ({ nombre: MESES[Number(f.mes.slice(5)) - 1], tip: mesLargo(f.mes) })),
+    [{ nombre: "Ventas", color: AZUL, valores: meses.map(f => f.ventas) },
+     { nombre: "Aprovisionamientos", color: NARANJA, valores: meses.map(f => f.aprovisionamientos) }],
+    x => num(x / 1000, 0), eur);
 
-  const meses = D.d_margen_bruto_mensual.filter(f => anosSel().includes(f.mes.slice(0, 4)));
-  const de26 = meses.filter(f => f.mes.startsWith("2026"));
   const fig2 = document.getElementById("dir-g2");
-  const todos26Bajo50 = de26.length > 0 && de26.every(f => Number(f.margen_bruto_pct) < 50);
-  const titulo2 = todos26Bajo50 ? "El margen bruto no llegó al 50 % en ningún mes de 2026"
-    : "Margen bruto de cada mes" + (estado.ano === "Todos" ? "" : " de " + estado.ano);
-  cabeceraGrafico(fig2, titulo2, "Margen bruto sobre ventas de cada mes, en %, " +
-    (meses.length ? mesLargo(meses[0].mes) + " a " + mesLargo(meses[meses.length - 1].mes) : ""), []);
-  lineas(fig2, meses.map(f => ({ corta: f.mes.endsWith("-01") || meses.length <= 12 ? (meses.length <= 12 ? MESES[Number(f.mes.slice(5)) - 1] : f.mes.slice(0, 4)) : "", larga: mesLargo(f.mes) })),
+  const todosBajo50 = meses.length > 0 && meses.every(f => Number(f.margen_bruto_pct) < 50);
+  cabeceraGrafico(fig2, todosBajo50 ? "El margen bruto no llegó al 50 % en ningún mes" : "Margen bruto de cada mes",
+    "Margen bruto sobre ventas de cada mes, en %; de enero a julio de " + a, []);
+  lineas(fig2, meses.map(f => ({ corta: MESES[Number(f.mes.slice(5)) - 1], larga: mesLargo(f.mes) })),
     [{ nombre: "Margen bruto", color: AZUL, valores: meses.map(f => Number(f.margen_bruto_pct)) }],
-    { unidad: " %", referencia: 50, rotuloReferencia: "50 %", rotularFinal: true });
+    { unidad: " %", referencia: 50, rotuloReferencia: "50 %", rotularFinal: true, desdeCero: true });
 
   const det = document.getElementById("dir-detalle");
-  det.replaceChildren(el("summary", {}, "Detalle por año"));
-  const pm = porAno("d_punto_muerto"), rt = porAno("d_rentabilidad");
-  const filas = anosSel().map(x => ({ x }));
-  tabla(det, "Las cifras de cada año", [
-    { nombre: "Año", valor: f => etiquetaAno(f.x) },
-    { nombre: "Ventas (€)", num: true, valor: f => num(v[f.x].ventas) },
-    { nombre: "Resultado (€)", num: true, valor: f => num(v[f.x].resultado) },
-    { nombre: "Margen bruto (%)", num: true, valor: f => num(mg[f.x].margen_bruto_pct, 1) },
-    { nombre: "Margen de explotación (%)", num: true, valor: f => num(mg[f.x].margen_explotacion_pct, 1) },
-    { nombre: "Punto muerto (€ de ventas)", num: true, valor: f => pm[f.x] ? num(pm[f.x].punto_muerto) : "" },
-    { nombre: "Caja libre (€)", num: true, valor: f => num(fl[f.x].caja_libre) },
-    { nombre: "Rentabilidad del capital (%)", num: true, valor: f => num(rt[f.x].roe_pct, 1) },
-  ], filas);
+  det.replaceChildren(el("summary", {}, "Detalle de " + a));
+  tabla(det, "Las cifras de enero a julio de " + a, [
+    { nombre: "Ventas (€)", num: true, valor: () => num(v.ventas) },
+    { nombre: "Resultado (€)", num: true, valor: () => num(v.resultado) },
+    { nombre: "Margen bruto (%)", num: true, valor: () => num(mg.margen_bruto_pct, 1) },
+    { nombre: "Margen de explotación (%)", num: true, valor: () => num(mg.margen_explotacion_pct, 1) },
+    { nombre: "Punto muerto (€ de ventas)", num: true, valor: () => pm ? num(pm.punto_muerto) : "" },
+    { nombre: "Flujo de caja libre (€)", num: true, valor: () => num(fl.caja_libre) },
+    { nombre: "Rentabilidad del capital (%)", num: true, valor: () => num(rt.roe_pct, 1) },
+  ], [{}]);
   const conc = D.d_concentracion_clientes;
   det.append(el("p", { class: "nota" },
-    "El punto muerto es lo que hay que vender para no perder. La rentabilidad del capital es el resultado sobre el patrimonio medio del año; no se ha comprobado por otra vía y la de 2026 no está anualizada. " +
-    "En los doce meses hasta julio de 2026, el primer cliente reúne el " + pct(conc[0].peso_pct) + " de lo facturado y los cinco primeros, el " + pct(conc[4].peso_acumulado_pct) + "."));
+    "Solo se publica " + a + ": las series de 2023 a 2025 salen de un dato generado en el que las compras no siguen a las ventas, y sus márgenes no son los de una pyme real. " +
+    "El punto muerto es lo que hay que vender para no perder. La rentabilidad del capital es el resultado sobre el patrimonio medio, sin anualizar, y no se ha comprobado por otra vía. " +
+    "En los doce meses hasta julio de " + a + ", el primer cliente reúne el " + pct(conc[0].peso_pct) + " de lo facturado y los cinco primeros, el " + pct(conc[4].peso_acumulado_pct) + "."));
 }
 
 // ===== Pestaña Controller =====

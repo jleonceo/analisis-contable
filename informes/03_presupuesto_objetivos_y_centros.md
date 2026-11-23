@@ -89,8 +89,7 @@ cuentas 70.
 
 **Lo que no se publica.** El margen de cada línea. Todo el gasto del diario está en la línea común, sin asignar a B2B
 ni a B2C, salvo dos apuntes de amortización de 2023 que no llevan línea. La única base de reparto con dato son las ventas. Repartir el gasto común en proporción a las ventas da a
-las dos líneas el mismo margen que la empresa entera: el 57,57 % en 2025. Esa cifra no informa de nada, así que no se
-enseña.
+las dos líneas el mismo margen que la empresa entera. Esa cifra no informa de nada, así que no se enseña.
 
 ## El coste de cada centro se lee dentro de su año
 

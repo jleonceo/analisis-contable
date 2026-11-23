@@ -29,6 +29,8 @@ Las cifras de ventas, resultado, margen bruto, margen neto, variación de tesore
 
 - **La empresa es ficticia.** TechAcces es una distribuidora inventada; sus datos se generaron para practicar.
 - **2026 llega hasta julio.** Sus cifras son de siete meses y no se comparan con un año entero sin decirlo.
+- **La rentabilidad se publica solo de 2026.** Los ejercicios de 2023 a 2025 salen de un dato generado en el que las
+  compras no siguen a las ventas: sus márgenes no son los de una pyme real. Los controles los siguen comprobando.
 - **Los clientes van por su código de cuenta.** El nombre de un cliente, un proveedor o una persona no se publica.
 - **El fraude, la previsión de caja, la antigüedad de saldos y los ratios de liquidez** están en otros dos
   repositorios, [control-interno-fraude-ia](https://github.com/jleonceo/control-interno-fraude-ia) y

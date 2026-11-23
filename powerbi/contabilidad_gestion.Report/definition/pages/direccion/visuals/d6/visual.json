@@ -13,25 +13,6 @@
     "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "d_flujos"
-                    }
-                  },
-                  "Property": "ano"
-                }
-              },
-              "queryRef": "d_flujos.ano",
-              "nativeQueryRef": "Ejercicio",
-              "displayName": "Ejercicio"
-            }
-          ]
-        },
         "Y": {
           "projections": [
             {
@@ -42,12 +23,42 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Caja libre"
+                  "Property": "Flujo de explotación"
                 }
               },
-              "queryRef": "_Medidas.Caja libre",
-              "nativeQueryRef": "Flujo de caja libre",
-              "displayName": "Flujo de caja libre"
+              "queryRef": "_Medidas.Flujo de explotación",
+              "nativeQueryRef": "Explotación",
+              "displayName": "Explotación"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Flujo de inversión"
+                }
+              },
+              "queryRef": "_Medidas.Flujo de inversión",
+              "nativeQueryRef": "Inversión",
+              "displayName": "Inversión"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Flujo de financiación"
+                }
+              },
+              "queryRef": "_Medidas.Flujo de financiación",
+              "nativeQueryRef": "Financiación",
+              "displayName": "Financiación"
             }
           ]
         }
@@ -67,34 +78,23 @@
           }
         }
       ],
-      "dataPoint": [
+      "labels": [
         {
           "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Medidas"
-                        }
-                      },
-                      "Property": "Color ejercicio"
-                    }
-                  }
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
                 }
               }
             }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 1
-                }
-              }
-            ]
           }
         }
       ]
@@ -113,7 +113,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Flujo de caja libre por ejercicio (2026: enero a julio)'"
+                  "Value": "'Flujos de efectivo'"
                 }
               }
             },

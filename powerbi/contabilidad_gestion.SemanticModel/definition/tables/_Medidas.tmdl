@@ -2,12 +2,6 @@
 table _Medidas
 	lineageTag: 4d17a7e2-b869-4118-b39b-5154c816b8b3
 
-	/// Último año completo de la serie.
-	measure 'Año cerrado' = CALCULATE ( MAX ( d_ventas_resultado[ano] ), d_ventas_resultado[completo] = TRUE (), REMOVEFILTERS ( d_ventas_resultado ) )
-		formatString: 0
-		displayFolder: Dirección
-		lineageTag: 7824112f-af78-4db0-967e-cdae572f1add
-
 	measure Ventas = SUM ( d_ventas_resultado[ventas] )
 		formatString: #,0.00 €
 		displayFolder: Dirección
@@ -23,25 +17,42 @@ table _Medidas
 		displayFolder: Dirección
 		lineageTag: 69cd00bd-50cc-47ed-a4af-34971e09795e
 
-	measure 'Ventas del año cerrado' = VAR a = [Año cerrado] RETURN CALCULATE ( [Ventas], d_ventas_resultado[ano] = a )
+	/// Las tarjetas redondean al euro. Se publica solo el ejercicio 2026, de enero a julio.
+	measure 'Ventas del periodo' = [Ventas]
 		formatString: #,0 €
 		displayFolder: Dirección
-		lineageTag: e2aa94a0-1c6e-4420-aa9b-7ec23656a80f
 
-	measure 'Resultado del año cerrado' = VAR a = [Año cerrado] RETURN CALCULATE ( [Resultado], d_ventas_resultado[ano] = a )
+	measure 'Resultado del periodo' = [Resultado]
 		formatString: #,0 €
 		displayFolder: Dirección
-		lineageTag: ec8c06bb-4d47-4228-abd2-382c8e09b55c
 
-	measure 'Caja libre del año cerrado' = VAR a = [Año cerrado] RETURN CALCULATE ( [Caja libre], d_flujos[ano] = a )
+	measure 'Caja libre del periodo' = [Caja libre]
 		formatString: #,0 €
 		displayFolder: Dirección
-		lineageTag: 037f43da-93c8-47cc-adfa-b1ef2819d07b
 
-	measure 'Margen bruto del año cerrado %' = VAR a = [Año cerrado] RETURN CALCULATE ( MAX ( d_margenes[margen_bruto_pct] ), d_margenes[ano] = a )
+	measure 'Margen bruto del periodo %' = MAX ( d_margenes[margen_bruto_pct] )
 		formatString: 0.0 \%
 		displayFolder: Dirección
-		lineageTag: 4cd0b7b5-9771-4043-9475-554d0dd66607
+
+	measure 'Ventas del mes' = SUM ( d_margen_bruto_mensual[ventas] )
+		formatString: #,0 €
+		displayFolder: Dirección
+
+	measure 'Aprovisionamientos del mes' = SUM ( d_margen_bruto_mensual[aprovisionamientos] )
+		formatString: #,0 €
+		displayFolder: Dirección
+
+	measure 'Flujo de explotación' = SUM ( d_flujos[explotacion] )
+		formatString: #,0 €
+		displayFolder: Dirección
+
+	measure 'Flujo de inversión' = SUM ( d_flujos[inversion] )
+		formatString: #,0 €
+		displayFolder: Dirección
+
+	measure 'Flujo de financiación' = SUM ( d_flujos[financiacion] )
+		formatString: #,0 €
+		displayFolder: Dirección
 
 	measure 'Importe de la masa' = SUM ( d_balance_masas[importe] )
 		formatString: #,0 €
@@ -103,22 +114,6 @@ table _Medidas
 		displayFolder: Contabilidad
 		lineageTag: f99588c6-4d51-4b92-afce-9c9ece0b945b
 
-	measure 'Título ventas' = "Ventas " & [Año cerrado]
-		displayFolder: Títulos
-		lineageTag: 5927e0ec-2099-4536-8e2c-88eb77fa3f0c
-
-	measure 'Título resultado' = "Resultado del ejercicio " & [Año cerrado]
-		displayFolder: Títulos
-		lineageTag: bb559fda-debd-41e6-99e3-bbf5cef0a6c4
-
-	measure 'Título flujo de caja libre' = "Flujo de caja libre " & [Año cerrado]
-		displayFolder: Títulos
-		lineageTag: 2be77571-9c22-4b4a-9848-a8a437631fd0
-
-	measure 'Título margen bruto' = "Margen bruto " & [Año cerrado]
-		displayFolder: Títulos
-		lineageTag: eef961ec-fe35-41dd-b9a9-fa3fd0d36116
-
 	measure 'Margen bruto mensual %' = AVERAGE ( d_margen_bruto_mensual[margen_bruto_pct] )
 		formatString: 0.0 \%
 		displayFolder: Dirección
@@ -128,10 +123,6 @@ table _Medidas
 		formatString: 0.0 \%
 		displayFolder: Dirección
 		lineageTag: 9d38dcaa-a200-427f-97db-af1af0b3e096
-
-	measure 'Color ejercicio' = IF ( SELECTEDVALUE ( d_flujos[completo], TRUE () ), "#1F4E79", "#9DC3E6" )
-		displayFolder: Colores
-		lineageTag: 3a388bf7-bffe-49fd-9a0f-da93fcba3e7a
 
 	measure 'Color desviación' = IF ( [Desviación del resultado] < 0, "#C62828", "#1F4E79" )
 		displayFolder: Colores

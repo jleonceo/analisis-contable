@@ -23,12 +23,12 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Resultado del año cerrado"
+                  "Property": "Resultado del periodo"
                 }
               },
-              "queryRef": "_Medidas.Resultado del año cerrado",
-              "nativeQueryRef": "Resultado del año cerrado",
-              "displayName": "Resultado del año cerrado"
+              "queryRef": "_Medidas.Resultado del periodo",
+              "nativeQueryRef": "Resultado del periodo",
+              "displayName": "Resultado del periodo"
             }
           ]
         }
@@ -75,13 +75,8 @@
             },
             "text": {
               "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Medidas"
-                    }
-                  },
-                  "Property": "Título resultado"
+                "Literal": {
+                  "Value": "'Resultado antes de impuestos'"
                 }
               }
             },

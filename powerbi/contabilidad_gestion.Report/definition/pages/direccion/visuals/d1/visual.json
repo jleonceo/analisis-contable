@@ -23,12 +23,12 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Ventas del año cerrado"
+                  "Property": "Ventas del periodo"
                 }
               },
-              "queryRef": "_Medidas.Ventas del año cerrado",
-              "nativeQueryRef": "Ventas del año cerrado",
-              "displayName": "Ventas del año cerrado"
+              "queryRef": "_Medidas.Ventas del periodo",
+              "nativeQueryRef": "Ventas del periodo",
+              "displayName": "Ventas del periodo"
             }
           ]
         }
@@ -75,13 +75,8 @@
             },
             "text": {
               "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Medidas"
-                    }
-                  },
-                  "Property": "Título ventas"
+                "Literal": {
+                  "Value": "'Ventas'"
                 }
               }
             },

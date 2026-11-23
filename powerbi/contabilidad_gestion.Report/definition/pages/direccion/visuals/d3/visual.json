@@ -23,12 +23,12 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Caja libre del año cerrado"
+                  "Property": "Caja libre del periodo"
                 }
               },
-              "queryRef": "_Medidas.Caja libre del año cerrado",
-              "nativeQueryRef": "Caja libre del año cerrado",
-              "displayName": "Caja libre del año cerrado"
+              "queryRef": "_Medidas.Caja libre del periodo",
+              "nativeQueryRef": "Caja libre del periodo",
+              "displayName": "Caja libre del periodo"
             }
           ]
         }
@@ -75,13 +75,8 @@
             },
             "text": {
               "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Medidas"
-                    }
-                  },
-                  "Property": "Título flujo de caja libre"
+                "Literal": {
+                  "Value": "'Flujo de caja libre'"
                 }
               }
             },
