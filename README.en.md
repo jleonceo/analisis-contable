@@ -68,7 +68,7 @@ BI Desktop and updates with «Actualizar» (Refresh).
 | [`datos/`](datos/) | the 19 CSV files read by the web page and Power BI, with `metadatos.json` (the period each one covers) |
 | [`informes/`](informes/) | six reports by block, with the method and the check behind each figure |
 | [`powerbi/`](powerbi/) | the Power BI project |
-| [`comprobar.py`](comprobar.py), [`tests/`](tests/) | the checks GitHub runs on every change, and their tests |
+| [`comprobar.py`](comprobar.py), [`test_comprobar.py`](test_comprobar.py) | the checks GitHub runs on every change, and their tests |
 | [`assets/`](assets/) | the images of the three views |
 
 ## Limits

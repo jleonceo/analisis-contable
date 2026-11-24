@@ -66,7 +66,7 @@ Se abre con Power BI Desktop y se actualiza con «Actualizar».
 | [`datos/`](datos/) | los 19 ficheros CSV que leen la web y Power BI, con `metadatos.json` (periodo que cubre cada uno) |
 | [`informes/`](informes/) | seis informes por bloque, con el método y la comprobación de cada cifra |
 | [`powerbi/`](powerbi/) | el proyecto de Power BI |
-| [`comprobar.py`](comprobar.py), [`tests/`](tests/) | las comprobaciones que ejecuta GitHub en cada cambio y sus pruebas |
+| [`comprobar.py`](comprobar.py), [`test_comprobar.py`](test_comprobar.py) | las comprobaciones que ejecuta GitHub en cada cambio y sus pruebas |
 | [`assets/`](assets/) | las imágenes de las tres vistas |
 
 ## Límites

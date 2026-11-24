@@ -1,4 +1,4 @@
-"""Pruebas de comprobar.py. Solo biblioteca estándar: python -m unittest discover -s tests
+"""Pruebas de comprobar.py. Solo biblioteca estándar: python -m unittest test_comprobar -v
 
 Cada caso copia el repositorio a una carpeta temporal, estropea una cosa y exige que
 comprobar.py lo detecte. El primero comprueba que el repositorio tal como está pasa.
@@ -9,7 +9,7 @@ import sys
 import tempfile
 import unittest
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAIZ = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, RAIZ)
 
 import comprobar  # noqa: E402
