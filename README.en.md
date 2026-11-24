@@ -34,7 +34,7 @@ The dashboards and the reports are written in Spanish.
 At 31/07/2026, nine of the twenty checks flag issues that need manual review, among them the unfunded legal reserve
 and 2,273 unused journal entry numbers.
 
-![Management view: sales, result, gross margin and free cash flow from January to July 2026, and the customer Pareto](assets/direccion.png)
+![Management view: sales, result, gross margin and free cash flow from January to July 2026, and the customer and supplier Paretos](assets/direccion.png)
 
 ![Controller view: target achievement and the bridge from budgeted to actual result](assets/controller.png)
 
@@ -46,6 +46,21 @@ The figures come from an analysis program that reads the general ledger in MySQL
 recalculated with a separately written SQL query, with the same result to the cent. The few without a second
 calculation say so in their report. The [reports](informes/README.md) explain, analysis by analysis, the question, the
 formula, the figure, how it was checked and when the figure can mislead.
+
+```mermaid
+flowchart LR
+    D[(General ledger<br/>in MySQL)] --> P[Analysis program<br/>in Python]
+    D --> S[Second calculation<br/>in separate SQL]
+    P --> C{Same to<br/>the cent?}
+    S --> C
+    C -->|Yes| F[CSV files<br/>in datos/]
+    C -->|No| X[Not published]
+    F --> W[Web page]
+    F --> B[Power BI]
+    F --> G[comprobar.py<br/>on every change]
+    style F fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    style X fill:#ffebee,stroke:#c62828,color:#b71c1c
+```
 
 On every change that is pushed, GitHub runs [`comprobar.py`](comprobar.py): the files the web page and Power BI read exist
 and have rows, the figures on this page come from the files in `datos/`, and the links lead to files that exist.
@@ -65,7 +80,7 @@ related to an accounts table and to a date table built in DAX. On top of that mo
 
 - the year-to-date result month by month, which at 31 July gives the same result as the financial statements;
 - the spending on accounts with no budget;
-- spending against a flexible budget, which adjusts the spending target to actual sales;
+- spending against a flexible budget, which adjusts only variable spending to actual sales;
 - a Pareto of customers and suppliers with ABC classes, which the page shows next to those in the file so that they can
   be seen to match.
 

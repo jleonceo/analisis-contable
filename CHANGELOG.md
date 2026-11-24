@@ -1,5 +1,17 @@
 # Registro de cambios
 
+## 3.0.1 · 24 de noviembre de 2026
+
+Correcciones tras una segunda revisión externa.
+
+- El informe 03 seguía con el puente del presupuesto de la versión 2.1, por centro. Ahora va por cuenta, como los datos
+  publicados en la 3.0 (`9e52fac`).
+- El presupuesto flexible de Power BI solo ajusta a las ventas el gasto variable, con la regla de la empresa que separa
+  el gasto fijo del variable. La desviación de los siete meses pasa de 70.878,45 € a 59.722,89 €. El informe 07 y
+  `MEDIDAS.md` lo explican.
+- La web enseña el Pareto de clientes y el de proveedores lado a lado, sin selector.
+- La portada lleva otra vez un esquema de cómo se comprueba cada cifra, que se había perdido en la 2.0.
+
 ## 3.0 · 24 de noviembre de 2026
 
 Power BI deja de ser un visor de ficheros y pasa a tener un modelo propio con sus medidas DAX. Llega el Pareto de

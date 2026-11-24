@@ -33,7 +33,7 @@ Después se abre `http://localhost:8000` en el navegador. La versión de Power B
 A 31/07/2026, nueve de los veinte controles señalan incidencias que requieren revisión manual, entre ellas la
 reserva legal sin dotar y 2.273 números de asiento sin usar.
 
-![Vista de dirección: ventas, resultado, margen bruto y flujo de caja libre de enero a julio de 2026, y el Pareto de clientes](assets/direccion.png)
+![Vista de dirección: ventas, resultado, margen bruto y flujo de caja libre de enero a julio de 2026, y el Pareto de clientes y de proveedores](assets/direccion.png)
 
 ![Vista del controller: cumplimiento de objetivos y puente del resultado presupuestado al real](assets/controller.png)
 
@@ -45,6 +45,21 @@ Las cifras salen de un programa de análisis que lee el libro diario en MySQL. C
 una consulta SQL escrita aparte, con el mismo resultado al céntimo. Las pocas que no tienen un segundo cálculo lo
 indican en su informe. Los [informes](informes/README.md) explican, análisis por análisis, la pregunta, la fórmula, la
 cifra, su comprobación y en qué casos la cifra puede llevar a error.
+
+```mermaid
+flowchart LR
+    D[(Libro diario<br/>en MySQL)] --> P[Programa de<br/>análisis en Python]
+    D --> S[Segundo cálculo<br/>con SQL aparte]
+    P --> C{¿Coinciden<br/>al céntimo?}
+    S --> C
+    C -->|Sí| F[Ficheros CSV<br/>de datos/]
+    C -->|No| X[No se publica]
+    F --> W[Web]
+    F --> B[Power BI]
+    F --> G[comprobar.py<br/>en cada cambio]
+    style F fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    style X fill:#ffebee,stroke:#c62828,color:#b71c1c
+```
 
 En cada cambio que se sube, GitHub ejecuta [`comprobar.py`](comprobar.py): los ficheros que leen la web y Power BI
 existen y tienen filas, las cifras de esta portada salen de los ficheros de `datos/` y los enlaces llevan a ficheros que existen.
@@ -64,7 +79,7 @@ una tabla de cuentas y con una tabla de fechas hecha en DAX. Sobre ese modelo, l
 
 - el resultado acumulado del año mes a mes, que a 31 de julio da el mismo resultado que los estados financieros;
 - el gasto de las cuentas sin presupuesto;
-- el gasto frente a un presupuesto flexible, que ajusta el objetivo de gasto a las ventas reales;
+- el gasto frente a un presupuesto flexible, que ajusta a las ventas reales solo el gasto variable;
 - un Pareto de clientes y proveedores con clases ABC, que la página pone al lado de las del fichero para que se vea que
   coinciden.
 
