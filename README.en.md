@@ -11,6 +11,8 @@ than budgeted. Three budget lines that seemed to save €100,479.60 had their sp
 
 **Tools:** SQL (MySQL), Python, Power BI (DAX and Power Query), HTML and JavaScript.
 
+[![comprobaciones](https://github.com/jleonceo/management-accounting-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/management-accounting-analytics/actions/workflows/ci.yml)
+
 ```bash
 git clone https://github.com/jleonceo/management-accounting-analytics.git
 cd management-accounting-analytics
@@ -45,6 +47,9 @@ recalculated with a separately written SQL query, with the same result to the ce
 calculation say so in their report. The [reports](informes/README.md) explain, analysis by analysis, the question, the
 formula, the figure, how it was checked and when the figure can mislead.
 
+On every change that is pushed, GitHub runs [`comprobar.py`](comprobar.py): the files the web page reads exist and have
+rows, the figures on this page come from the files in `datos/`, and the links lead to files that exist.
+
 An independent review, with its own SQL queries, found the three budget lines mentioned at the top. The budget bridge
 showed spending below budget on them: that spending was booked to another cost centre. The detail is in
 [Presupuesto y coste por centro](informes/03_presupuesto_objetivos_y_centros.md) (budget and cost by centre).
@@ -63,6 +68,8 @@ BI Desktop and updates with «Actualizar» (Refresh).
 | [`datos/`](datos/) | the 19 CSV files read by the web page and Power BI, with `metadatos.json` (the period each one covers) |
 | [`informes/`](informes/) | six reports by block, with the method and the check behind each figure |
 | [`powerbi/`](powerbi/) | the Power BI project |
+| [`comprobar.py`](comprobar.py), [`tests/`](tests/) | the checks GitHub runs on every change, and their tests |
+| [`assets/`](assets/) | the images of the three views |
 
 ## Limits
 

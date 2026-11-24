@@ -11,6 +11,8 @@ de lo presupuestado. Tres partidas que parecían ahorrar 100.479,60 € tenían 
 
 **Herramientas:** SQL (MySQL), Python, Power BI (DAX y Power Query), HTML y JavaScript.
 
+[![comprobaciones](https://github.com/jleonceo/management-accounting-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/management-accounting-analytics/actions/workflows/ci.yml)
+
 ```bash
 git clone https://github.com/jleonceo/management-accounting-analytics.git
 cd management-accounting-analytics
@@ -43,6 +45,9 @@ una consulta SQL escrita aparte, con el mismo resultado al céntimo. Las pocas q
 indican en su informe. Los [informes](informes/README.md) explican, análisis por análisis, la pregunta, la fórmula, la
 cifra, su comprobación y en qué casos la cifra puede llevar a error.
 
+En cada cambio que se sube, GitHub ejecuta [`comprobar.py`](comprobar.py): los ficheros que lee la web existen y tienen
+filas, las cifras de esta portada salen de los ficheros de `datos/` y los enlaces llevan a ficheros que existen.
+
 Una revisión independiente, con consultas SQL propias, detectó las tres partidas que se citan al principio. El puente
 del presupuesto mostraba en ellas un gasto inferior al presupuestado: ese gasto estaba imputado a otro centro de coste.
 El detalle está en [Presupuesto y coste por centro](informes/03_presupuesto_objetivos_y_centros.md).
@@ -61,6 +66,8 @@ Se abre con Power BI Desktop y se actualiza con «Actualizar».
 | [`datos/`](datos/) | los 19 ficheros CSV que leen la web y Power BI, con `metadatos.json` (periodo que cubre cada uno) |
 | [`informes/`](informes/) | seis informes por bloque, con el método y la comprobación de cada cifra |
 | [`powerbi/`](powerbi/) | el proyecto de Power BI |
+| [`comprobar.py`](comprobar.py), [`tests/`](tests/) | las comprobaciones que ejecuta GitHub en cada cambio y sus pruebas |
+| [`assets/`](assets/) | las imágenes de las tres vistas |
 
 ## Límites
 

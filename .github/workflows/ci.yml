@@ -1,0 +1,21 @@
+name: comprobaciones
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  comprobaciones:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Pruebas de comprobar.py
+        run: python -m unittest discover -s tests -v
+      - name: Datos, cifras de la portada y enlaces
+        run: python comprobar.py

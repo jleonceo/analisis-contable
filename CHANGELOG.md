@@ -14,7 +14,9 @@ gestión, con web, Power BI e informes. Cambia también de nombre: `analisis-con
   `d53b66e`). Lee los datos del repositorio en GitHub, así que se actualiza desde cualquier ordenador (`3b8c0ef`).
 - Solo se publica 2026, de enero a julio. Las cifras de los ejercicios anteriores ya no salen; de ellos se cuenta el
   cierre, sin importes (`57b4ccf`, `22bb51d`).
-- Portada nueva, en español y en inglés (`c22ee02`).
+- Portada nueva, en español y en inglés (`c22ee02`), con una imagen de cada vista (`8a899d8`).
+- Comprobaciones en GitHub en cada cambio: los ficheros de la web, las cifras de la portada frente a los datos y los
+  enlaces, con sus pruebas.
 - Se retira el cuaderno de 2024 (`analisis_contable.ipynb`), con su libro diario y su script de construcción
   (`daac5c6`). Sigue disponible en la versión 1.0.
 
