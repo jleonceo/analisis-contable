@@ -104,14 +104,9 @@ SUMX (
             CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), ALL ( m_cuentas ), m_cuentas[naturaleza] = "ingreso" )
         )
     VAR Variable = CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), KEEPFILTERS ( m_cuentas[comportamiento] = "variable" ) )
-    VAR Resto =
-        CALCULATE (
-            SUM ( h_real_presupuesto_mes[presupuesto] ),
-            KEEPFILTERS ( m_cuentas[naturaleza] = "gasto" ),
-            KEEPFILTERS ( m_cuentas[comportamiento] <> "variable" )
-        )
+    VAR Fijo = CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), KEEPFILTERS ( m_cuentas[comportamiento] = "fijo" ) )
     RETURN
-        Variable * Ventas + Resto
+        Variable * Ventas + Fijo
 )
 ```
 
