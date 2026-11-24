@@ -1,5 +1,23 @@
 # Registro de cambios
 
+## 3.0 · 24 de noviembre de 2026
+
+Power BI deja de ser un visor de ficheros y pasa a tener un modelo propio con sus medidas DAX. Llega el Pareto de
+clientes y proveedores.
+
+- Tres ficheros nuevos en `datos/`: la tabla de hechos con el real y el presupuesto de 2026 por mes y cuenta, la
+  tabla de cuentas y el Pareto con la clase ABC de cada cliente y proveedor. Sale `d_concentracion_clientes.csv`
+  (`aaaab64`).
+- El puente del presupuesto compara cada cuenta con su presupuesto sumando todos sus centros. Antes lo hacía dentro de
+  cada centro y presentaba como ahorro gasto apuntado en otro centro (`aaaab64`).
+- La web enseña el Pareto en la vista de Dirección. Las imágenes de la portada se rehacen con las cifras de ahora
+  (`aaaab64`).
+- Power BI tiene una tabla de hechos, una tabla de cuentas y un calendario en DAX, con una página nueva, «Cuentas y
+  Pareto». Las medidas que promediaban porcentajes se corrigen y el margen va en puntos. El código de cada medida está en
+  [`powerbi/MEDIDAS.md`](powerbi/MEDIDAS.md) (`5f57ebd`).
+- `comprobar.py` revisa también los ficheros que lee Power BI (`5f57ebd`).
+- La portada y los informes 04 y 07 cuentan el modelo nuevo y los puntos ya corregidos (`181f351`).
+
 ## 2.1 · 24 de noviembre de 2026
 
 Un informe nuevo que mide los defectos de los datos y del cálculo, sin cambiar los datos publicados.
