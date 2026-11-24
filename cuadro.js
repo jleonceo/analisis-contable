@@ -1,5 +1,5 @@
 /* Cuadro de mando de contabilidad de gestión.
-   Lee los CSV de datos/ (los mismos que lee el informe de Power BI), dibuja tres pestañas y guarda la pestaña y el
+   Lee los CSV de datos/ (los mismos que lee el informe de Power BI), dibuja tres pestañas y guarda la pestaña
    en la dirección de la página. Sin librerías: SVG dibujado aquí. Todo texto que viene de los datos entra con
    textContent. */
 "use strict";
@@ -14,7 +14,7 @@ const FICHEROS = ["d_ventas_resultado", "d_margenes", "d_margen_bruto_mensual", 
 const ESTADO = { OK: "En orden", AVISO: "Aviso", SIN_DATO: "Sin dato" };
 
 let D = {};                       // los CSV leídos, por nombre
-const estado = { pestana: "direccion", lado: "clientes" };
+const estado = { pestana: "direccion" };
 const CLASE = { A: AZUL, B: NARANJA, C: GRIS };
 
 // ===== Números y textos a la española =====
@@ -276,7 +276,8 @@ function dibujarDireccion() {
     [{ nombre: "Margen bruto", color: AZUL, valores: meses.map(f => Number(f.margen_bruto_pct)) }],
     { unidad: " %", referencia: 50, rotuloReferencia: "50 %", rotularFinal: true, desdeCero: true });
 
-  dibujarPareto(a);
+  dibujarPareto(a, "clientes", "dir-g3");
+  dibujarPareto(a, "proveedores", "dir-g4");
 
   const det = document.getElementById("dir-detalle");
   det.replaceChildren(el("summary", {}, "Detalle de " + a));
@@ -296,23 +297,16 @@ function dibujarDireccion() {
     "En los doce meses hasta julio de " + a + ", el primer cliente reúne el " + pct(conc[0].peso_pct) + " de lo facturado y los cinco primeros, el " + pct(conc[4].peso_acumulado_pct) + "."));
 }
 
-// El Pareto de clientes o de proveedores, con su selector
-function dibujarPareto(a) {
-  const fig = document.getElementById("dir-g3");
-  const filas = D.d_pareto_terceros.filter(f => f.lado === estado.lado);
-  const nombre = estado.lado === "clientes" ? "Cliente" : "Proveedor";
+// El Pareto de un lado, clientes o proveedores, en su hueco
+function dibujarPareto(a, lado, id) {
+  const fig = document.getElementById(id);
+  const filas = D.d_pareto_terceros.filter(f => f.lado === lado);
+  const nombre = lado === "clientes" ? "Cliente" : "Proveedor";
   const deClaseA = filas.filter(f => f.clase === "A").length;
-  cabeceraGrafico(fig, "Hacen falta " + deClaseA + " de los " + filas.length + " " + estado.lado + " para llegar al 80 % de lo facturado",
-    (estado.lado === "clientes" ? "Facturado a cada cliente" : "Facturado por cada proveedor") + " en los doce meses hasta julio de " + a +
+  cabeceraGrafico(fig, "Hacen falta " + deClaseA + " de los " + filas.length + " " + lado + " para llegar al 80 % de lo " + (lado === "clientes" ? "facturado" : "comprado"),
+    (lado === "clientes" ? "Facturado a cada cliente" : "Facturado por cada proveedor") + " en los doce meses hasta julio de " + a +
     ", por posición; la línea es el acumulado en %",
     [{ nombre: "Clase A", color: AZUL }, { nombre: "Clase B", color: NARANJA }, { nombre: "Clase C", color: GRIS }, { nombre: "Acumulado", color: "#0b0b0b", raya: true }]);
-  const selector = el("p", { class: "selector", role: "group", "aria-label": "Qué terceros" });
-  for (const lado of ["clientes", "proveedores"]) {
-    const b = el("button", { type: "button", "aria-pressed": String(lado === estado.lado) }, lado === "clientes" ? "Clientes" : "Proveedores");
-    b.addEventListener("click", () => { estado.lado = lado; dibujarPareto(a); });
-    selector.append(b);
-  }
-  fig.append(selector);
   paretoGrafico(fig, filas, nombre);
 }
 

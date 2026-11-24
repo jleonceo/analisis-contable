@@ -68,12 +68,6 @@ th.num, td.num { text-align: right; }
 tr.total td { font-weight: 700; border-top: 1px solid #0b0b0b; }
 td.aviso { font-weight: 700; }
 
-/* Selector del Pareto: dos botones planos; el elegido, en negrita y con borde oscuro. */
-.selector { display: flex; gap: 8px; margin: 0 0 6px; }
-.selector button { font: 13px "Segoe UI", system-ui, sans-serif; background: #ffffff; border: 1px solid #c3c2b7; border-radius: 2px; padding: 2px 10px; cursor: pointer; color: #0b0b0b; }
-.selector button[aria-pressed="true"] { font-weight: 700; border-color: #0b0b0b; }
-.selector button:focus-visible { outline: 2px solid #0b0b0b; outline-offset: 2px; }
-
 .descarga { margin: 10px 0 0; }
 .descarga button { font: 13px "Segoe UI", system-ui, sans-serif; background: #ffffff; border: 1px solid #c3c2b7; border-radius: 2px; padding: 3px 10px; cursor: pointer; }
 
