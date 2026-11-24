@@ -22,6 +22,20 @@ table m_cuentas
 		summarizeBy: none
 		sourceColumn: naturaleza
 
+	/// Si el gasto sube con las ventas o no. Regla de la empresa (RN-18, 26/10/2026): variables las cuentas que empiezan
+	/// por 60, 61, 624, 626, 650 y 694; los gastos financieros (66) quedan fuera; el resto del gasto es fijo.
+	column comportamiento =
+			SWITCH (
+			    TRUE (),
+			    m_cuentas[naturaleza] = "ingreso", "ingreso",
+			    LEFT ( m_cuentas[cuenta], 2 ) IN { "60", "61" }
+			        || LEFT ( m_cuentas[cuenta], 3 ) IN { "624", "626", "650", "694" }, "variable",
+			    LEFT ( m_cuentas[cuenta], 2 ) = "66", "financiero",
+			    "fijo"
+			)
+		dataType: string
+		summarizeBy: none
+
 	partition m_cuentas = m
 		mode: import
 		source = Table.TransformColumnTypes(LeerCsv("m_cuentas.csv"), {{"cuenta", type text}, {"nombre_cuenta", type text}, {"grupo", type text}, {"naturaleza", type text}}, "en-US")

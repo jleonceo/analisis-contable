@@ -130,24 +130,35 @@ table _Medidas
 		formatStringDefinition =
 				IF ( SELECTEDVALUE ( c_objetivos[indicador] ) = "Margen_Bruto_Pct", "+0.00 \p\t\o\s;-0.00 \p\t\o\s;0.00 \p\t\o\s", "0.0 \%" )
 
-	/// Objetivo de gasto ajustado a las ventas reales: objetivo de gasto × ventas reales / ventas objetivo. Supone que
-	/// todo el gasto sube con las ventas. Solo con los meses, nunca con la fila del acumulado.
+	/// Presupuesto de gasto ajustado a las ventas de cada mes: el gasto variable se escala con ventas reales / ventas
+	/// presupuestadas; el fijo se queda como estaba. Se calcula mes a mes y se suma.
 	measure 'Gasto con presupuesto flexible' =
-			VAR Meses = FILTER ( c_objetivos, NOT CONTAINSSTRING ( c_objetivos[periodo], " a " ) && NOT ISBLANK ( c_objetivos[real] ) )
-			VAR ObjetivoGasto = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Gasto_Total_Mes" ), c_objetivos[objetivo] )
-			VAR ObjetivoVentas = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Ingresos_Totales_Mes" ), c_objetivos[objetivo] )
-			VAR VentasReales = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Ingresos_Totales_Mes" ), c_objetivos[real] )
-			RETURN
-			    DIVIDE ( ObjetivoGasto * VentasReales, ObjetivoVentas )
+			SUMX (
+			    VALUES ( h_real_presupuesto_mes[fecha] ),
+			    VAR Ventas =
+			        DIVIDE (
+			            CALCULATE ( SUM ( h_real_presupuesto_mes[real] ), ALL ( m_cuentas ), m_cuentas[naturaleza] = "ingreso" ),
+			            CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), ALL ( m_cuentas ), m_cuentas[naturaleza] = "ingreso" )
+			        )
+			    VAR Variable = CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), KEEPFILTERS ( m_cuentas[comportamiento] = "variable" ) )
+			    VAR Resto =
+			        CALCULATE (
+			            SUM ( h_real_presupuesto_mes[presupuesto] ),
+			            KEEPFILTERS ( m_cuentas[naturaleza] = "gasto" ),
+			            KEEPFILTERS ( m_cuentas[comportamiento] <> "variable" )
+			        )
+			    RETURN
+			        Variable * Ventas + Resto
+			)
 		formatString: #,0.00 €
-		displayFolder: Controller
+		displayFolder: Modelo
 
+	/// Todo el gasto real, con el de las cuentas sin presupuesto, menos el presupuesto flexible.
 	measure 'Desviación frente al presupuesto flexible' =
-			VAR Meses = FILTER ( c_objetivos, NOT CONTAINSSTRING ( c_objetivos[periodo], " a " ) && NOT ISBLANK ( c_objetivos[real] ) )
-			RETURN
-			    SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Gasto_Total_Mes" ), c_objetivos[real] ) - [Gasto con presupuesto flexible]
+			CALCULATE ( SUM ( h_real_presupuesto_mes[real] ), KEEPFILTERS ( m_cuentas[naturaleza] = "gasto" ) )
+			    - [Gasto con presupuesto flexible]
 		formatString: #,0.00 €
-		displayFolder: Controller
+		displayFolder: Modelo
 
 	/// Real de la tabla de hechos, en el sentido de cada cuenta: un gasto y un ingreso, en positivo. Vacío si en el
 	/// contexto hay ingresos y gastos a la vez: sumarlos no significa nada.

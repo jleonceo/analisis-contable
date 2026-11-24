@@ -89,21 +89,39 @@ un mes suelto.
 
 El objetivo de gasto de julio era de 456.332,56 € y el gasto real fue de 508.112,59 €, un 111,35 %. Pero las ventas
 también subieron, al 111,11 % de su objetivo. El presupuesto flexible ajusta el objetivo de gasto a lo que se vendió de
-verdad:
+verdad. Solo se ajusta el gasto que sube con las ventas. La regla de la empresa lo separa por cuenta: son variables
+las compras (60 y 61), los transportes (624), los servicios bancarios (626) y las pérdidas por clientes (650 y 694).
+Lo demás es fijo, salvo los gastos financieros (66), que quedan fuera. Es la misma regla del punto muerto. La tabla de
+cuentas la lleva en la columna `comportamiento`.
 
 ```dax
 Gasto con presupuesto flexible =
-VAR Meses = FILTER ( c_objetivos, NOT CONTAINSSTRING ( c_objetivos[periodo], " a " ) && NOT ISBLANK ( c_objetivos[real] ) )
-VAR ObjetivoGasto = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Gasto_Total_Mes" ), c_objetivos[objetivo] )
-VAR ObjetivoVentas = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Ingresos_Totales_Mes" ), c_objetivos[objetivo] )
-VAR VentasReales = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Ingresos_Totales_Mes" ), c_objetivos[real] )
-RETURN
-    DIVIDE ( ObjetivoGasto * VentasReales, ObjetivoVentas )
+SUMX (
+    VALUES ( h_real_presupuesto_mes[fecha] ),
+    VAR Ventas =
+        DIVIDE (
+            CALCULATE ( SUM ( h_real_presupuesto_mes[real] ), ALL ( m_cuentas ), m_cuentas[naturaleza] = "ingreso" ),
+            CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), ALL ( m_cuentas ), m_cuentas[naturaleza] = "ingreso" )
+        )
+    VAR Variable = CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), KEEPFILTERS ( m_cuentas[comportamiento] = "variable" ) )
+    VAR Resto =
+        CALCULATE (
+            SUM ( h_real_presupuesto_mes[presupuesto] ),
+            KEEPFILTERS ( m_cuentas[naturaleza] = "gasto" ),
+            KEEPFILTERS ( m_cuentas[comportamiento] <> "variable" )
+        )
+    RETURN
+        Variable * Ventas + Resto
+)
 ```
 
-Con ese ajuste, julio solo gastó 1.076,41 € de más. En los siete meses, en cambio, el gasto supera el objetivo
-ajustado en 70.878,45 €. La medida supone que todo el gasto sube con las ventas: con una parte de gasto fijo, la
-desviación sería mayor.
+El ajuste se hace mes a mes, porque cada mes tiene su propia relación entre ventas reales y presupuestadas. En julio,
+con las ventas por encima, el gasto supera el objetivo ajustado en 7.286,54 €, un 1,45 %. En los siete meses lo supera
+en 59.722,89 €, un 4,37 %, que incluye los 73.690,68 € de gasto sin presupuesto.
+
+La versión anterior trataba todo el gasto como variable y daba 70.878,45 €. Separar el fijo no sube siempre la
+desviación. En los meses de ventas por debajo del objetivo, el gasto fijo no baja con ellas y el objetivo ajustado
+queda más alto.
 
 ## Pareto con clases ABC
 

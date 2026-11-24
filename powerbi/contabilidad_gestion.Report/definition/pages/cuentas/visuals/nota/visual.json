@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "La tabla de hechos suma cada cuenta en todos sus centros: así se ve que las cuentas con presupuesto apenas se desvían y que la desviación del resultado la explican los gastos sin presupuesto. El presupuesto flexible ajusta el objetivo de gasto a las ventas reales y supone que todo el gasto sube con ellas. Las clases ABC cortan en el 80 % y el 95 % del acumulado; los clientes y proveedores van por posición, sin su cuenta.",
+                    "value": "La tabla de hechos suma cada cuenta en todos sus centros: así se ve que las cuentas con presupuesto apenas se desvían y que la desviación del resultado la explican los gastos sin presupuesto. El presupuesto flexible ajusta a las ventas reales de cada mes el gasto variable (compras y transportes) y deja el fijo como estaba. Las clases ABC cortan en el 80 % y el 95 % del acumulado; los clientes y proveedores van por posición, sin su cuenta.",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#605E5C"

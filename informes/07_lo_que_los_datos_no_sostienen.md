@@ -100,14 +100,15 @@ corrección es cambiar la fecha de esos dos asientos al 1 de enero.
 
 ### El semáforo de julio no tiene en cuenta que se vendió más
 
-En julio el gasto llegó al 111,35 % de su objetivo y el semáforo lo marca en rojo. Las ventas llegaron al 111,11 %. Si
-el objetivo de gasto se ajusta a lo que se vendió de verdad, que es lo que se llama presupuesto flexible, julio solo
-gastó 1.076,41 € de más, un 0,21 %.
+En julio el gasto llegó al 111,35 % de su objetivo y el semáforo lo marca en rojo. Las ventas llegaron al 111,11 %. El
+presupuesto flexible ajusta el objetivo de gasto a lo que se vendió de verdad, pero solo en el gasto que sube con las
+ventas: compras y transportes, según la regla de la empresa que separa el gasto fijo del variable. Con ese ajuste,
+julio gastó 7.286,54 € de más, un 1,45 %. Lo que el semáforo marca como un 11 % de exceso se queda en algo más del 1 %.
 
-En el acumulado de los siete meses la lectura es otra: con el mismo ajuste, el gasto supera su objetivo en
-70.878,45 €, un 5,22 %. Estas dos cifras suponen que todo el gasto sube con las ventas. Con una parte de gasto fijo, el
-objetivo ajustado sería menor y la desviación, mayor. Desde la versión 3.0, Power BI calcula el presupuesto flexible
-con una medida. El semáforo sigue comparando con el objetivo fijo.
+En el acumulado de los siete meses, el gasto supera su objetivo ajustado en 59.722,89 €, un 4,37 %. Una primera
+versión trataba todo el gasto como variable y daba 70.878,45 €. Separar el fijo baja la desviación del acumulado,
+porque en los meses de ventas por debajo del objetivo el gasto fijo no baja con ellas. Desde la versión 3.0.1, Power BI
+calcula el presupuesto flexible con esa separación. El semáforo sigue comparando con el objetivo fijo.
 
 ### El cumplimiento del margen se mide como cociente de porcentajes
 
