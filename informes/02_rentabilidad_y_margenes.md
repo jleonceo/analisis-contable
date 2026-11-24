@@ -5,7 +5,7 @@ margen bruto. Los márgenes y el punto muerto se han rehecho por SQL. La rentabi
 por eso no va a la portada.
 
 Datos a 31/07/2026. Se publica solo el ejercicio 2026, de enero a julio. Los años anteriores salen de un dato generado
-en el que las compras no siguen a las ventas, y sus márgenes no son los de una pyme real.
+en el que las compras no siguen a las ventas. Por eso sus márgenes no son los de una pyme real.
 
 ## El margen bruto no llegó al 50 % en ningún mes de 2026
 
@@ -37,7 +37,7 @@ el del periodo sin los gastos financieros (66); la empresa no tiene ingresos fin
 **Segunda vía.** Resultado más gastos financieros, dividido por las ventas, todo con consultas sobre el diario: da la
 cifra de la tabla.
 
-## Con estos costes, el punto muerto de los siete meses es de 798.608,80 €
+## El punto muerto de los siete meses es de 798.608,80 €
 
 **Pregunta.** ¿Cuánto hay que vender para cubrir todos los gastos de la actividad?
 

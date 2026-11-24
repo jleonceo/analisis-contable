@@ -4,7 +4,7 @@ De enero a julio de 2026 la empresa vendió 1.834.612,84 € y ganó 406.707,28 
 patrimonio neto, su inmovilizado y su deuda a largo plazo se han rehecho por SQL y dan lo mismo al céntimo.
 
 Datos a 31/07/2026. Se publica solo el ejercicio 2026, de enero a julio. Los años anteriores salen de un dato generado
-en el que las compras no siguen a las ventas, y sus márgenes no son los de una pyme real.
+en el que las compras no siguen a las ventas. Por eso sus márgenes no son los de una pyme real.
 
 ## La empresa ganó 22 céntimos de cada euro vendido de enero a julio
 
