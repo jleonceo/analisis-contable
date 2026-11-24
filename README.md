@@ -23,12 +23,18 @@ Después se abre `http://localhost:8000` en el navegador. La versión de Power B
 
 | Vista | Pregunta que contesta | Qué muestra |
 |---|---|---|
-| Dirección | ¿Cómo va la empresa? | ventas, resultado, margen bruto y flujo de caja libre de enero a julio, su evolución mensual y el balance a 31 de julio |
+| Dirección | ¿Cómo va la empresa? | ventas, resultado, margen bruto y flujo de caja libre de enero a julio y su evolución mensual; en Power BI, además, el balance a 31 de julio |
 | Controller | ¿Dónde se desvía del presupuesto? | puente de desviaciones por partida, coste por centro y grado de cumplimiento de objetivos |
 | Contabilidad | ¿Está bien llevado el libro diario? | veinte controles sobre el diario, con lo que detecta cada uno |
 
 A 31/07/2026, nueve de los veinte controles señalan incidencias que requieren revisión manual, entre ellas la
 reserva legal sin dotar y 2.273 números de asiento sin usar.
+
+![Vista de dirección: ventas, resultado, margen bruto y flujo de caja libre de enero a julio de 2026](assets/direccion.png)
+
+![Vista del controller: cumplimiento de objetivos y puente del resultado presupuestado al real](assets/controller.png)
+
+![Vista de contabilidad: las veinte comprobaciones del libro diario, primero las que tienen aviso](assets/contabilidad.png)
 
 ## Cómo se comprueba cada cifra
 

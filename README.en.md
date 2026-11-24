@@ -25,12 +25,18 @@ The dashboards and the reports are written in Spanish.
 
 | View | Question it answers | What it shows |
 |---|---|---|
-| Management | How is the company doing? | sales, result, gross margin and free cash flow from January to July, their month-by-month trend and the balance sheet at 31 July |
+| Management | How is the company doing? | sales, result, gross margin and free cash flow from January to July and their month-by-month trend; in Power BI, also the balance sheet at 31 July |
 | Controller | Where does it deviate from the budget? | variance bridge by budget line, cost by cost centre and degree of target achievement |
 | Accounting | Is the general ledger well kept? | twenty checks on the ledger, with what each one detects |
 
 At 31/07/2026, nine of the twenty checks flag issues that need manual review, among them the unfunded legal reserve
 and 2,273 unused journal entry numbers.
+
+![Management view: sales, result, gross margin and free cash flow from January to July 2026](assets/direccion.png)
+
+![Controller view: target achievement and the bridge from budgeted to actual result](assets/controller.png)
+
+![Accounting view: the twenty general ledger checks, those with a warning first](assets/contabilidad.png)
 
 ## How each figure is checked
 
