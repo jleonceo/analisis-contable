@@ -89,10 +89,161 @@ table _Medidas
 		displayFolder: Controller
 		lineageTag: 39507996-c2f4-487d-a18e-f3c5ac170015
 
-	measure 'Cumplimiento %' = AVERAGE ( c_objetivos[cumplimiento_pct] )
+	/// Real entre objetivo de los importes. El margen no entra: un porcentaje entre otro no significa nada, y su
+	/// desviación va en puntos. Sin un periodo elegido no suma la fila del acumulado, que repite los meses.
+	measure 'Cumplimiento %' =
+			VAR Filas =
+			    FILTER (
+			        c_objetivos,
+			        c_objetivos[indicador] <> "Margen_Bruto_Pct"
+			            && ( HASONEVALUE ( c_objetivos[periodo] ) || NOT CONTAINSSTRING ( c_objetivos[periodo], " a " ) )
+			    )
+			RETURN
+			    DIVIDE ( SUMX ( Filas, c_objetivos[real] ), SUMX ( Filas, c_objetivos[objetivo] ) ) * 100
 		formatString: 0.0 \%
 		displayFolder: Controller
 		lineageTag: 2011bf68-fccb-4213-9933-60e5978ed31e
+
+	/// Margen bruto real menos su objetivo, en puntos, de un mes elegido. Vacío en las filas de los importes y en los
+	/// meses sin real: sin ese control, un mes futuro daba el objetivo en negativo.
+	measure 'Desviación del margen (puntos)' =
+			IF (
+			    HASONEVALUE ( c_objetivos[periodo] )
+			        && SELECTEDVALUE ( c_objetivos[indicador], "Margen_Bruto_Pct" ) = "Margen_Bruto_Pct",
+			    CALCULATE (
+			        IF ( NOT ISBLANK ( SUM ( c_objetivos[real] ) ), SUM ( c_objetivos[real] ) - SUM ( c_objetivos[objetivo] ) ),
+			        c_objetivos[indicador] = "Margen_Bruto_Pct"
+			    )
+			)
+		formatString: +0.00;-0.00;0.00
+		displayFolder: Controller
+
+	/// Una sola medida para la matriz de objetivos: el cumplimiento en % para los importes y la desviación en puntos
+	/// para el margen. El formato cambia con la fila, así que cada mes ocupa una columna y no dos.
+	measure 'Cumplimiento o margen' =
+			IF (
+			    SELECTEDVALUE ( c_objetivos[indicador] ) = "Margen_Bruto_Pct",
+			    [Desviación del margen (puntos)],
+			    [Cumplimiento %]
+			)
+		displayFolder: Controller
+		formatStringDefinition =
+				IF ( SELECTEDVALUE ( c_objetivos[indicador] ) = "Margen_Bruto_Pct", "+0.00 \p\t\o\s;-0.00 \p\t\o\s;0.00 \p\t\o\s", "0.0 \%" )
+
+	/// Objetivo de gasto ajustado a las ventas reales: objetivo de gasto × ventas reales / ventas objetivo. Supone que
+	/// todo el gasto sube con las ventas. Solo con los meses, nunca con la fila del acumulado.
+	measure 'Gasto con presupuesto flexible' =
+			VAR Meses = FILTER ( c_objetivos, NOT CONTAINSSTRING ( c_objetivos[periodo], " a " ) && NOT ISBLANK ( c_objetivos[real] ) )
+			VAR ObjetivoGasto = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Gasto_Total_Mes" ), c_objetivos[objetivo] )
+			VAR ObjetivoVentas = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Ingresos_Totales_Mes" ), c_objetivos[objetivo] )
+			VAR VentasReales = SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Ingresos_Totales_Mes" ), c_objetivos[real] )
+			RETURN
+			    DIVIDE ( ObjetivoGasto * VentasReales, ObjetivoVentas )
+		formatString: #,0.00 €
+		displayFolder: Controller
+
+	measure 'Desviación frente al presupuesto flexible' =
+			VAR Meses = FILTER ( c_objetivos, NOT CONTAINSSTRING ( c_objetivos[periodo], " a " ) && NOT ISBLANK ( c_objetivos[real] ) )
+			RETURN
+			    SUMX ( FILTER ( Meses, c_objetivos[indicador] = "Gasto_Total_Mes" ), c_objetivos[real] ) - [Gasto con presupuesto flexible]
+		formatString: #,0.00 €
+		displayFolder: Controller
+
+	/// Real de la tabla de hechos, en el sentido de cada cuenta: un gasto y un ingreso, en positivo. Vacío si en el
+	/// contexto hay ingresos y gastos a la vez: sumarlos no significa nada.
+	measure Real =
+			VAR Naturalezas = CALCULATE ( DISTINCTCOUNT ( m_cuentas[naturaleza] ), h_real_presupuesto_mes )
+			RETURN
+			    IF ( Naturalezas = 1, SUM ( h_real_presupuesto_mes[real] ) )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	/// Igual que el real: vacío si mezcla ingresos y gastos.
+	measure Presupuesto =
+			VAR Naturalezas = CALCULATE ( DISTINCTCOUNT ( m_cuentas[naturaleza] ), h_real_presupuesto_mes )
+			RETURN
+			    IF ( Naturalezas = 1, SUM ( h_real_presupuesto_mes[presupuesto] ) )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	/// Real menos presupuesto. En una cuenta sin presupuesto es todo su real.
+	measure 'Real menos presupuesto' = [Real] - [Presupuesto]
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	/// DIVIDE devuelve vacío cuando la cuenta no tiene presupuesto, en lugar de un error o un infinito.
+	measure 'Cumplimiento del presupuesto %' = DIVIDE ( [Real], [Presupuesto] ) * 100
+		formatString: 0.0 \%
+		displayFolder: Modelo
+
+	/// Ingresos menos gastos con el signo de cada cuenta: el resultado sale de la tabla de hechos.
+	measure 'Resultado real por cuenta' = SUMX ( h_real_presupuesto_mes, h_real_presupuesto_mes[real] * h_real_presupuesto_mes[signo] )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	measure 'Resultado presupuestado por cuenta' = SUMX ( h_real_presupuesto_mes, h_real_presupuesto_mes[presupuesto] * h_real_presupuesto_mes[signo] )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	measure 'Resultado real acumulado del año' = TOTALYTD ( [Resultado real por cuenta], Calendario[Fecha] )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	measure 'Resultado presupuestado acumulado del año' = TOTALYTD ( [Resultado presupuestado por cuenta], Calendario[Fecha] )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	/// Gasto de las cuentas que no tienen presupuesto en ningún mes del ejercicio: la mayor parte de la desviación.
+	measure 'Gasto sin presupuesto' =
+			VAR SinPresupuesto =
+			    FILTER (
+			        VALUES ( h_real_presupuesto_mes[cuenta] ),
+			        ISBLANK ( CALCULATE ( SUM ( h_real_presupuesto_mes[presupuesto] ), ALL ( Calendario ) ) )
+			    )
+			RETURN
+			    CALCULATE (
+			        SUMX ( h_real_presupuesto_mes, - h_real_presupuesto_mes[real] * h_real_presupuesto_mes[signo] ),
+			        KEEPFILTERS ( SinPresupuesto )
+			    )
+		formatString: #,0.00 €
+		displayFolder: Modelo
+
+	measure 'Importe del tercero' = SUM ( d_pareto_terceros[importe] )
+		formatString: #,0.00 €
+		displayFolder: Pareto
+
+	/// Posición del cliente o proveedor por importe, dentro de su lado, con RANKX.
+	measure 'Posición en el Pareto' =
+			VAR Lado = SELECTEDVALUE ( d_pareto_terceros[lado] )
+			RETURN
+			    IF (
+			        HASONEVALUE ( d_pareto_terceros[posicion] ) && NOT ISBLANK ( Lado ),
+			        RANKX ( FILTER ( ALL ( d_pareto_terceros ), d_pareto_terceros[lado] = Lado ), d_pareto_terceros[importe], [Importe del tercero], DESC, SKIP )
+			    )
+		formatString: 0
+		displayFolder: Pareto
+
+	/// Lo que suman este tercero y los que van delante, sobre el total de su lado, en %.
+	measure 'Acumulado del Pareto %' =
+			VAR Lado = SELECTEDVALUE ( d_pareto_terceros[lado] )
+			VAR Importe = [Importe del tercero]
+			VAR Todos = FILTER ( ALL ( d_pareto_terceros ), d_pareto_terceros[lado] = Lado )
+			RETURN
+			    IF (
+			        HASONEVALUE ( d_pareto_terceros[posicion] ) && NOT ISBLANK ( Lado ),
+			        DIVIDE ( SUMX ( FILTER ( Todos, d_pareto_terceros[importe] >= Importe ), d_pareto_terceros[importe] ), SUMX ( Todos, d_pareto_terceros[importe] ) ) * 100
+			    )
+		formatString: 0.00
+		displayFolder: Pareto
+
+	/// A mientras lo que va delante no llega al 80 %; B mientras no llega al 95 %; C el resto.
+	measure 'Clase ABC' =
+			VAR Lado = SELECTEDVALUE ( d_pareto_terceros[lado] )
+			VAR Total = SUMX ( FILTER ( ALL ( d_pareto_terceros ), d_pareto_terceros[lado] = Lado ), d_pareto_terceros[importe] )
+			VAR Previo = [Acumulado del Pareto %] - DIVIDE ( [Importe del tercero], Total ) * 100
+			RETURN
+			    IF ( NOT ISBLANK ( [Acumulado del Pareto %] ), IF ( Previo < 80, "A", IF ( Previo < 95, "B", "C" ) ) )
+		displayFolder: Pareto
 
 	measure 'Controles superados' = CALCULATE ( COUNTROWS ( o_comprobaciones ), o_comprobaciones[estado] = "OK" )
 		formatString: 0
@@ -114,12 +265,17 @@ table _Medidas
 		displayFolder: Contabilidad
 		lineageTag: f99588c6-4d51-4b92-afce-9c9ece0b945b
 
-	measure 'Margen bruto mensual %' = AVERAGE ( d_margen_bruto_mensual[margen_bruto_pct] )
+	/// Ventas menos aprovisionamientos, sobre ventas, sumados en el contexto: nunca una media de porcentajes.
+	measure 'Margen bruto mensual %' =
+			VAR Ventas = SUM ( d_margen_bruto_mensual[ventas] )
+			RETURN
+			    DIVIDE ( Ventas - SUM ( d_margen_bruto_mensual[aprovisionamientos] ), Ventas ) * 100
 		formatString: 0.0 \%
 		displayFolder: Dirección
 		lineageTag: 1bfa2787-56b1-44f3-9ef6-64d07be5f780
 
-	measure 'Margen bruto medio %' = AVERAGEX ( ALL ( d_margen_bruto_mensual ), d_margen_bruto_mensual[margen_bruto_pct] )
+	/// El margen de todo el periodo (42,02 % de enero a julio), no la media de los siete porcentajes (41,97 %).
+	measure 'Margen bruto medio %' = CALCULATE ( [Margen bruto mensual %], ALL ( d_margen_bruto_mensual ) )
 		formatString: 0.0 \%
 		displayFolder: Dirección
 		lineageTag: 9d38dcaa-a200-427f-97db-af1af0b3e096

@@ -1,0 +1,40 @@
+/// Pareto de clientes y de proveedores por posición, sin su cuenta: facturado en los doce meses hasta el corte.
+/// La clase ABC del fichero corta en el 80 % y el 95 % del acumulado; la medida Clase ABC tiene que dar la misma.
+table d_pareto_terceros
+
+	column lado
+		dataType: string
+		summarizeBy: none
+		sourceColumn: lado
+
+	column posicion
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: posicion
+
+	column importe
+		dataType: decimal
+		formatString: #,0.00 €
+		sourceColumn: importe
+
+	column peso_pct
+		dataType: double
+		formatString: 0.00
+		sourceColumn: peso_pct
+
+	column peso_acumulado_pct
+		dataType: double
+		formatString: 0.00
+		summarizeBy: none
+		sourceColumn: peso_acumulado_pct
+
+	column clase
+		dataType: string
+		summarizeBy: none
+		sourceColumn: clase
+
+	partition d_pareto_terceros = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("d_pareto_terceros.csv"), {{"lado", type text}, {"posicion", Int64.Type}, {"importe", Currency.Type}, {"peso_pct", type number}, {"peso_acumulado_pct", type number}, {"clase", type text}}, "en-US")
+

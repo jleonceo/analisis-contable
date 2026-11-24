@@ -1,0 +1,8 @@
+relationship h_real_presupuesto_mes_fecha_Calendario_Fecha
+	fromColumn: h_real_presupuesto_mes.fecha
+	toColumn: Calendario.Fecha
+
+relationship h_real_presupuesto_mes_cuenta_m_cuentas_cuenta
+	fromColumn: h_real_presupuesto_mes.cuenta
+	toColumn: m_cuentas.cuenta
+

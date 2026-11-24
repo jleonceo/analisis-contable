@@ -2,8 +2,9 @@
 
 Tres comprobaciones, solo con la biblioteca estándar de Python:
 
-1. Los ficheros que lee la web (la lista FICHEROS de cuadro.js) existen en datos/ y tienen
-   al menos una fila además de la cabecera.
+1. Los ficheros que lee la web (la lista FICHEROS de cuadro.js) y los que lee el modelo de
+   Power BI (cada LeerCsv de sus tablas) existen en datos/ y tienen al menos una fila además
+   de la cabecera.
 2. Las cifras de la portada salen de los datos: las ventas y el resultado de 2026 de
    d_ventas_resultado.csv, y la diferencia entre el resultado presupuestado y el real de
    d_puente_presupuesto.csv. Tienen que aparecer, con su formato, en README.md (español)
@@ -48,12 +49,26 @@ def ficheros_de_la_web(raiz):
     return re.findall(r'"([^"]+)"', m.group(1)) if m else []
 
 
+TABLAS_POWER_BI = os.path.join("powerbi", "contabilidad_gestion.SemanticModel", "definition", "tables")
+
+
+def ficheros_de_power_bi(raiz):
+    carpeta = os.path.join(raiz, TABLAS_POWER_BI)
+    nombres = []
+    for fichero in sorted(os.listdir(carpeta)) if os.path.isdir(carpeta) else []:
+        if fichero.endswith(".tmdl"):
+            nombres += re.findall(r'LeerCsv\("([^"]+)\.csv"\)', _leer(carpeta, fichero))
+    return nombres
+
+
 def comprobar_datos(raiz):
     fallos = []
-    nombres = ficheros_de_la_web(raiz)
-    if not nombres:
+    web, power_bi = ficheros_de_la_web(raiz), ficheros_de_power_bi(raiz)
+    if not web:
         return ["cuadro.js: no se encuentra la lista FICHEROS"]
-    for nombre in nombres:
+    if not power_bi:
+        return ["powerbi: ninguna tabla lee un CSV con LeerCsv"]
+    for nombre in sorted(set(web) | set(power_bi)):
         ruta = os.path.join("datos", nombre + ".csv")
         if not os.path.isfile(os.path.join(raiz, ruta)):
             fallos.append(ruta + ": no existe")

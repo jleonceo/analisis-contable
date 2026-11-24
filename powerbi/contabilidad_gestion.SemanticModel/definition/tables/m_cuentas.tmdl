@@ -1,0 +1,28 @@
+/// Las cuentas de resultado de la tabla de hechos, con su nombre, su grupo y su naturaleza.
+table m_cuentas
+
+	column cuenta
+		dataType: string
+		isKey
+		summarizeBy: none
+		sourceColumn: cuenta
+
+	column nombre_cuenta
+		dataType: string
+		summarizeBy: none
+		sourceColumn: nombre_cuenta
+
+	column grupo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: grupo
+
+	column naturaleza
+		dataType: string
+		summarizeBy: none
+		sourceColumn: naturaleza
+
+	partition m_cuentas = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("m_cuentas.csv"), {{"cuenta", type text}, {"nombre_cuenta", type text}, {"grupo", type text}, {"naturaleza", type text}}, "en-US")
+

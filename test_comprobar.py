@@ -50,6 +50,11 @@ class TestLosDatos(Base):
         os.remove(self.ruta("datos/c_variaciones.csv"))
         self.assertTrue(any("c_variaciones" in f for f in self.fallos()))
 
+    def test_un_fichero_que_solo_lee_power_bi(self):
+        # La tabla de cuentas solo la lee el modelo de Power BI: la web no la nombra.
+        os.remove(self.ruta("datos/m_cuentas.csv"))
+        self.assertTrue(any("m_cuentas" in f for f in self.fallos()))
+
     def test_un_fichero_sin_filas(self):
         with open(self.ruta("datos/c_clientes.csv"), encoding="utf-8") as f:
             cabecera = f.readline()

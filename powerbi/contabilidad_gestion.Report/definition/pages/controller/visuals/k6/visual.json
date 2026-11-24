@@ -61,10 +61,10 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Cumplimiento %"
+                  "Property": "Cumplimiento o margen"
                 }
               },
-              "queryRef": "_Medidas.Cumplimiento %",
+              "queryRef": "_Medidas.Cumplimiento o margen",
               "nativeQueryRef": "Cumplimiento",
               "displayName": "Cumplimiento"
             }
@@ -119,7 +119,7 @@
                 }
               }
             ],
-            "metadata": "_Medidas.Cumplimiento %"
+            "metadata": "_Medidas.Cumplimiento o margen"
           }
         }
       ],
@@ -178,7 +178,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Grado de cumplimiento de objetivos (%)'"
+                  "Value": "'Grado de cumplimiento de objetivos: % del objetivo; el margen, en puntos'"
                 }
               }
             },

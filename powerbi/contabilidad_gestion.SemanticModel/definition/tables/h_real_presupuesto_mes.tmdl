@@ -1,0 +1,39 @@
+/// Tabla de hechos: real y presupuesto de cada cuenta de resultado por mes; meses terminados de 2026.
+/// El real va en el sentido de la cuenta (un gasto y un ingreso, en positivo); signo dice cómo entra en el resultado.
+table h_real_presupuesto_mes
+
+	column mes
+		dataType: string
+		summarizeBy: none
+		sourceColumn: mes
+
+	column cuenta
+		dataType: string
+		summarizeBy: none
+		sourceColumn: cuenta
+
+	column real
+		dataType: decimal
+		formatString: #,0.00 €
+		sourceColumn: real
+
+	column presupuesto
+		dataType: decimal
+		formatString: #,0.00 €
+		sourceColumn: presupuesto
+
+	column signo
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: signo
+
+	column fecha = DATE ( VALUE ( LEFT ( h_real_presupuesto_mes[mes], 4 ) ), VALUE ( RIGHT ( h_real_presupuesto_mes[mes], 2 ) ), 1 )
+		dataType: dateTime
+		formatString: mmm yyyy
+		summarizeBy: none
+
+	partition h_real_presupuesto_mes = m
+		mode: import
+		source = Table.TransformColumnTypes(LeerCsv("h_real_presupuesto_mes.csv"), {{"mes", type text}, {"cuenta", type text}, {"real", Currency.Type}, {"presupuesto", Currency.Type}, {"signo", Int64.Type}}, "en-US")
+

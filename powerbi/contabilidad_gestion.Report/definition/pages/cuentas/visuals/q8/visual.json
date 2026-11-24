@@ -1,0 +1,236 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "q8",
+  "position": {
+    "x": 736,
+    "y": 376,
+    "z": 1000,
+    "height": 264,
+    "width": 524,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "d_pareto_terceros"
+                    }
+                  },
+                  "Property": "lado"
+                }
+              },
+              "queryRef": "d_pareto_terceros.lado",
+              "nativeQueryRef": "Lado",
+              "displayName": "Lado"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "d_pareto_terceros"
+                    }
+                  },
+                  "Property": "posicion"
+                }
+              },
+              "queryRef": "d_pareto_terceros.posicion",
+              "nativeQueryRef": "Posición",
+              "displayName": "Posición"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Importe del tercero"
+                }
+              },
+              "queryRef": "_Medidas.Importe del tercero",
+              "nativeQueryRef": "Facturado",
+              "displayName": "Facturado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Acumulado del Pareto %"
+                }
+              },
+              "queryRef": "_Medidas.Acumulado del Pareto %",
+              "nativeQueryRef": "Acumulado %",
+              "displayName": "Acumulado %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Clase ABC"
+                }
+              },
+              "queryRef": "_Medidas.Clase ABC",
+              "nativeQueryRef": "Clase (DAX)",
+              "displayName": "Clase (DAX)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "d_pareto_terceros"
+                    }
+                  },
+                  "Property": "clase"
+                }
+              },
+              "queryRef": "d_pareto_terceros.clase",
+              "nativeQueryRef": "Clase (fichero)",
+              "displayName": "Clase (fichero)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "d_pareto_terceros"
+                  }
+                },
+                "Property": "lado"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "d_pareto_terceros"
+                  }
+                },
+                "Property": "posicion"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Clase ABC: la medida DAX frente a la del fichero'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
