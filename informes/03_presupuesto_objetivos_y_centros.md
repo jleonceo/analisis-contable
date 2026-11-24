@@ -1,9 +1,8 @@
 # Presupuesto y coste por centro
 
 De enero a julio de 2026 los ingresos cumplen su objetivo y el gasto lo supera en un 5,40 %. El resultado real queda
-70.085,60 € por debajo del presupuestado. Tres partidas parecen gastar menos de lo previsto, 100.479,60 € entre las
-tres. Su gasto está apuntado en otro centro y reaparece en el escalón de partidas sin presupuesto. Cada cifra de este informe se ha rehecho
-por SQL.
+70.085,60 € por debajo del presupuestado. Las cuentas con presupuesto apenas se desvían: la diferencia la explican
+73.690,68 € de gastos que no tenían presupuesto. Cada cifra de este informe se ha rehecho por SQL.
 
 Datos a 31/07/2026. El presupuesto y los objetivos solo existen para 2026.
 
@@ -38,38 +37,40 @@ más alto. Un cumplimiento cercano al 100 % no dice si el objetivo era razonable
 
 **Pregunta.** ¿Qué partidas explican la diferencia entre el resultado presupuestado y el real?
 
-**Cómo se calcula.** Una partida es una cuenta en un centro de coste. Para cada partida con presupuesto, su efecto
-sobre el resultado es lo presupuestado menos lo real si es un gasto, o lo real menos lo presupuestado si es un ingreso.
-Todo lo apuntado en una cuenta o un centro sin presupuesto se suma en un escalón aparte. Se cuentan solo los meses
-terminados.
+**Cómo se calcula.** Una partida es una cuenta, sumando todos los centros de coste. Para cada cuenta con presupuesto, su
+efecto sobre el resultado es lo presupuestado menos lo real si es un gasto, o lo real menos lo presupuestado si es un
+ingreso. Lo apuntado en una cuenta sin presupuesto se suma en un escalón aparte. Se cuentan solo los meses terminados.
 
 | Escalón | Efecto sobre el resultado (€) | Resultado acumulado (€) |
 |---|---:|---:|
 | Resultado presupuestado | | 476.792,88 |
-| Transportes, almacén y logística | +40.975,01 | 517.767,89 |
-| Publicidad, comercial | +34.479,59 | 552.247,48 |
-| Arrendamientos, administración | +25.025,00 | 577.272,48 |
-| Ventas de mercaderías | +3.045,69 | 580.318,17 |
-| Compras de mercaderías, almacén y logística | −1.389,00 | 578.929,17 |
-| Suministros, administración | +384,64 | 579.313,81 |
-| Seguridad Social, recursos humanos | −0,10 | 579.313,71 |
-| Partidas sin presupuesto | −172.606,43 | 406.707,28 |
+| Ventas de mercaderías | +3.045,69 | 479.838,57 |
+| Compras de mercaderías | −1.389,00 | 478.449,57 |
+| Transportes | +815,28 | 479.264,85 |
+| Publicidad, propaganda y relaciones públicas | +748,57 | 480.013,42 |
+| Suministros | +384,64 | 480.398,06 |
+| Seguridad Social a cargo de la empresa | −0,10 | 480.397,96 |
+| Partidas sin presupuesto | −73.690,68 | 406.707,28 |
 | **Resultado real** | | **406.707,28** |
 
-Los sueldos, con presupuesto, coinciden al céntimo con lo real y no mueven el resultado.
+Los arrendamientos y los sueldos coinciden al céntimo con lo presupuestado y no mueven el resultado. El escalón sin
+presupuesto reúne siete cuentas. Las que más pesan son los seguros, con 37.368,19 €, y los servicios de profesionales,
+con 28.760,35 €. Las otras cinco son las dos amortizaciones, los intereses, otros gastos financieros y las
+reparaciones.
 
-**Segunda vía.** Tres consultas independientes dan el resultado presupuestado, el real y el escalón sin presupuesto, al
+**Segunda vía.** Consultas independientes dan el real y el presupuesto de cada cuenta y el escalón sin presupuesto, al
 céntimo. El real es el mismo que el de [Estados financieros](01_estados_financieros.md).
 
-**Cuándo engaña.** El real de una partida es el de esa cuenta en ese centro. Un gasto apuntado en otro centro sale como
-ahorro en su partida y como gasto sin presupuesto en el escalón final. Les pasa a las tres partidas que parecen ahorrar:
+**Cuándo engaña.** Al sumar los centros, el puente no enseña dónde se apuntó cada gasto. Tres cuentas tienen el
+presupuesto en un centro y el gasto en otro:
 
 - **arrendamientos**: presupuestados en administración; los 25.025,00 € reales están en almacén;
 - **publicidad**: presupuestada en comercial, que recibe 3.795,00 €; en administración hay 33.731,02 €;
 - **transporte**: presupuestado en almacén, que recibe 8.703,30 €; en administración hay 40.159,73 €.
 
-Ninguna de las tres ahorra de verdad. El gasto de las partidas con presupuesto no es el gasto total del
-cumplimiento de objetivos, que incluye todo el grupo 6.
+Comparadas dentro de cada centro, esas tres cuentas parecerían ahorrar 100.479,60 €, que es lo que contaba este informe
+hasta la versión 3.0. El gasto de las cuentas con presupuesto tampoco es el gasto total del cumplimiento de objetivos,
+que incluye todo el grupo 6.
 
 ## La venta a empresas pasó a ser el 78,56 % de los ingresos en 2026
 
