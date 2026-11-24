@@ -58,9 +58,8 @@ en parte.
 
 [`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) es un proyecto de Power BI con las tres vistas
 de la web y una cuarta, «Cuentas y Pareto». Sus tablas leen los 21 ficheros de `datos/`, los mismos que la web, así que
-las dos muestran las mismas cifras. Se abre con Power BI Desktop y se actualiza con «Actualizar».
-
-El modelo tiene una tabla de hechos con el real y el presupuesto de cada cuenta de resultado por mes. Se relaciona con
+las dos muestran las mismas cifras. Se abre con Power BI Desktop y se actualiza con «Actualizar». El modelo tiene una
+tabla de hechos con el real y el presupuesto de cada cuenta de resultado por mes. Se relaciona con
 una tabla de cuentas y con una tabla de fechas hecha en DAX. Sobre ese modelo, las medidas calculan:
 
 - el resultado acumulado del año mes a mes, que a 31 de julio da el mismo resultado que los estados financieros;

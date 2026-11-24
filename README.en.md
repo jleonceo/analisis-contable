@@ -60,9 +60,7 @@ Fourteen are confirmed and two are partly corrected.
 [`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) is a Power BI project with the three views of
 the web page and a fourth one, «Cuentas y Pareto» (accounts and Pareto). Its tables read the 21 files in `datos/`, the
 same ones as the web page, so both show the same figures. It opens in Power BI Desktop and updates with «Actualizar»
-(Refresh).
-
-The model has a fact table with the actual and budgeted amount of each income statement account by month. It is
+(Refresh). The model has a fact table with the actual and budgeted amount of each income statement account by month. It is
 related to an accounts table and to a date table built in DAX. On top of that model, the measures calculate:
 
 - the year-to-date result month by month, which at 31 July gives the same result as the financial statements;
