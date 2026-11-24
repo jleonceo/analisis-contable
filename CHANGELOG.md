@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## 3.1 · 24 de noviembre de 2026
+
+- El informe 07 publica una cuenta de resultados de gestión con el Impuesto sobre Sociedades estimado al 23 %: el
+  resultado de enero a julio después de impuestos sería de unos 313.165 €, y el de enero a mayo, sin los dos meses por
+  revisar, de unos 65.134 €.
+
 ## 3.0.2 · 24 de noviembre de 2026
 
 - La medida del presupuesto flexible deja fuera los gastos financieros, como ya decía `MEDIDAS.md`. Antes los sumaba

@@ -76,6 +76,23 @@ El stock real a 31 de julio no se puede saber con el diario. Lo que sí se puede
 diferencia en el stock mueve el margen bruto de los siete meses en 0,55 puntos. Un cierre intermedio estimaría las
 existencias con un recuento o con el margen habitual sobre las ventas.
 
+### El resultado después del impuesto estimado baja a unos 313.165 €
+
+Es la cuenta de resultados de gestión de los siete meses. Sin junio y julio, que están por revisar, el resultado de
+enero a mayo después de impuestos se queda en unos 65.134 €. Esta tabla junta las dos lecturas:
+
+| Euros, 2026 | Enero a julio | Enero a mayo |
+|---|---:|---:|
+| Ventas | 1.834.612,84 | 578.277,40 |
+| Resultado antes de impuestos | 406.707,28 | 84.589,19 |
+| Impuesto sobre Sociedades estimado, al 23 % | −93.542,67 | −19.455,51 |
+| **Resultado después de impuestos, estimado** | **313.164,61** | **65.133,68** |
+
+El impuesto supone que la base imponible es igual al resultado contable. La base real no se puede saber con el diario,
+porque depende de ajustes fiscales que no están contabilizados. Las existencias se quedan como están: su ajuste no se
+puede estimar sin un recuento. Las ventas y el resultado de los dos periodos se han rehecho con una consulta SQL sobre
+el diario.
+
 ## Lo que está mal contabilizado pero no cambia el resultado
 
 ### Cinco clientes tienen saldo a su favor
