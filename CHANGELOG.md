@@ -1,5 +1,10 @@
 # Registro de cambios
 
+## 3.0.2 · 24 de noviembre de 2026
+
+- La medida del presupuesto flexible deja fuera los gastos financieros, como ya decía `MEDIDAS.md`. Antes los sumaba
+  con el gasto fijo. No cambia ninguna cifra, porque esos gastos no tienen presupuesto (`b0ed4f5`).
+
 ## 3.0.1 · 24 de noviembre de 2026
 
 Correcciones tras una segunda revisión externa.
