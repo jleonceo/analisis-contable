@@ -1,7 +1,7 @@
 {
  "empresa": "S0",
  "corte": "2026-07-31",
- "generado_el": "2026-11-23T21:58:00",
+ "generado_el": "2026-11-24T10:33:02",
  "fuentes": {
   "plantilla_b": "familia_b_154855.json (2026-11-20 15:48)",
   "plantilla_c": "familia_c_154858.json (2026-11-20 15:48)",
@@ -12,7 +12,8 @@
   "publicacion": "2026-11-21 08:27:24"
  },
  "periodo_de_cada_fichero": {
-  "d_concentracion_clientes.csv": "facturado a clientes en los doce meses hasta el corte",
+  "d_pareto_terceros.csv": "facturado a cada cliente y por cada proveedor en los doce meses hasta el corte",
+  "h_real_presupuesto_mes.csv": "los meses terminados del ejercicio del corte",
   "c_clientes.csv": "días de cobro de todo el histórico; saldo y límite al corte; apagado al corte",
   "c_flujo_entre_grupos.csv": "todo el histórico del diario hasta el corte",
   "c_facturas_disparadas.csv": "todo el histórico del diario hasta el corte, por mes",
@@ -97,6 +98,188 @@
    "fichero": "o_comprobaciones.csv",
    "en_el_fichero": "11680.00",
    "en_sql": "11680.00",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 60000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "1063649.33",
+   "en_sql": "1063649.33",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62100002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "25025.00",
+   "en_sql": "25025.00",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62200002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "1250.00",
+   "en_sql": "1250.00",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62300002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "28760.35",
+   "en_sql": "28760.35",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62400002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "48863.03",
+   "en_sql": "48863.03",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62500002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "37368.19",
+   "en_sql": "37368.19",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62700002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "37526.02",
+   "en_sql": "37526.02",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 62800002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "30480.92",
+   "en_sql": "30480.92",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 64000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "114450.00",
+   "en_sql": "114450.00",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 64200002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "34220.58",
+   "en_sql": "34220.58",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 66200002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "740.00",
+   "en_sql": "740.00",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 66900002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "322.14",
+   "en_sql": "322.14",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 68000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "1166.69",
+   "en_sql": "1166.69",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 68100002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "4083.31",
+   "en_sql": "4083.31",
+   "coincide": true
+  },
+  {
+   "cifra": "real 2026 de la cuenta 70000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "1834612.84",
+   "en_sql": "1834612.84",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 60000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "1062260.33",
+   "en_sql": "1062260.33",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 62100002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "25025.00",
+   "en_sql": "25025.00",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 62400002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "49678.31",
+   "en_sql": "49678.31",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 62700002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "38274.59",
+   "en_sql": "38274.59",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 62800002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "30865.56",
+   "en_sql": "30865.56",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 64000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "114450.00",
+   "en_sql": "114450.00",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 64200002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "34220.48",
+   "en_sql": "34220.48",
+   "coincide": true
+  },
+  {
+   "cifra": "presupuesto 2026 de la cuenta 70000002",
+   "fichero": "h_real_presupuesto_mes.csv",
+   "en_el_fichero": "1831567.15",
+   "en_sql": "1831567.15",
+   "coincide": true
+  },
+  {
+   "cifra": "partidas sin presupuesto del puente 2026",
+   "fichero": "d_puente_presupuesto.csv",
+   "en_el_fichero": "-73690.68",
+   "en_sql": "-73690.68",
+   "coincide": true
+  },
+  {
+   "cifra": "total de clientes del Pareto",
+   "fichero": "d_pareto_terceros.csv",
+   "en_el_fichero": "2223141.27",
+   "en_sql": "2223141.27",
+   "coincide": true
+  },
+  {
+   "cifra": "total de proveedores del Pareto",
+   "fichero": "d_pareto_terceros.csv",
+   "en_el_fichero": "1633701.86",
+   "en_sql": "1633701.86",
    "coincide": true
   }
  ]

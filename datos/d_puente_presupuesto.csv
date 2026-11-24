@@ -1,11 +1,10 @@
 orden,partida,efecto,acumulado
 0,Resultado presupuestado,476792.88,476792.88
-1,Transportes (Almacén y logística),40975.01,517767.89
-2,"Publicidad, propaganda y relaciones públicas (Comercial)",34479.59,552247.48
-3,Arrendamientos y cánones (Administración),25025.00,577272.48
-4,Ventas de mercaderías,3045.69,580318.17
-5,Compras de mercaderías (Almacén y logística),-1389.00,578929.17
-6,Suministros (Administración),384.64,579313.81
-7,Seguridad Social a cargo de la empresa (Recursos humanos),-0.10,579313.71
-8,Partidas sin presupuesto,-172606.43,406707.28
-9,Resultado real,406707.28,406707.28
+1,Ventas de mercaderías,3045.69,479838.57
+2,Compras de mercaderías,-1389.00,478449.57
+3,Transportes,815.28,479264.85
+4,"Publicidad, propaganda y relaciones públicas",748.57,480013.42
+5,Suministros,384.64,480398.06
+6,Seguridad Social a cargo de la empresa,-0.10,480397.96
+7,Partidas sin presupuesto,-73690.68,406707.28
+8,Resultado real,406707.28,406707.28

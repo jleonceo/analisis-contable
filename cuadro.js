@@ -9,12 +9,13 @@ const AZUL = "#2a78d6", NARANJA = "#eb6834", VERDE = "#1baf7a", GRIS = "#898781"
 const REJILLA = "#e1e0d9", EJE = "#c3c2b7";
 const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 const FICHEROS = ["d_ventas_resultado", "d_margenes", "d_margen_bruto_mensual", "d_punto_muerto", "d_flujos",
-  "d_rentabilidad", "d_concentracion_clientes", "d_puente_presupuesto", "c_objetivos", "c_presupuesto_real",
+  "d_rentabilidad", "d_pareto_terceros", "d_puente_presupuesto", "c_objetivos", "c_presupuesto_real",
   "c_ingresos_linea", "c_coste_centro", "c_coste_laboral", "c_variaciones", "c_clientes", "o_comprobaciones"];
 const ESTADO = { OK: "En orden", AVISO: "Aviso", SIN_DATO: "Sin dato" };
 
 let D = {};                       // los CSV leídos, por nombre
-const estado = { pestana: "direccion" };
+const estado = { pestana: "direccion", lado: "clientes" };
+const CLASE = { A: AZUL, B: NARANJA, C: GRIS };
 
 // ===== Números y textos a la española =====
 function miles(entero) { return String(entero).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
@@ -180,6 +181,33 @@ function cascada(fig, pasos) {
   fig.append(svg);
 }
 
+// Pareto: una barra por tercero, de mayor a menor y con el color de su clase ABC; la línea es el acumulado en %,
+// con las referencias del 80 % y el 95 % que separan las clases.
+function paretoGrafico(fig, filas, nombre) {
+  const W = 500, H = 270, m = { t: 14, r: 40, b: 30, l: 8 };
+  const max = escalaLimpia(Math.max(...filas.map(f => Number(f.importe))));
+  const yImp = v => m.t + (H - m.t - m.b) * (1 - v / max);
+  const yPct = v => m.t + (H - m.t - m.b) * (1 - v / 100);
+  const banda = (W - m.l - m.r) / filas.length, ancho = Math.min(22, banda * 0.75);
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" });
+  svg.append(svgEl("line", { x1: m.l, x2: W - m.r, y1: yImp(0), y2: yImp(0), stroke: EJE }));
+  for (const r of [80, 95]) {
+    svg.append(svgEl("line", { x1: m.l, x2: W - m.r, y1: yPct(r), y2: yPct(r), stroke: REJILLA, "stroke-dasharray": "4 3" }));
+    svg.append(svgEl("text", { x: W - m.r + 4, y: yPct(r) + 4 }, r + " %"));
+  }
+  const puntos = [];
+  filas.forEach((f, i) => {
+    const xc = m.l + banda * i + banda / 2, v = Number(f.importe);
+    const g = dato(svgEl("g"), `${nombre} ${f.posicion}, clase ${f.clase}: ${eur(v)}, el ${pct(f.peso_pct)} del total; acumulado ${pct(f.peso_acumulado_pct)}`);
+    g.append(svgEl("rect", { x: xc - ancho / 2, y: yImp(v), width: ancho, height: Math.max(1, yImp(0) - yImp(v)), fill: CLASE[f.clase], rx: 2 }));
+    svg.append(g);
+    if (filas.length <= 20 || i % 2 === 0) svg.append(svgEl("text", { x: xc, y: H - 10, "text-anchor": "middle" }, f.posicion));
+    puntos.push([xc, yPct(Number(f.peso_acumulado_pct))]);
+  });
+  svg.append(svgEl("polyline", { points: puntos.map(p => p.join(",")).join(" "), fill: "none", stroke: "#0b0b0b", "stroke-width": 1.5, "stroke-linejoin": "round" }));
+  fig.append(svg);
+}
+
 // ===== Tablas =====
 function tabla(destino, titulo, columnasTabla, filas, total) {
   const caja = el("div", { class: "tabla-caja" });
@@ -248,6 +276,8 @@ function dibujarDireccion() {
     [{ nombre: "Margen bruto", color: AZUL, valores: meses.map(f => Number(f.margen_bruto_pct)) }],
     { unidad: " %", referencia: 50, rotuloReferencia: "50 %", rotularFinal: true, desdeCero: true });
 
+  dibujarPareto(a);
+
   const det = document.getElementById("dir-detalle");
   det.replaceChildren(el("summary", {}, "Detalle de " + a));
   tabla(det, "Las cifras de enero a julio de " + a, [
@@ -259,11 +289,31 @@ function dibujarDireccion() {
     { nombre: "Flujo de caja libre (€)", num: true, valor: () => num(fl.caja_libre) },
     { nombre: "Rentabilidad del capital (%)", num: true, valor: () => num(rt.roe_pct, 1) },
   ], [{}]);
-  const conc = D.d_concentracion_clientes;
+  const conc = D.d_pareto_terceros.filter(f => f.lado === "clientes");
   det.append(el("p", { class: "nota" },
     "Solo se publica " + a + ": las series de 2023 a 2025 salen de un dato generado en el que las compras no siguen a las ventas, y sus márgenes no son los de una pyme real. " +
     "El punto muerto es lo que hay que vender para no perder. La rentabilidad del capital es el resultado sobre el patrimonio medio, sin anualizar, y no se ha comprobado por otra vía. " +
     "En los doce meses hasta julio de " + a + ", el primer cliente reúne el " + pct(conc[0].peso_pct) + " de lo facturado y los cinco primeros, el " + pct(conc[4].peso_acumulado_pct) + "."));
+}
+
+// El Pareto de clientes o de proveedores, con su selector
+function dibujarPareto(a) {
+  const fig = document.getElementById("dir-g3");
+  const filas = D.d_pareto_terceros.filter(f => f.lado === estado.lado);
+  const nombre = estado.lado === "clientes" ? "Cliente" : "Proveedor";
+  const deClaseA = filas.filter(f => f.clase === "A").length;
+  cabeceraGrafico(fig, "Hacen falta " + deClaseA + " de los " + filas.length + " " + estado.lado + " para llegar al 80 % de lo facturado",
+    (estado.lado === "clientes" ? "Facturado a cada cliente" : "Facturado por cada proveedor") + " en los doce meses hasta julio de " + a +
+    ", por posición; la línea es el acumulado en %",
+    [{ nombre: "Clase A", color: AZUL }, { nombre: "Clase B", color: NARANJA }, { nombre: "Clase C", color: GRIS }, { nombre: "Acumulado", color: "#0b0b0b", raya: true }]);
+  const selector = el("p", { class: "selector", role: "group", "aria-label": "Qué terceros" });
+  for (const lado of ["clientes", "proveedores"]) {
+    const b = el("button", { type: "button", "aria-pressed": String(lado === estado.lado) }, lado === "clientes" ? "Clientes" : "Proveedores");
+    b.addEventListener("click", () => { estado.lado = lado; dibujarPareto(a); });
+    selector.append(b);
+  }
+  fig.append(selector);
+  paretoGrafico(fig, filas, nombre);
 }
 
 // ===== Pestaña Controller =====
@@ -283,7 +333,7 @@ function dibujarController() {
       valor: sin.efecto, tip: "Resultado de las partidas sin presupuesto, de enero a julio de 2026: " + eur(sin.efecto) + "." },
   ]);
   document.getElementById("con-texto").textContent =
-    "Hasta julio, los ingresos cumplen su objetivo y el gasto lo supera. Tres partidas parecen gastar menos de lo presupuestado, pero su gasto está apuntado en otro centro. Ese gasto reaparece en las partidas sin presupuesto y deja el resultado real por debajo del presupuestado.";
+    "Hasta julio, los ingresos cumplen su objetivo y el gasto lo supera. Las cuentas con presupuesto apenas se desvían. El resultado real queda por debajo del presupuestado por los gastos que no tenían presupuesto: servicios de profesionales, seguros, amortizaciones e intereses.";
 
   const fig1 = document.getElementById("con-g1");
   cabeceraGrafico(fig1, "Las partidas sin presupuesto dejan el resultado por debajo de lo previsto",
@@ -331,7 +381,7 @@ function dibujarController() {
     { nombre: "Presupuesto (€)", num: true, valor: p => num(p.presupuesto) }, { nombre: "Real (€)", num: true, valor: p => num(p.real) },
     { nombre: "Real menos presupuesto (€)", num: true, valor: p => num(p.desviacion) },
   ], lista);
-  det.append(el("p", { class: "nota" }, "El real de cada partida es el de esa cuenta en ese centro. Lo apuntado en otro centro, o en una cuenta sin presupuesto, cae en las partidas sin presupuesto."));
+  det.append(el("p", { class: "nota" }, "Esta tabla separa cada cuenta por el centro en que se presupuestó, así que el gasto apuntado en otro centro no aparece en su fila. El puente de arriba suma cada cuenta en todos sus centros."));
 
   tabla(det, "Ingresos por línea de negocio, de enero a julio de 2026", [
     { nombre: "Línea", valor: f => f.linea }, { nombre: "Ingresos (€)", num: true, valor: f => num(f.ingresos) },

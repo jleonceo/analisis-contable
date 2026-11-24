@@ -1,0 +1,16 @@
+cuenta,nombre_cuenta,grupo,naturaleza
+60000002,Compras de mercaderías,60,gasto
+62100002,Arrendamientos y cánones,62,gasto
+62200002,Reparaciones y conservación,62,gasto
+62300002,Servicios de profesionales independientes,62,gasto
+62400002,Transportes,62,gasto
+62500002,Primas de seguros,62,gasto
+62700002,"Publicidad, propaganda y relaciones públicas",62,gasto
+62800002,Suministros,62,gasto
+64000002,Sueldos y salarios,64,gasto
+64200002,Seguridad Social a cargo de la empresa,64,gasto
+66200002,Intereses de deudas,66,gasto
+66900002,Otros gastos financieros,66,gasto
+68000002,Amortización del inmovilizado intangible,68,gasto
+68100002,Amortización del inmovilizado material,68,gasto
+70000002,Ventas de mercaderías,70,ingreso
