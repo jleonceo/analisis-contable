@@ -128,5 +128,5 @@ la factura con z por encima de 3,5 y de al menos 1.000 €. Solo cuenta hacia ar
 **Cuándo engaña.** Una operación grande y legítima, como un pedido excepcional, sale siempre. Un tercero que factura casi
 siempre lo mismo tiene una desviación pequeña: cualquier factura algo mayor salta.
 
-Ficheros: `datos/d_concentracion_clientes.csv`, `datos/c_clientes.csv` y `datos/c_facturas_disparadas.csv`. Las 17
+Ficheros: `datos/d_pareto_terceros.csv`, `datos/c_clientes.csv` y `datos/c_facturas_disparadas.csv`. Las 17
 facturas atípicas van como recuento en `datos/o_comprobaciones.csv`.

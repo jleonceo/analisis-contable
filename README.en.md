@@ -27,14 +27,14 @@ The dashboards and the reports are written in Spanish.
 
 | View | Question it answers | What it shows |
 |---|---|---|
-| Management | How is the company doing? | sales, result, gross margin and free cash flow from January to July and their month-by-month trend; in Power BI, also the balance sheet at 31 July |
+| Management | How is the company doing? | sales, result, gross margin and free cash flow from January to July and their month-by-month trend, and the Pareto of customers and suppliers; in Power BI, also the balance sheet at 31 July |
 | Controller | Where does it deviate from the budget? | variance bridge by budget line, cost by cost centre and degree of target achievement |
 | Accounting | Is the general ledger well kept? | twenty checks on the ledger, with what each one detects |
 
 At 31/07/2026, nine of the twenty checks flag issues that need manual review, among them the unfunded legal reserve
 and 2,273 unused journal entry numbers.
 
-![Management view: sales, result, gross margin and free cash flow from January to July 2026](assets/direccion.png)
+![Management view: sales, result, gross margin and free cash flow from January to July 2026, and the customer Pareto](assets/direccion.png)
 
 ![Controller view: target achievement and the bridge from budgeted to actual result](assets/controller.png)
 
@@ -47,8 +47,8 @@ recalculated with a separately written SQL query, with the same result to the ce
 calculation say so in their report. The [reports](informes/README.md) explain, analysis by analysis, the question, the
 formula, the figure, how it was checked and when the figure can mislead.
 
-On every change that is pushed, GitHub runs [`comprobar.py`](comprobar.py): the files the web page reads exist and have
-rows, the figures on this page come from the files in `datos/`, and the links lead to files that exist.
+On every change that is pushed, GitHub runs [`comprobar.py`](comprobar.py): the files the web page and Power BI read exist
+and have rows, the figures on this page come from the files in `datos/`, and the links lead to files that exist.
 
 An external review, with its own SQL queries, pointed out 16 defects in the data and the calculations. The report
 [Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md) (what the data does not support)
@@ -57,18 +57,31 @@ Fourteen are confirmed and two are partly corrected.
 
 ## Power BI
 
-[`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) is a Power BI project with the same three
-views. Its 19 tables read the same files in `datos/` as the web page, so both show the same figures. It opens in Power
-BI Desktop and updates with «Actualizar» (Refresh).
+[`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) is a Power BI project with the three views of
+the web page and a fourth one, «Cuentas y Pareto» (accounts and Pareto). Its tables read the 21 files in `datos/`, the
+same ones as the web page, so both show the same figures. It opens in Power BI Desktop and updates with «Actualizar»
+(Refresh).
+
+The model has a fact table with the actual and budgeted amount of each income statement account by month. It is
+related to an accounts table and to a date table built in DAX. On top of that model, the measures calculate:
+
+- the year-to-date result month by month, which at 31 July gives the same result as the financial statements;
+- the spending on accounts with no budget;
+- spending against a flexible budget, which adjusts the spending target to actual sales;
+- a Pareto of customers and suppliers with ABC classes, which the page shows next to those in the file so that they can
+  be seen to match.
+
+The code of each measure, with the figure it gives and the errors that were fixed, is in
+[`powerbi/MEDIDAS.md`](powerbi/MEDIDAS.md) (in Spanish).
 
 ## What is in the repository
 
 | File | What it is |
 |---|---|
 | `index.html`, `cuadro.js`, `estilo.css` | the web page with the three dashboards |
-| [`datos/`](datos/) | the 19 CSV files read by the web page and Power BI, with `metadatos.json` (the period each one covers) |
+| [`datos/`](datos/) | the 21 CSV files read by the web page and Power BI, with `metadatos.json` (the period each one covers) |
 | [`informes/`](informes/) | six reports by block, with the method and the check behind each figure, and one on what the data does not support |
-| [`powerbi/`](powerbi/) | the Power BI project |
+| [`powerbi/`](powerbi/) | the Power BI project and [`MEDIDAS.md`](powerbi/MEDIDAS.md), with its DAX measures |
 | [`comprobar.py`](comprobar.py), [`test_comprobar.py`](test_comprobar.py) | the checks GitHub runs on every change, and their tests |
 | [`assets/`](assets/) | the images of the three views |
 

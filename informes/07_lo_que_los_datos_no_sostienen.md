@@ -4,7 +4,11 @@ Una revisión externa del repositorio señaló 16 defectos. Este informe mide ca
 cuánto mueve las cifras publicadas y qué haría falta para corregirlo. Catorce se confirman y dos se corrigen en parte.
 Los que más pesan son cuatro. Junio y julio aportan el 79,20 % del resultado con un volumen que no encaja con el resto
 del año. Falta el Impuesto sobre Sociedades, que restaría unos 93.500 € al resultado de los siete meses. El puente del
-presupuesto atribuye la desviación a las partidas equivocadas. Las existencias no se recuentan a mitad de año.
+presupuesto atribuía la desviación a las partidas equivocadas. Las existencias no se recuentan a mitad de año.
+
+La versión 3.0 corrige tres puntos en el propio repositorio. El puente del presupuesto compara ahora cada cuenta con su
+presupuesto. Power BI da el margen en puntos. Además, tiene un modelo con tabla de hechos y tabla de fechas. Las
+secciones de esos puntos cuentan lo que se midió y lo que cambió.
 
 Datos a 31/07/2026. Cada cifra de este informe se ha obtenido con una consulta SQL sobre el diario, distinta del
 programa que genera los cuadros de mando.
@@ -30,10 +34,10 @@ presentaría las dos lecturas y no daría por bueno el resultado de siete meses 
 
 ### El presupuesto se desvía por las partidas sin presupuesto
 
-El resultado real se quedó 70.085,60 € por debajo del presupuestado. El puente del cuadro del controller compara cada
-cuenta dentro de su centro de coste. Así presenta tres partidas como ahorro, por 100.479,60 € entre las tres:
-transportes, publicidad y arrendamientos. Tenían presupuesto en un centro. La mayor parte de su gasto, 98.915,75 €,
-se apuntó en otro. El puente la lleva a «partidas sin presupuesto».
+El resultado real se quedó 70.085,60 € por debajo del presupuestado. Hasta la versión 2.1, el puente del cuadro del
+controller comparaba cada cuenta dentro de su centro de coste. Así presentaba tres partidas como ahorro, por
+100.479,60 € entre las tres: transportes, publicidad y arrendamientos. Tenían presupuesto en un centro. La mayor parte
+de su gasto, 98.915,75 €, se apuntó en otro. El puente la llevaba a «partidas sin presupuesto».
 
 Comparada cada cuenta con su presupuesto sin separar por centro, la lectura cambia:
 
@@ -45,7 +49,8 @@ Comparada cada cuenta con su presupuesto sin separar por centro, la lectura camb
 
 La desviación del resultado se explica casi entera por ese último grupo. Para la dirección, la lectura es que
 el presupuesto se quedó corto porque no recogía esos gastos. Las tres partidas solo tienen un problema de imputación
-a centros, que no cambia el resultado.
+a centros, que no cambia el resultado. Desde la versión 3.0, el puente compara cada cuenta con su presupuesto sumando
+todos sus centros y enseña esta lectura.
 
 ### Falta el Impuesto sobre Sociedades
 
@@ -101,13 +106,15 @@ gastó 1.076,41 € de más, un 0,21 %.
 
 En el acumulado de los siete meses la lectura es otra: con el mismo ajuste, el gasto supera su objetivo en
 70.878,45 €, un 5,22 %. Estas dos cifras suponen que todo el gasto sube con las ventas. Con una parte de gasto fijo, el
-objetivo ajustado sería menor y la desviación, mayor.
+objetivo ajustado sería menor y la desviación, mayor. Desde la versión 3.0, Power BI calcula el presupuesto flexible
+con una medida. El semáforo sigue comparando con el objetivo fijo.
 
 ### El cumplimiento del margen se mide como cociente de porcentajes
 
-En mayo el margen bruto fue del 39,44 % frente a un objetivo del 31,67 %. El cuadro lo publica como un cumplimiento
-del 124,53 %. Dividir un porcentaje entre otro no significa nada para el negocio. Lo que se publica en control de gestión es
-la diferencia: 7,77 puntos por encima del objetivo.
+En mayo el margen bruto fue del 39,44 % frente a un objetivo del 31,67 %. Hasta la versión 2.1, Power BI lo publicaba
+como un cumplimiento del 124,53 %. Dividir un porcentaje entre otro no significa nada para el negocio. Lo que se publica
+en control de gestión es la diferencia: 7,77 puntos por encima del objetivo. Desde la versión 3.0, Power BI da esa
+diferencia. El fichero `c_objetivos.csv` conserva la columna del cociente.
 
 ### El reparto entre centros no sirve para decidir
 
@@ -140,10 +147,11 @@ coste no se da por departamento.
 
 ## Los límites del propio repositorio
 
-- Power BI es un visor de los ficheros ya calculados. Sus tablas leen los CSV de `datos/`, sin relaciones entre
-  ellas ni tabla de fechas.
-- **Dos medidas de Power BI promedian porcentajes.** El cumplimiento medio y el margen bruto mensual medio son medias
-  simples. El margen de los siete meses es del 42,02 %; la media de los siete porcentajes mensuales da 41,97 %.
+- Hasta la versión 2.1, Power BI era un visor de los ficheros ya calculados, sin relaciones ni tabla de fechas, y dos
+  de sus medidas promediaban porcentajes. La versión 3.0 añade un modelo con tabla de hechos, tabla de cuentas y tabla
+  de fechas. Corrige además esas dos medidas. El margen de los siete meses es del 42,02 %; la media de los siete
+  porcentajes mensuales, que es lo que daba antes, es del 41,97 %. Las demás tablas siguen leyendo los ficheros ya calculados. Las medidas están
+  en [`MEDIDAS.md`](../powerbi/MEDIDAS.md).
 - **Las cifras no se pueden rehacer desde aquí.** El libro diario completo está en una base de datos que no se publica,
   como dice el [README](../README.md).
   La comprobación automática mira que los ficheros existan y que la portada coincida con ellos. Nada contable.
@@ -154,12 +162,11 @@ coste no se da por departamento.
 |---|---|---|
 | Alta | Junio y julio | revisar la carga de esos dos meses contra sus documentos |
 | Alta | Impuesto sobre Sociedades | provisión mensual del impuesto y gasto definitivo al cierre |
-| Alta | Puente del presupuesto | publicarlo por cuenta y presupuestar los gastos que no tenían partida |
+| Alta | Puente del presupuesto | presupuestar los gastos que no tenían partida; el puente por cuenta está hecho en la 3.0 |
 | Alta | Existencias | estimar el stock en cada cierre intermedio |
 | Media | Clientes con saldo a su favor | reclasificar a anticipos al cierre de cada periodo |
 | Media | Fecha de las aperturas | cambiar la fecha de dos asientos |
-| Media | Presupuesto flexible y margen en puntos | cambiar el cálculo del cumplimiento |
+| Media | Presupuesto flexible | llevarlo al semáforo; en Power BI ya es una medida, y el margen va en puntos desde la 3.0 |
 | Media | Nómina y centros | repartir la nómina por departamento y cuadrarla con la ficha |
 | Baja | Seguridad Social | comparar la cuota con el tipo de la ficha |
-| Baja | Power BI | un modelo con tabla de hechos, tabla de fechas y medidas que no promedien porcentajes |
 | Baja | Reproducibilidad | no tiene arreglo mientras el diario no se publique |

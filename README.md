@@ -26,14 +26,14 @@ Después se abre `http://localhost:8000` en el navegador. La versión de Power B
 
 | Vista | Pregunta que contesta | Qué muestra |
 |---|---|---|
-| Dirección | ¿Cómo va la empresa? | ventas, resultado, margen bruto y flujo de caja libre de enero a julio y su evolución mensual; en Power BI, además, el balance a 31 de julio |
+| Dirección | ¿Cómo va la empresa? | ventas, resultado, margen bruto y flujo de caja libre de enero a julio y su evolución mensual, y el Pareto de clientes y proveedores; en Power BI, además, el balance a 31 de julio |
 | Controller | ¿Dónde se desvía del presupuesto? | puente de desviaciones por partida, coste por centro y grado de cumplimiento de objetivos |
 | Contabilidad | ¿Está bien llevado el libro diario? | veinte controles sobre el diario, con lo que detecta cada uno |
 
 A 31/07/2026, nueve de los veinte controles señalan incidencias que requieren revisión manual, entre ellas la
 reserva legal sin dotar y 2.273 números de asiento sin usar.
 
-![Vista de dirección: ventas, resultado, margen bruto y flujo de caja libre de enero a julio de 2026](assets/direccion.png)
+![Vista de dirección: ventas, resultado, margen bruto y flujo de caja libre de enero a julio de 2026, y el Pareto de clientes](assets/direccion.png)
 
 ![Vista del controller: cumplimiento de objetivos y puente del resultado presupuestado al real](assets/controller.png)
 
@@ -46,8 +46,8 @@ una consulta SQL escrita aparte, con el mismo resultado al céntimo. Las pocas q
 indican en su informe. Los [informes](informes/README.md) explican, análisis por análisis, la pregunta, la fórmula, la
 cifra, su comprobación y en qué casos la cifra puede llevar a error.
 
-En cada cambio que se sube, GitHub ejecuta [`comprobar.py`](comprobar.py): los ficheros que lee la web existen y tienen
-filas, las cifras de esta portada salen de los ficheros de `datos/` y los enlaces llevan a ficheros que existen.
+En cada cambio que se sube, GitHub ejecuta [`comprobar.py`](comprobar.py): los ficheros que leen la web y Power BI
+existen y tienen filas, las cifras de esta portada salen de los ficheros de `datos/` y los enlaces llevan a ficheros que existen.
 
 Una revisión externa, con consultas SQL propias, señaló 16 defectos en los datos y en el cálculo. El informe
 [Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md) los mide uno a uno con el mismo diario:
@@ -56,18 +56,30 @@ en parte.
 
 ## Power BI
 
-[`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) es un proyecto de Power BI con las mismas
-tres vistas. Sus 19 tablas leen los mismos ficheros de `datos/` que la web, así que las dos muestran las mismas cifras.
-Se abre con Power BI Desktop y se actualiza con «Actualizar».
+[`powerbi/contabilidad_gestion.pbip`](powerbi/contabilidad_gestion.pbip) es un proyecto de Power BI con las tres vistas
+de la web y una cuarta, «Cuentas y Pareto». Sus tablas leen los 21 ficheros de `datos/`, los mismos que la web, así que
+las dos muestran las mismas cifras. Se abre con Power BI Desktop y se actualiza con «Actualizar».
+
+El modelo tiene una tabla de hechos con el real y el presupuesto de cada cuenta de resultado por mes. Se relaciona con
+una tabla de cuentas y con una tabla de fechas hecha en DAX. Sobre ese modelo, las medidas calculan:
+
+- el resultado acumulado del año mes a mes, que a 31 de julio da el mismo resultado que los estados financieros;
+- el gasto de las cuentas sin presupuesto;
+- el gasto frente a un presupuesto flexible, que ajusta el objetivo de gasto a las ventas reales;
+- un Pareto de clientes y proveedores con clases ABC, que la página pone al lado de las del fichero para que se vea que
+  coinciden.
+
+El código de cada medida, con la cifra que da y los fallos que se corrigieron, está en
+[`powerbi/MEDIDAS.md`](powerbi/MEDIDAS.md).
 
 ## Qué hay en el repositorio
 
 | Fichero | Qué es |
 |---|---|
 | `index.html`, `cuadro.js`, `estilo.css` | la web de los tres cuadros de mando |
-| [`datos/`](datos/) | los 19 ficheros CSV que leen la web y Power BI, con `metadatos.json` (periodo que cubre cada uno) |
+| [`datos/`](datos/) | los 21 ficheros CSV que leen la web y Power BI, con `metadatos.json` (periodo que cubre cada uno) |
 | [`informes/`](informes/) | seis informes por bloque, con el método y la comprobación de cada cifra, y uno con lo que los datos no sostienen |
-| [`powerbi/`](powerbi/) | el proyecto de Power BI |
+| [`powerbi/`](powerbi/) | el proyecto de Power BI y [`MEDIDAS.md`](powerbi/MEDIDAS.md), con sus medidas DAX |
 | [`comprobar.py`](comprobar.py), [`test_comprobar.py`](test_comprobar.py) | las comprobaciones que ejecuta GitHub en cada cambio y sus pruebas |
 | [`assets/`](assets/) | las imágenes de las tres vistas |
 
