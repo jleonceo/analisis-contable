@@ -1,5 +1,15 @@
 # Registro de cambios
 
+## 2.1 · 24 de noviembre de 2026
+
+Un informe nuevo que mide los defectos de los datos y del cálculo, sin cambiar los datos publicados.
+
+- El informe [Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md) recoge los 16 puntos de una
+  revisión externa del repositorio. Mide cada uno con el libro diario, dice cuánto mueve las cifras publicadas y qué
+  haría falta para corregirlo (`a4417e4`).
+- La portada da el resultado como antes de impuestos y explica la desviación del presupuesto por los gastos que no
+  tenían presupuesto. La sección de límites enlaza el informe nuevo (`a4417e4`).
+
 ## 2.0 · 24 de noviembre de 2026
 
 El repositorio deja de ser un cuaderno de Python sobre un año y pasa a ser un cuadro de mando de contabilidad de
