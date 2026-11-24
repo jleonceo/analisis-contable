@@ -1,5 +1,5 @@
 /// Carpeta local o dirección web de los CSV de datos/, terminada en barra.
-expression CarpetaDatos = "C:\PROYECTOS_GITHUB\analisis-contable\datos\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression CarpetaDatos = "https://raw.githubusercontent.com/jleonceo/management-accounting-analytics/main/datos/" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 353d3e05-5ba6-40b9-9abd-63c1b637b8c6
 
 /// Lee un CSV de CarpetaDatos (disco o web) y deja vacíos como nulos.
