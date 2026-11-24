@@ -14,6 +14,7 @@ Van del más general al más concreto:
 | [Clientes y proveedores](04_clientes_y_proveedores.md) | cuánto depende la empresa de pocos clientes, quién paga tarde y quién pasa de su límite |
 | [Calidad del libro diario](05_calidad_del_libro_diario.md) | si el diario cuadra y qué apuntes hay que revisar a mano |
 | [Fiscal y cierre](06_fiscal_y_cierre.md) | si el cierre, la reserva legal, el IVA soportado y la nómina están bien contabilizados |
+| [Lo que los datos no sostienen](07_lo_que_los_datos_no_sostienen.md) | qué defectos de los datos y del cálculo mueven las cifras publicadas, cuánto y qué haría falta para corregirlos |
 
 ## Cómo se ha comprobado cada cifra
 

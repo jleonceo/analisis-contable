@@ -6,8 +6,9 @@ Tres cuadros de mando sobre el libro diario de una pyme: uno para dirección, ot
 contabilidad. Casi todas las cifras se comprueban con un segundo cálculo independiente antes de publicarse. La empresa, TechAcces
 SL, es ficticia: su contabilidad se generó para el proyecto.
 
-**Resultado:** de enero a julio de 2026 la empresa vendió 1.834.612,84 € y ganó 406.707,28 €, que son 70.085,60 € menos
-de lo presupuestado. Tres partidas que parecían ahorrar 100.479,60 € tenían su gasto imputado a otro centro de coste.
+**Resultado:** de enero a julio de 2026 la empresa vendió 1.834.612,84 € y ganó 406.707,28 € antes de impuestos, que
+son 70.085,60 € menos de lo presupuestado. Casi toda la diferencia viene de 73.690,68 € de gastos que no tenían
+presupuesto.
 
 **Herramientas:** SQL (MySQL), Python, Power BI (DAX y Power Query), HTML y JavaScript.
 
@@ -48,9 +49,10 @@ cifra, su comprobación y en qué casos la cifra puede llevar a error.
 En cada cambio que se sube, GitHub ejecuta [`comprobar.py`](comprobar.py): los ficheros que lee la web existen y tienen
 filas, las cifras de esta portada salen de los ficheros de `datos/` y los enlaces llevan a ficheros que existen.
 
-Una revisión independiente, con consultas SQL propias, detectó las tres partidas que se citan al principio. El puente
-del presupuesto mostraba en ellas un gasto inferior al presupuestado: ese gasto estaba imputado a otro centro de coste.
-El detalle está en [Presupuesto y coste por centro](informes/03_presupuesto_objetivos_y_centros.md).
+Una revisión externa, con consultas SQL propias, señaló 16 defectos en los datos y en el cálculo. El informe
+[Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md) los mide uno a uno con el mismo diario:
+cuánto mueve cada uno las cifras publicadas y qué haría falta para corregirlo. Catorce se confirman y dos se corrigen
+en parte.
 
 ## Power BI
 
@@ -64,7 +66,7 @@ Se abre con Power BI Desktop y se actualiza con «Actualizar».
 |---|---|
 | `index.html`, `cuadro.js`, `estilo.css` | la web de los tres cuadros de mando |
 | [`datos/`](datos/) | los 19 ficheros CSV que leen la web y Power BI, con `metadatos.json` (periodo que cubre cada uno) |
-| [`informes/`](informes/) | seis informes por bloque, con el método y la comprobación de cada cifra |
+| [`informes/`](informes/) | seis informes por bloque, con el método y la comprobación de cada cifra, y uno con lo que los datos no sostienen |
 | [`powerbi/`](powerbi/) | el proyecto de Power BI |
 | [`comprobar.py`](comprobar.py), [`test_comprobar.py`](test_comprobar.py) | las comprobaciones que ejecuta GitHub en cada cambio y sus pruebas |
 | [`assets/`](assets/) | las imágenes de las tres vistas |
@@ -79,6 +81,10 @@ Se abre con Power BI Desktop y se actualiza con «Actualizar».
   resultados ya calculados. Como el libro diario completo se queda en esa base, la comprobación no se puede repetir
   desde aquí.
 - El EBITDA no se publica: dos cálculos del proyecto lo definen de forma diferente y dan cifras distintas.
+- Junio y julio aportan el 79,20 % del resultado de los siete meses, con un volumen de ventas que el diario no
+  explica. El resultado es antes de impuestos, porque el diario no registra el Impuesto sobre Sociedades. Las
+  existencias solo se recuentan a fin de año. El detalle está en
+  [Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md).
 
 ## Repositorios relacionados
 

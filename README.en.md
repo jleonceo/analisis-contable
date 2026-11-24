@@ -6,8 +6,8 @@ Three dashboards built on a small business's general ledger: one for management,
 accounting. Almost every figure is checked against an independent second calculation before it is published. The
 company, TechAcces SL, is fictional: its books were generated for the project.
 
-**Result:** from January to July 2026 the company sold €1,834,612.84 and earned €406,707.28, which is €70,085.60 less
-than budgeted. Three budget lines that seemed to save €100,479.60 had their spending booked to another cost centre.
+**Result:** from January to July 2026 the company sold €1,834,612.84 and earned €406,707.28 before tax, which is
+€70,085.60 less than budgeted. Almost all of the gap comes from €73,690.68 of spending that had no budget.
 
 **Tools:** SQL (MySQL), Python, Power BI (DAX and Power Query), HTML and JavaScript.
 
@@ -50,9 +50,10 @@ formula, the figure, how it was checked and when the figure can mislead.
 On every change that is pushed, GitHub runs [`comprobar.py`](comprobar.py): the files the web page reads exist and have
 rows, the figures on this page come from the files in `datos/`, and the links lead to files that exist.
 
-An independent review, with its own SQL queries, found the three budget lines mentioned at the top. The budget bridge
-showed spending below budget on them: that spending was booked to another cost centre. The detail is in
-[Presupuesto y coste por centro](informes/03_presupuesto_objetivos_y_centros.md) (budget and cost by centre).
+An external review, with its own SQL queries, pointed out 16 defects in the data and the calculations. The report
+[Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md) (what the data does not support)
+measures each one against the same ledger: how much it moves the published figures and what it would take to fix it.
+Fourteen are confirmed and two are partly corrected.
 
 ## Power BI
 
@@ -66,7 +67,7 @@ BI Desktop and updates with «Actualizar» (Refresh).
 |---|---|
 | `index.html`, `cuadro.js`, `estilo.css` | the web page with the three dashboards |
 | [`datos/`](datos/) | the 19 CSV files read by the web page and Power BI, with `metadatos.json` (the period each one covers) |
-| [`informes/`](informes/) | six reports by block, with the method and the check behind each figure |
+| [`informes/`](informes/) | six reports by block, with the method and the check behind each figure, and one on what the data does not support |
 | [`powerbi/`](powerbi/) | the Power BI project |
 | [`comprobar.py`](comprobar.py), [`test_comprobar.py`](test_comprobar.py) | the checks GitHub runs on every change, and their tests |
 | [`assets/`](assets/) | the images of the three views |
@@ -81,6 +82,9 @@ BI Desktop and updates with «Actualizar» (Refresh).
   results already calculated. Since the full general ledger stays in that database, the check cannot be repeated from
   here.
 - EBITDA is not published: two calculations in the project define it differently and give different figures.
+- June and July bring 79.20% of the seven-month result, with a sales volume the ledger does not explain. The result
+  is before tax, because the ledger does not record corporate income tax. Inventory is only counted at year end. The
+  detail is in [Lo que los datos no sostienen](informes/07_lo_que_los_datos_no_sostienen.md).
 
 ## Related repositories
 
